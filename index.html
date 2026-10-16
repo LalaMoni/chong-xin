@@ -112,7 +112,7 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
       <div class="stat" style="margin-bottom:16px"><div class="stat-top">净支出（购入总额 - 售出总额）</div><div class="stat-value" id="reportNet">¥0</div></div>
       <div class="stat"><div class="section-title" style="margin-bottom:15px">类别分布</div><div id="typeBreakdown"></div></div>
     </section>
-    <div class="footer-note">藏间 · 一个只属于你的收藏角落　✦　数据暂存于当前浏览器</div>
+    <div class="footer-note">藏间 · 一个只属于你的收藏角落</div>
   </main>
 </div>
 <nav class="mobile-top"><button class="active" data-view="all"><span>▦</span>收藏柜</button><button id="mobileAdd"><span>＋</span>添加</button></nav>
@@ -148,14 +148,14 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
 <div class="overlay" id="settingsOverlay"><div class="modal" style="max-width:610px">
   <div class="modal-head"><div><h2>设置</h2><div class="modal-desc">管理属性选项与本地收藏数据</div></div><button class="close" data-close="settingsOverlay" aria-label="关闭"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
   <section class="settings-section"><h3>云端同步 · Supabase</h3><p class="settings-note">登录后自动加载云端数据，编辑后自动同步。离线改动会等待联网，发生冲突时暂停同步并提示处理。建议定期保存 JSON 备份。</p><div class="cloud-panel"><div id="cloudStatus" class="cloud-status">正在准备云端连接…</div><div id="cloudAuthFields" class="cloud-auth-fields"><input id="cloudEmail" type="email" autocomplete="email" placeholder="邮箱地址" aria-label="邮箱地址"><input id="cloudPassword" type="password" autocomplete="current-password" placeholder="密码（至少 6 位）" aria-label="密码"></div><div class="cloud-buttons" id="cloudAuthActions"><button class="btn primary" type="button" id="cloudLogin">登录</button><button class="btn" type="button" id="cloudSignup">注册</button><button class="btn" type="button" id="cloudLogout" hidden>退出登录</button></div><div class="cloud-buttons" id="cloudSyncActions" style="margin-top:12px" hidden><button class="btn primary" type="button" id="cloudUpload">↑ 手动上传（谨慎）</button><button class="btn" type="button" id="cloudDownload">↓ 手动合并</button></div><p class="cloud-warning">自动同步默认开启。发生同一藏品的跨设备冲突时，不会静默覆盖；请先备份并选择保留哪个版本。手动上传仅作为紧急恢复工具，图片存入私人 Storage。</p></div></section>
-  <section class="settings-section"><h3>自定义属性管理</h3><p class="settings-note">默认属性 Z&S、22X、SU、TOP、跨代保持不变。自定义属性可以改名、调整顺序或移出选项。改名会同步更新已使用该属性的藏品；移除选项不会删除藏品。</p>
+  <section class="settings-section"><h3>自定义属性管理</h3><p class="settings-note">默认属性保持不变。自定义属性可以改名、调整顺序或移出选项。改名会同步更新已使用该属性的藏品；移除选项不会删除藏品。</p>
     <div class="settings-defaults">默认属性：Z&S · 22X · SU · TOP · 跨代</div>
     <div id="customAttrList" class="settings-attr-list"></div>
     <div class="settings-add"><input id="settingsNewAttr" maxlength="40" placeholder="输入新的属性名称" aria-label="新的属性名称"><button class="btn primary" id="settingsAddAttr" type="button">添加属性</button></div>
   </section>
   <section class="settings-section"><h3>修改历史与撤销</h3><p class="settings-note">每次保存、删除、导入或清空前都会记录一个还原点。可撤销上一步，也可恢复到某次操作之前。最多保留最近 8 个还原点；若浏览器空间不足，历史仅在本次打开期间保留。重要数据仍建议保存 JSON 备份。</p><div class="settings-actions"><button class="btn secondary" id="undoChangeBtn" type="button">↶ 撤销上一步</button></div><div id="historyList" class="settings-attr-list" aria-live="polite"></div></section>
   <section class="settings-section"><h3>数据检查</h3><p class="settings-note">检查重复 ID、未成功关联套装的子记录、未填写发布时间的 SET，以及可能重复的记录。只检查，不会自动修改或删除数据。</p><button class="btn secondary" id="runDataCheck" type="button">检查收藏数据</button><div id="dataCheckResults" class="check-report" aria-live="polite"></div></section>
-  <section class="settings-section"><h3>数据管理中心</h3><p class="settings-note">Excel 用于批量编辑文字字段；JSON 备份包含图片，更适合完整保存和恢复。所有操作沿用原来的导入、导出逻辑。</p>
+  <section class="settings-section"><h3>数据管理中心</h3>
     <div class="settings-data-stats" id="settingsDataStats"></div>
     <div class="settings-actions"><button class="btn secondary" type="button" data-data-action="excelImportBtn">↓ 导入 Excel</button><button class="btn secondary" type="button" data-data-action="excelExportBtn">↑ 导出 Excel</button><button class="btn secondary" type="button" data-data-action="exportBtn">▣ 保存 JSON 备份</button><button class="btn secondary" type="button" data-data-action="importBackupBtn">↶ 恢复 JSON 备份</button></div>
     <div class="settings-danger"><strong>清空所有藏品</strong><p class="settings-note">永久删除本浏览器保存的套装、小卡、价格及图片。自定义属性保留。建议先保存 JSON 备份。</p><button type="button" class="btn" id="clearAllBtn" style="border-color:#c77c75;color:#ae4c46">清空所有藏品…</button></div>
