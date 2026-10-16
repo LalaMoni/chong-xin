@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>藏间 · 我的周边收藏柜</title>
+<style>
+:root{--bg:#FAF4F2;--panel:#FFFCFA;--ink:#543E42;--muted:#8B7779;--line:#EBDDD9;--accent:#A66C70;--accent-soft:#EBD5D3;--green:#8B9880;--shadow:0 10px 35px rgba(58,45,34,.06)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}
+.app{display:grid;grid-template-columns:238px minmax(0,1fr);min-height:100vh}.sidebar{padding:30px 18px;border-right:1px solid var(--line);background:#F8EFED;display:flex;flex-direction:column;gap:30px}.brand{display:flex;align-items:center;gap:11px;padding:0 12px}.brand-mark{width:38px;height:38px;border-radius:13px;background:var(--accent);color:white;display:grid;place-items:center;font-size:20px}.brand-name{font-family:Georgia,serif;font-size:22px;letter-spacing:.4px}.brand-sub{font-size:11px;color:var(--muted);margin-top:3px;letter-spacing:1.4px}.nav-label{font-size:10px;letter-spacing:1.7px;color:#B49B9E;padding:0 13px;margin-bottom:8px}.nav{display:grid;gap:5px}.nav button{border:0;background:transparent;text-align:left;padding:12px 13px;border-radius:12px;color:#777168;display:flex;gap:12px;align-items:center}.nav button.active,.nav button:hover{background:var(--accent-soft);color:#87565E}.nav .ico{width:19px;text-align:center;font-size:17px}.side-note{margin-top:auto;border:1px solid var(--line);border-radius:15px;padding:15px;font-size:12px;color:var(--muted);line-height:1.65;background:#FFFCFA}.side-note strong{display:block;color:#655158;margin-bottom:4px;font-size:13px}
+main{padding:35px clamp(20px,4vw,58px) 60px;max-width:1500px;width:100%;margin:auto}.topbar{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:32px}.eyebrow{font-size:11px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:8px}.page-title{font-family:Georgia,"Songti SC",serif;font-weight:500;font-size:clamp(28px,3vw,38px);margin:0;letter-spacing:.2px}.subtitle{font-size:13px;color:var(--muted);margin:10px 0 0}.top-actions{display:flex;gap:9px;align-items:center}.btn{border:1px solid var(--line);border-radius:12px;padding:11px 15px;background:var(--panel);color:var(--ink);font-size:13px}.btn.primary{background:var(--accent);color:white;border-color:var(--accent);box-shadow:0 5px 12px #A66C7025}.btn:hover{transform:translateY(-1px)}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:30px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:19px 20px;box-shadow:var(--shadow)}.stat-top{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px}.stat-icon{width:31px;height:31px;border-radius:10px;background:#F3E3E1;display:grid;place-items:center;color:var(--accent);font-size:15px}.stat-value{font-family:Georgia,serif;font-size:29px;margin-top:14px}.stat-foot{font-size:11px;color:#B49B9E;margin-top:4px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:15px;margin-bottom:17px}.section-title{font-size:18px;font-weight:600;margin:0}.section-desc{font-size:12px;color:var(--muted);margin-top:5px}.controls{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}.search{position:relative;flex:1;min-width:190px}.search input{width:100%;padding:11px 13px 11px 38px;border:1px solid var(--line);border-radius:12px;background:var(--panel);outline:none;font-size:13px}.search:before{content:"⌕";position:absolute;left:14px;top:7px;font-size:22px;color:#A58C90}.controls select{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:10px 12px;color:#655158;font-size:13px;max-width:170px}.chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:22px}.chip{border:1px solid var(--line);border-radius:999px;padding:7px 13px;background:transparent;color:#8B7779;font-size:12px}.chip.active{background:#EBD5D3;border-color:#EBD5D3;color:#87565E}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}.item-card{background:var(--panel);border:1px solid var(--line);border-radius:17px;overflow:hidden;transition:.2s;min-width:0;cursor:pointer}.item-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.item-image{aspect-ratio:4/4.25;background:#F0E4E2;position:relative;display:grid;place-items:center;overflow:hidden}.item-image img{width:100%;height:100%;object-fit:cover}.placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;color:#BCA4A4;text-align:center;padding:15px}.placeholder .big{font-size:38px;opacity:.8}.placeholder small{font-size:11px}.status{position:absolute;left:10px;top:10px;font-size:10px;padding:5px 8px;border-radius:99px;background:#fffdf0e8;color:#80694e;backdrop-filter:blur(6px)}.item-body{padding:13px 14px 15px}.item-type{font-size:10px;color:var(--accent);letter-spacing:.8px;margin-bottom:7px}.item-name{font-size:14px;font-weight:600;line-height:1.4;overflow-wrap:anywhere}.item-meta{font-size:11px;color:var(--muted);margin-top:6px;min-height:15px}.item-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:13px;padding-top:11px;border-top:1px solid #F2E7E5}.price{font-family:Georgia,serif;font-size:16px}.date{font-size:10px;color:#B49B9E}.empty{grid-column:1/-1;text-align:center;padding:65px 20px;border:1px dashed #E5D3D0;border-radius:18px;color:var(--muted)}.empty .big{font-size:40px;margin-bottom:12px}.empty strong{display:block;color:#655158;font-size:15px;margin-bottom:7px}.empty p{font-size:12px;margin:0 0 17px}
+.overlay{position:fixed;inset:0;background:#3B252B70;display:none;align-items:center;justify-content:center;padding:20px;z-index:10}.overlay.show{display:flex}.modal{width:min(650px,100%);max-height:92vh;overflow:auto;background:var(--panel);border-radius:20px;padding:25px;box-shadow:0 25px 80px #0002}.modal-head{display:flex;justify-content:space-between;align-items:start;margin-bottom:22px}.modal h2{font-family:Georgia,serif;font-weight:500;font-size:25px;margin:0}.modal-desc{color:var(--muted);font-size:12px;margin-top:7px}.close{border:0;background:#F2E7E5;border-radius:9px;width:33px;height:33px;padding:0;display:inline-flex;align-items:center;justify-content:center;flex:none;color:#8B7779;cursor:pointer}.close svg{width:17px;height:17px;display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:12px;color:#6f675e}.field input,.field select,.field textarea{border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:#FFFCFA;outline:none;color:var(--ink);width:100%;font-size:13px}.field textarea{min-height:80px;resize:vertical}.field input:focus,.field select:focus,.field textarea:focus{border-color:#C79B9E;box-shadow:0 0 0 3px #A66C7015}.image-upload{border:1px dashed #E1C9C7;border-radius:12px;min-height:105px;display:flex;align-items:center;justify-content:center;gap:13px;padding:14px;background:#FCF3F1;color:var(--muted);font-size:12px;cursor:pointer}.image-upload img{width:70px;height:70px;object-fit:cover;border-radius:9px}.modal-actions{display:flex;justify-content:space-between;gap:10px;margin-top:23px}.right-actions{display:flex;gap:8px}.detail-layout{display:grid;grid-template-columns:190px 1fr;gap:22px}.detail-image{width:100%;aspect-ratio:3/4;border-radius:13px;object-fit:cover;background:#F0E4E2}.detail-list{display:grid;gap:13px}.detail-row{border-bottom:1px solid var(--line);padding-bottom:10px}.detail-label{font-size:10px;color:var(--muted);margin-bottom:5px}.detail-value{font-size:13px;overflow-wrap:anywhere}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#543E42;color:white;padding:11px 17px;border-radius:11px;font-size:12px;opacity:0;pointer-events:none;transition:.25s;z-index:20}.toast.show{opacity:1}.footer-note{font-size:11px;color:#aaa196;margin-top:28px;text-align:center}.mobile-top{display:none}
+@media(max-width:1100px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.app{display:block}.sidebar{display:none}main{padding:23px 16px 90px}.topbar{align-items:flex-start;margin-bottom:23px}.page-title{font-size:29px}.subtitle{max-width:250px;line-height:1.6}.top-actions{justify-content:flex-start;flex-wrap:wrap;gap:6px}.top-actions .btn{padding:8px 10px;font-size:11px}.topbar{flex-direction:column;align-items:stretch}.top-actions .btn span{white-space:nowrap}.stats{gap:9px;margin-bottom:27px}.stat{padding:14px}.stat-value{font-size:25px;margin-top:10px}.stat-icon{width:27px;height:27px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.item-body{padding:11px}.item-name{font-size:13px}.section-head{align-items:start}.section-title{font-size:16px}.controls select{flex:1;max-width:none}.chips{flex-wrap:nowrap;overflow:auto;padding-bottom:3px}.chip{white-space:nowrap}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.modal{padding:20px}.detail-layout{grid-template-columns:105px 1fr;gap:15px}.detail-image{aspect-ratio:3/4}.detail-value{font-size:12px}.footer-note{line-height:1.6}.mobile-top{display:flex;position:fixed;bottom:0;left:0;right:0;background:#F8EFEDf5;backdrop-filter:blur(15px);border-top:1px solid var(--line);z-index:5;justify-content:space-around;padding:9px 4px calc(9px + env(safe-area-inset-bottom))}.mobile-top button{border:0;background:none;color:#9A8387;font-size:10px;display:grid;gap:3px;justify-items:center;min-width:55px}.mobile-top button.active{color:var(--accent)}.mobile-top span{font-size:18px}.eyebrow{font-size:10px}.stat-foot{font-size:10px}}
+.view-switch{display:flex;gap:5px;padding:4px;border:1px solid var(--line);border-radius:12px;background:#FFFCFA}.view-switch button{border:0;border-radius:8px;background:transparent;color:#84786e;padding:8px 12px;font-size:12px}.view-switch button.active{background:var(--accent-soft);color:#87565E}.grid.atlas{grid-template-columns:repeat(5,minmax(0,1fr));gap:13px}.atlas .item-image{aspect-ratio:3/4}.atlas .item-body{padding:10px 11px}.atlas .item-type,.atlas .item-meta,.atlas .item-bottom{display:none}.atlas .item-name{font-size:12px;text-align:center}.photo-strip{display:flex;gap:8px;flex-wrap:wrap;margin-top:9px}.photo-tile{position:relative;width:83px}.photo-tile img{width:83px;height:90px;object-fit:cover;border-radius:9px;border:2px solid transparent}.photo-tile.cover img{border-color:var(--accent)}.photo-tile button{font-size:10px;border:1px solid var(--line);border-radius:6px;background:white;padding:3px 5px;margin-right:2px}.photo-tile small{display:block;font-size:10px;color:var(--accent)}.gallery-main{width:100%;max-height:340px;object-fit:contain;background:#F0E4E2;border-radius:12px}.gallery-thumbs{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0}.gallery-thumbs button{padding:2px;border:2px solid transparent;border-radius:8px;background:transparent}.gallery-thumbs button.active{border-color:var(--accent)}.gallery-thumbs img{width:55px;height:65px;object-fit:cover;border-radius:5px}.detail-gallery{margin-bottom:15px}.photo-hint{font-size:11px;color:var(--muted);margin-top:6px}@media(max-width:760px){.grid.atlas{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.view-switch button{padding:7px 9px}.photo-tile{width:74px}.photo-tile img{width:74px;height:82px}}
+
+/* Toolbar: clear actions with familiar icons and accessible text labels */
+.top-actions{flex-wrap:wrap;justify-content:flex-end;gap:8px}
+.top-actions .btn{display:inline-flex;align-items:center;justify-content:center;gap:0;white-space:nowrap;width:43px;height:43px;padding:0;position:relative}.top-actions .btn span{display:none}.top-actions .btn:focus-visible{outline:3px solid #B9868A;outline-offset:3px}.top-actions .btn:hover::after,.top-actions .btn:focus-visible::after{content:attr(data-tooltip);position:absolute;bottom:calc(100% + 9px);left:50%;transform:translateX(-50%);padding:7px 10px;border-radius:8px;background:#543E42;color:white;font-size:12px;font-weight:400;white-space:nowrap;z-index:30;box-shadow:0 4px 12px #0002;pointer-events:none}
+.action-icon{width:21px;height:21px;flex:none}
+@media(max-width:760px){.top-actions{justify-content:flex-start}.top-actions .btn{width:42px;height:42px;padding:0}.action-icon{width:20px;height:20px}}
+
+/* 套装详情：左侧图片，右侧资料；子藏品纵向排列 */
+.detail-layout{grid-template-columns:minmax(155px,220px) minmax(0,1fr);align-items:start;gap:24px}
+.detail-gallery{margin:0}.detail-gallery .detail-image{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:13px;background:#F0E4E2}
+.detail-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 15px}
+.detail-row{min-width:0;padding-bottom:8px}.detail-value{line-height:1.5}
+.suite-children-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 12px}
+.suite-children{display:flex;flex-direction:column;gap:9px}
+.related-child{width:100%;display:flex;align-items:center;gap:15px;text-align:left;border:1px solid var(--line);border-radius:13px;background:#FFF7F5;padding:10px;cursor:pointer;color:inherit;transition:background .15s}
+.related-child:hover{background:#F6E8E6}.child-thumb{flex:0 0 82px;width:82px;height:98px;border-radius:9px;background:#F0E4E2;overflow:hidden;display:flex;align-items:center;justify-content:center;color:#BCA4A4;font-size:25px}
+.child-thumb img{width:100%;height:100%;object-fit:cover}.child-info{min-width:0;flex:1;display:flex;flex-direction:column;gap:6px;font-size:12px;color:var(--muted);overflow-wrap:anywhere}.child-info strong{font-size:14px;color:var(--ink)}.child-info .child-price{color:var(--accent);font-weight:600}.child-chevron{font-size:24px;color:#BCA4A4;padding-right:5px}
+@media(max-width:760px){.detail-layout{grid-template-columns:110px minmax(0,1fr);gap:14px}.detail-list{grid-template-columns:1fr;gap:7px}.child-thumb{flex-basis:65px;width:65px;height:80px}.related-child{gap:10px}.suite-children-heading{flex-wrap:wrap}}
+
+/* Detail action icons with hover/focus descriptions */
+.detail-modal-head{align-items:center;gap:12px}.detail-heading{min-width:0;flex:1}.detail-heading h2{overflow-wrap:anywhere}.detail-head-actions{display:flex;align-items:center;gap:8px;flex:none}.detail-icon-btn{width:40px;height:40px;padding:0;display:inline-flex;align-items:center;justify-content:center;position:relative;flex:none}
+.detail-icon-btn svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.detail-icon-btn:hover::after,.detail-icon-btn:focus-visible::after{content:attr(data-tooltip);position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#543E42;color:#fff;border-radius:8px;padding:7px 10px;white-space:nowrap;font-size:12px;box-shadow:0 4px 12px #0002;z-index:35;pointer-events:none}
+#backToParent:hover::after,#backToParent:focus-visible::after{content:none!important} .detail-icon-btn:focus-visible{outline:3px solid #B9868A;outline-offset:2px}
+.group-count{position:absolute;right:10px;top:10px;background:#fff9f0e8;border-radius:99px;padding:6px 10px;color:#87565E;font-size:11px;font-weight:600}
+/* 同名 SET 可在首页展开 */
+.suite-group-wrap{min-width:0}.suite-group-wrap .item-card{width:100%}.suite-group-toggle{width:100%;border:1px solid var(--line);background:#FFF7F5;border-radius:0 0 12px 12px;padding:10px;color:#87565E;font-size:12px;cursor:pointer;margin-top:-1px}.suite-group-members{display:grid;gap:7px;padding:10px;border:1px solid var(--line);border-top:0;background:#FFFAF8;border-radius:0 0 13px 13px}.suite-group-members[hidden]{display:none}.suite-group-members .related-child{padding:7px;gap:9px}.suite-group-members .child-thumb{flex:0 0 45px;width:45px;height:54px}.suite-group-members .child-info strong{font-size:12px}.detail-navigation{display:flex;gap:8px;align-items:center;margin:14px 0 0}.detail-navigation .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px}.detail-navigation .btn:disabled{opacity:.35;cursor:not-allowed}.check-report{display:grid;gap:9px;margin:12px 0}.check-report section{border:1px solid var(--line);padding:12px;border-radius:11px;background:#FFF7F5}.check-report h4{margin:0 0 7px;font-size:13px}.check-report p{margin:4px 0;color:#8B7779;font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+
+.group-totals,.group-card-totals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.group-total-item,.group-card-totals>div{background:#F7EAE8;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:6px;color:#8B7779;font-size:12px}.group-total-item strong,.group-card-totals strong{font-size:17px;color:#87565E;font-weight:700}.group-card-totals{margin:8px 0}.group-card-totals>div{padding:9px}.group-card-totals strong{font-size:15px}
+.suite-group-wrap .item-card .item-body{padding:18px 17px}.suite-group-wrap .item-card .item-name{font-size:15px}.suite-group-wrap .item-card .item-bottom{justify-content:flex-end;margin-top:7px;padding-top:8px}.suite-group-wrap .group-card-totals{margin-top:14px}.suite-group-wrap .related-child{min-height:62px}.grid.atlas .suite-group-wrap .item-type,.grid.atlas .suite-group-wrap .item-meta,.grid.atlas .suite-group-wrap .item-bottom{display:block}.grid.atlas .suite-group-wrap .item-name{text-align:left;font-size:15px}.grid.atlas .suite-group-wrap .item-body{padding:18px 17px}.grid.atlas .suite-group-wrap .group-card-totals{display:grid}.grid.atlas .suite-group-wrap .item-card{height:100%}
+/* 属性视图：按藏品逐件归类，外层不显示图片 */
+.grid.attribute-layout{display:flex;flex-direction:column;gap:18px}
+.attribute-section{background:#FFFCFA;border:1px solid var(--line);border-radius:16px;padding:16px;min-width:0}
+.attribute-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.attribute-heading>div:first-child{display:flex;align-items:center;gap:10px}
+.attribute-heading strong{font-size:17px;color:var(--ink)}.attribute-heading span,.attribute-totals{font-size:12px;color:var(--muted)}
+.attribute-records{display:flex;flex-direction:column;gap:7px}
+.attribute-record{display:flex;align-items:center;gap:12px;width:100%;padding:12px;border:1px solid var(--line);border-radius:11px;background:#FFF7F5;color:var(--ink);text-align:left;cursor:pointer}
+.attribute-record:hover{background:#F6E8E6}.attribute-record-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px;overflow-wrap:anywhere}.attribute-record-main strong{font-size:13px}.attribute-record-main small{font-size:11px;color:var(--muted)}
+.attribute-record-prices{display:flex;flex-direction:column;gap:5px;align-items:flex-end;white-space:nowrap;font-size:11px;color:var(--accent)}
+@media(max-width:760px){.attribute-section{padding:12px}.attribute-record{gap:7px;padding:10px}.attribute-record-prices{font-size:10px}}
+/* 属性视图多选筛选 */
+.multi-filters{display:flex;gap:9px;flex-wrap:wrap}.multi-filters[hidden]{display:none}
+.multi-filter{position:relative;min-width:125px;font-size:13px;color:#655158}
+.multi-filter summary{list-style:none;cursor:pointer;border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:11px 30px 11px 12px;white-space:nowrap;max-width:185px;overflow:hidden;text-overflow:ellipsis}
+.multi-filter summary::-webkit-details-marker{display:none}.multi-filter summary:after{content:'⌄';position:absolute;right:12px;top:10px;color:#A66C70}
+.multi-filter-options{position:absolute;z-index:8;top:calc(100% + 5px);left:0;min-width:180px;max-height:260px;overflow:auto;background:#FFFCFA;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 26px #543E4220;padding:7px}
+.multi-filter-options label{display:flex;align-items:center;gap:9px;padding:9px 8px;border-radius:8px;cursor:pointer;white-space:nowrap}.multi-filter-options label:hover{background:#F5E7E5}.multi-filter-options input{accent-color:#A66C70}
+@media(max-width:760px){.multi-filters{width:100%}.multi-filter{flex:1;min-width:0}.multi-filter summary{max-width:none}}
+</style>
+<style>
+.settings-section{padding:5px 0 20px;margin-bottom:17px;border-bottom:1px solid var(--line)}.settings-section:last-child{border-bottom:0;margin-bottom:0}.settings-section h3{font-size:15px;margin:0 0 9px;color:var(--ink)}.settings-note{font-size:12px;color:var(--muted);line-height:1.75;margin:5px 0 13px}.settings-defaults{font-size:12px;background:#F5E7E5;border-radius:10px;padding:10px 12px;margin-bottom:10px}.settings-attr-list{display:grid;gap:7px}.settings-attr-row{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:10px;padding:8px 10px}.settings-attr-row .attr-name{flex:1;min-width:0;overflow-wrap:anywhere;font-size:13px}.settings-attr-row button{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 9px;cursor:pointer}.settings-attr-row button:disabled{opacity:.3;cursor:default}.settings-add{display:flex;gap:8px;margin-top:12px}.settings-add input{flex:1;min-width:0;padding:10px;border:1px solid var(--line);border-radius:9px;background:#FFFCFA}.settings-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.settings-data-stats{font-size:12px;color:var(--muted);margin:10px 0 14px}.settings-danger{margin-top:22px;padding-top:17px;border-top:1px solid var(--line)}@media(max-width:440px){.settings-actions{grid-template-columns:1fr}.settings-attr-row{flex-wrap:wrap}}
+</style>
+<style>
+.cloud-auth-fields[hidden],.cloud-buttons[hidden]{display:none!important}.cloud-panel{border:1px solid var(--line);background:#FFF8F6;border-radius:14px;padding:15px;margin-top:12px}.cloud-status{font-size:12px;color:var(--muted);line-height:1.7;margin:8px 0 12px;overflow-wrap:anywhere}.cloud-buttons{display:flex;gap:8px;flex-wrap:wrap}.cloud-buttons .btn:disabled{opacity:.5;cursor:wait}.cloud-warning{font-size:12px;color:#87565E;line-height:1.7}.cloud-auth-fields{display:grid;gap:9px;margin:12px 0}.cloud-auth-fields input{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px;background:var(--panel);color:var(--ink)}
+</style>
+<style>
+body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,body.auth-locked .toast{display:none!important}
+#authGate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#FAF4F2;padding:22px}
+#authGate[hidden]{display:none!important}.auth-box{width:min(420px,100%);background:#FFFCFA;border:1px solid #EBD5D3;border-radius:22px;padding:30px;box-shadow:0 16px 50px #543E4212}.auth-box h1{font-family:Georgia,serif;color:#543E42;font-size:29px;font-weight:500;margin:0 0 8px}.auth-box p{font-size:13px;color:#8B7779;line-height:1.7}.auth-box input{display:block;width:100%;padding:13px;margin:10px 0;border:1px solid #EBD5D3;border-radius:11px;background:white;color:#543E42}.auth-box .btn{width:100%;margin-top:8px}.auth-error{font-size:12px;color:#a34d59;line-height:1.7;margin-top:12px;overflow-wrap:anywhere}
+#syncPill{font-size:12px;color:#87565E;display:inline-flex;align-items:center;gap:5px;padding:7px 10px;border-radius:99px;background:#EBD5D3;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+</style>
+</head>
+<body class="auth-locked">
+<div id="authGate"><div class="auth-box"><div style="font-size:12px;letter-spacing:2px;color:#A66C70;margin-bottom:9px">MY LITTLE ARCHIVE</div><h1>藏间 · 樱桃可可</h1><p>登录后开启私人收藏柜，收藏会自动保存至云端。</p><input id="gateEmail" type="email" autocomplete="email" placeholder="邮箱地址"><input id="gatePassword" type="password" autocomplete="current-password" placeholder="密码"><button class="btn primary" id="gateLogin" type="button">登录藏间</button><button class="btn" id="gateSignup" type="button">注册账号</button><div class="auth-error" id="gateStatus">正在检查登录状态…</div></div></div>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">藏</div><div><div class="brand-name">藏间</div><div class="brand-sub">MY LITTLE ARCHIVE</div></div></div>
+    <div><div class="nav-label">COLLECTION</div><nav class="nav">
+      <button class="active" data-view="all"><span class="ico">▦</span>我的收藏</button>
+    </nav></div>
+    <div><div class="nav-label">MANAGE</div><nav class="nav">
+      <button type="button" id="settingsBtn"><span class="ico">⚙</span>设置</button>
+    </nav></div>
+    <div class="side-note"><strong>给喜欢的东西一个位置。</strong>记录每一次心动，也记下每一件珍藏。<br>你的私人周边档案。</div>
+  </aside>
+  <main>
+    <div class="topbar">
+      <div><div class="eyebrow">YOUR PERSONAL ARCHIVE</div><h1 class="page-title" id="pageTitle">我的收藏柜</h1><p class="subtitle" id="pageSubtitle">把喜欢的周边好好收藏起来。</p></div>
+      <div class="top-actions"><span id="syncPill" aria-live="polite">☁ 正在连接…</span><button class="btn primary" id="addBtn" title="添加藏品" data-tooltip="添加藏品" aria-label="添加藏品"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>添加藏品</span></button></div><div id="dataActionTriggers" hidden aria-hidden="true"><button class="btn secondary" id="excelImportBtn" title="从 Excel 表格导入藏品" data-tooltip="导入 Excel" aria-label="导入 Excel"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4"/><path d="M4 17v3h16v-3"/></svg><span>导入 Excel</span></button><button class="btn secondary" id="excelExportBtn" title="将藏品导出为 Excel 表格" data-tooltip="导出 Excel" aria-label="导出 Excel"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4m-4 4 4-4 4 4"/><path d="M4 17v3h16v-3"/></svg><span>导出 Excel</span></button><button class="btn secondary" id="importBackupBtn" title="从 JSON 备份恢复藏品" data-tooltip="恢复备份" aria-label="恢复备份"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a8 8 0 1 1 2 6"/><path d="M4 5v6h6"/><path d="M12 8v5l3 2"/></svg><span>恢复备份</span></button><button class="btn secondary" id="exportBtn" title="保存包含图片的完整 JSON 备份" data-tooltip="保存备份" aria-label="保存备份"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V4h16v3M5 10h14v10H5z"/><path d="M9 14h6"/></svg><span>保存备份</span></button></div>
+    </div>
+    <section class="stats">
+      <div class="stat"><div class="stat-top">收藏总数 <span class="stat-icon">▦</span></div><div class="stat-value" id="statCount">0</div><div class="stat-foot">件值得珍藏的小物</div></div>
+      <div class="stat"><div class="stat-top">购入总额 <span class="stat-icon">￥</span></div><div class="stat-value" id="statSpend">¥0</div><div class="stat-foot">按已记录的购入价统计</div></div>
+      <div class="stat"><div class="stat-top">售出总额 <span class="stat-icon">↗</span></div><div class="stat-value" id="statSales">¥0</div><div class="stat-foot">按已记录的售出价统计</div></div>
+      <div class="stat"><div class="stat-top">套装数量 <span class="stat-icon">♡</span></div><div class="stat-value" id="statWish">0</div><div class="stat-foot">已创建的套装记录</div></div>
+    </section>
+    <section id="collectionSection">
+      <div class="section-head"><div><h2 class="section-title" id="sectionTitle">全部藏品</h2><div class="section-desc" id="resultCount">你的收藏，一目了然</div></div></div>
+      <div class="controls"><div class="view-switch"><button id="cardView" class="active" type="button">▦ 卡片</button><button id="atlasView" type="button">☷ 属性</button></div><div class="search"><input id="searchInput" placeholder="搜索名称、属性、编号…" /></div><select id="attributeFilter"><option value="">所有属性</option></select><div id="multiFilters" class="multi-filters" hidden><details class="multi-filter" id="multiAttr"><summary id="multiAttrLabel">所有属性</summary><div class="multi-filter-options" id="multiAttrOptions"></div></details><details class="multi-filter" id="multiType"><summary id="multiTypeLabel">所有类别</summary><div class="multi-filter-options" id="multiTypeOptions"></div></details></div><select id="sortSelect"><option value="releaseNew" selected>发布时间：最新优先</option><option value="releaseOld">发布时间：最早优先</option></select></div>
+      <div class="grid" id="itemsGrid"></div>
+    </section>
+    <section id="statsSection" hidden>
+      <div class="section-head"><div><h2 class="section-title">你的收藏报告</h2><div class="section-desc">用数字记录喜欢的轨迹</div></div></div>
+      <div class="stat" style="margin-bottom:16px"><div class="stat-top">购入总额</div><div class="stat-value" id="reportSpend">¥0</div><div class="stat-foot">所有记录的购入价格之和</div></div>
+      <div class="stat" style="margin-bottom:16px"><div class="stat-top">售出总额</div><div class="stat-value" id="reportSales">¥0</div><div class="stat-foot">所有记录的售出价格之和</div></div>
+      <div class="stat" style="margin-bottom:16px"><div class="stat-top">净支出（购入总额 - 售出总额）</div><div class="stat-value" id="reportNet">¥0</div></div>
+      <div class="stat"><div class="section-title" style="margin-bottom:15px">类别分布</div><div id="typeBreakdown"></div></div>
+    </section>
+    <div class="footer-note">藏间 · 一个只属于你的收藏角落　✦　数据暂存于当前浏览器</div>
+  </main>
+</div>
+<nav class="mobile-top"><button class="active" data-view="all"><span>▦</span>收藏柜</button><button id="mobileAdd"><span>＋</span>添加</button></nav>
+
+<div class="overlay" id="formOverlay"><div class="modal">
+  <div class="modal-head"><div><h2 id="formTitle">添加一件藏品</h2><div class="modal-desc">类别选择「SET」时自动作为母套装；其他藏品可选择所属套装。</div></div><button class="close" data-close="formOverlay"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+  <form id="itemForm">
+    <input type="hidden" id="itemId" />
+    <div class="form-grid">
+      <div class="field full"><label>藏品图片</label><label class="image-upload" for="imageFile"><span>＋　上传或更换藏品图片</span><input id="imageFile" type="file" accept="image/*" hidden/></label><div class="photo-hint">每件藏品保留一张图片，上传新图片会替换原图。</div><div class="photo-strip" id="photoStrip"></div></div>
+      <div class="field"><label for="name">名称</label><input id="name" placeholder="例如：限定拍立得" /></div>
+      <div class="field"><label for="type">类别</label><select id="type"><option value="">未分类</option><option>小卡</option><option>拍立得</option><option>SET</option><option>其他</option></select></div>
+      <div class="field"><label for="attribute">属性</label><select id="attribute"><option value="">未设置</option><option>Z&S</option><option>22X</option><option>SU</option><option>TOP</option><option>跨代</option><option value="__custom__">＋ 自定义…</option></select><input id="customAttribute" type="text" placeholder="输入自定义属性名称" maxlength="40" hidden style="margin-top:7px" /></div>
+      <div class="field"><label for="version">版本</label><select id="version"><option value="">未设置</option><option>高会</option><option>场周</option><option>其他</option></select></div>
+      <div class="field"><label for="serial">编号 / 款式</label><input id="serial" placeholder="例如：218/299、A款" /></div>
+      <div class="field full" id="parentField" hidden><label for="parentId">所属套装</label><select id="parentId"><option value="">请选择所属套装</option></select></div>
+      <div class="field"><label for="price">购入价格（元）</label><input id="price" type="number" min="0" step="0.01" placeholder="0.00" /></div>
+      <div class="field"><label for="soldPrice">售出价格（元）</label><input id="soldPrice" type="number" min="0" step="0.01" placeholder="未售出可留空" /></div>
+      <div class="field"><label for="releaseDate">周边发布时间</label><input id="releaseDate" type="date" /><small id="releaseHint" style="display:block;color:#9A8387;margin-top:5px"></small></div>
+      <div class="field"><label for="source">购买渠道</label><input id="source" placeholder="例如：闲鱼、官方店、交换" /></div>
+      <div class="field full"><label for="notes">备注</label><textarea id="notes" placeholder="版本、保存情况、故事，或者任何想记住的事…"></textarea></div>
+    </div>
+    <div class="modal-actions"><button type="button" class="btn" id="deleteBtn" hidden>删除藏品</button><div class="right-actions"><button type="button" class="btn" data-close="formOverlay">取消</button><button class="btn primary" type="submit">保存藏品</button></div></div>
+  </form>
+</div></div>
+<div class="overlay" id="groupOverlay"><div class="modal"><div class="modal-head"><div><h2 id="groupTitle">套装分组</h2><div class="modal-desc" id="groupSubtitle"></div></div><button class="close" data-close="groupOverlay"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div><div id="groupTotals" class="group-totals"></div><div class="suite-children" id="groupRecords"></div></div></div>
+<div class="overlay" id="detailOverlay"><div class="modal">
+  <div class="modal-head detail-modal-head"><div class="detail-heading"><h2 id="detailTitle">藏品详情</h2><div class="modal-desc" id="detailSubtitle"></div></div><div class="detail-head-actions"><button class="btn detail-icon-btn" id="detailCopy" type="button" title="复制藏品" aria-label="复制藏品" data-tooltip="复制藏品"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></button><button class="btn detail-icon-btn" id="detailEdit" type="button" title="编辑藏品" aria-label="编辑藏品" data-tooltip="编辑藏品"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L9 17l-4 1 1-4Z"/></svg></button><button class="close" data-close="detailOverlay" aria-label="关闭"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div></div>
+  <div class="detail-layout"><div class="detail-gallery" id="detailGallery"></div><div class="detail-list" id="detailList"></div></div>
+  <div id="detailNavigation" class="detail-navigation" hidden></div>
+  <div id="relatedRecords" style="margin-top:20px"></div>
+</div></div>
+<div class="overlay" id="settingsOverlay"><div class="modal" style="max-width:610px">
+  <div class="modal-head"><div><h2>设置</h2><div class="modal-desc">管理属性选项与本地收藏数据</div></div><button class="close" data-close="settingsOverlay" aria-label="关闭"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+  <section class="settings-section"><h3>云端同步 · Supabase</h3><p class="settings-note">登录后自动加载云端数据，编辑后自动同步。离线改动会等待联网，发生冲突时暂停同步并提示处理。建议定期保存 JSON 备份。</p><div class="cloud-panel"><div id="cloudStatus" class="cloud-status">正在准备云端连接…</div><div id="cloudAuthFields" class="cloud-auth-fields"><input id="cloudEmail" type="email" autocomplete="email" placeholder="邮箱地址" aria-label="邮箱地址"><input id="cloudPassword" type="password" autocomplete="current-password" placeholder="密码（至少 6 位）" aria-label="密码"></div><div class="cloud-buttons" id="cloudAuthActions"><button class="btn primary" type="button" id="cloudLogin">登录</button><button class="btn" type="button" id="cloudSignup">注册</button><button class="btn" type="button" id="cloudLogout" hidden>退出登录</button></div><div class="cloud-buttons" id="cloudSyncActions" style="margin-top:12px" hidden><button class="btn primary" type="button" id="cloudUpload">↑ 手动上传（谨慎）</button><button class="btn" type="button" id="cloudDownload">↓ 手动合并</button></div><p class="cloud-warning">自动同步默认开启。发生同一藏品的跨设备冲突时，不会静默覆盖；请先备份并选择保留哪个版本。手动上传仅作为紧急恢复工具，图片存入私人 Storage。</p></div></section>
+  <section class="settings-section"><h3>自定义属性管理</h3><p class="settings-note">默认属性 Z&S、22X、SU、TOP、跨代保持不变。自定义属性可以改名、调整顺序或移出选项。改名会同步更新已使用该属性的藏品；移除选项不会删除藏品。</p>
+    <div class="settings-defaults">默认属性：Z&S · 22X · SU · TOP · 跨代</div>
+    <div id="customAttrList" class="settings-attr-list"></div>
+    <div class="settings-add"><input id="settingsNewAttr" maxlength="40" placeholder="输入新的属性名称" aria-label="新的属性名称"><button class="btn primary" id="settingsAddAttr" type="button">添加属性</button></div>
+  </section>
+  <section class="settings-section"><h3>修改历史与撤销</h3><p class="settings-note">每次保存、删除、导入或清空前都会记录一个还原点。可撤销上一步，也可恢复到某次操作之前。最多保留最近 8 个还原点；若浏览器空间不足，历史仅在本次打开期间保留。重要数据仍建议保存 JSON 备份。</p><div class="settings-actions"><button class="btn secondary" id="undoChangeBtn" type="button">↶ 撤销上一步</button></div><div id="historyList" class="settings-attr-list" aria-live="polite"></div></section>
+  <section class="settings-section"><h3>数据检查</h3><p class="settings-note">检查重复 ID、未成功关联套装的子记录、未填写发布时间的 SET，以及可能重复的记录。只检查，不会自动修改或删除数据。</p><button class="btn secondary" id="runDataCheck" type="button">检查收藏数据</button><div id="dataCheckResults" class="check-report" aria-live="polite"></div></section>
+  <section class="settings-section"><h3>数据管理中心</h3><p class="settings-note">Excel 用于批量编辑文字字段；JSON 备份包含图片，更适合完整保存和恢复。所有操作沿用原来的导入、导出逻辑。</p>
+    <div class="settings-data-stats" id="settingsDataStats"></div>
+    <div class="settings-actions"><button class="btn secondary" type="button" data-data-action="excelImportBtn">↓ 导入 Excel</button><button class="btn secondary" type="button" data-data-action="excelExportBtn">↑ 导出 Excel</button><button class="btn secondary" type="button" data-data-action="exportBtn">▣ 保存 JSON 备份</button><button class="btn secondary" type="button" data-data-action="importBackupBtn">↶ 恢复 JSON 备份</button></div>
+    <div class="settings-danger"><strong>清空所有藏品</strong><p class="settings-note">永久删除本浏览器保存的套装、小卡、价格及图片。自定义属性保留。建议先保存 JSON 备份。</p><button type="button" class="btn" id="clearAllBtn" style="border-color:#c77c75;color:#ae4c46">清空所有藏品…</button></div>
+  </section>
+</div></div>
+<div class="overlay" id="clearConfirmOverlay"><div class="modal" style="max-width:490px">
+  <div class="modal-head"><div><h2>确认清空收藏？</h2><div class="modal-desc">可通过修改历史尝试恢复；建议先保存 JSON 备份</div></div><button class="close" data-close="clearConfirmOverlay" aria-label="关闭"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+  <p style="font-size:14px;line-height:1.8;margin:8px 0 14px">即将删除当前浏览器中 <strong id="clearCount">0</strong> 条藏品记录（包括套装和小卡）。请先备份。确认删除，请在下方输入 <strong>清空</strong>。</p>
+  <div class="field"><label for="clearConfirmText">输入“清空”以确认</label><input id="clearConfirmText" autocomplete="off" placeholder="清空" /></div>
+  <div class="modal-actions"><button class="btn" type="button" data-close="clearConfirmOverlay">取消</button><button class="btn" type="button" id="clearConfirmBtn" disabled style="background:#ae4c46;color:white">永久清空所有藏品</button></div>
+</div></div>
+<div class="toast" id="toast"></div>
+<script>
+const STORAGE_KEY='cangjian_collection_v1';
+const CUSTOM_ATTR_KEY='cangjian_custom_attributes_v1';
+let customAttributes=[];try{customAttributes=JSON.parse(localStorage.getItem(CUSTOM_ATTR_KEY)||'[]')}catch(e){}
+customAttributes=Array.isArray(customAttributes)?customAttributes.filter(x=>typeof x==='string'):[];
+const $=id=>document.getElementById(id);
+let items=[],currentView='all',currentStatus='',pendingImage='',activeDetailId=null,displayMode='cards';
+let editReturnDetailId=null;
+try{items=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch(e){items=[]}
+if(!Array.isArray(items))items=[];items.forEach(x=>{if(x.type==='周边套装')x.type='SET';x.recordRole=x.type==='SET'?'parent':x.parentId?'child':'normal';if(x.recordRole==='parent')x.parentId=''});
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money=n=>'¥'+(Number(n||0)).toLocaleString('zh-CN',{minimumFractionDigits:0,maximumFractionDigits:2});
+const today=()=>new Date().toISOString().slice(0,10);
+const HISTORY_KEY='cangjian_change_history_v1';
+let history=[];try{const h=JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]');if(Array.isArray(h))history=h.filter(x=>x&&typeof x.data==='string').slice(0,8)}catch(e){}
+let lastSaved=localStorage.getItem(STORAGE_KEY)||'[]';
+let nextHistoryLabel='修改藏品';
+function save(){
+ const next=JSON.stringify(items);
+ try{localStorage.setItem(STORAGE_KEY,next)}catch(e){toast('浏览器存储空间不足，请减少图片大小或先导出备份。');return false}
+ if(next!==lastSaved){
+  history.unshift({time:new Date().toISOString(),label:nextHistoryLabel,data:lastSaved});history=history.slice(0,8);
+  try{localStorage.setItem(HISTORY_KEY,JSON.stringify(history))}catch(e){try{localStorage.removeItem(HISTORY_KEY)}catch(_){} }
+ }
+ lastSaved=next;nextHistoryLabel='修改藏品';
+ if(typeof queueCloudSync==='function')queueCloudSync();
+ if($('historyList'))renderHistory();
+ return true;
+}
+function renderHistory(){
+ const list=$('historyList');if(!list)return;
+ $('undoChangeBtn').disabled=!history.length;
+ list.innerHTML=history.length?history.map((h,i)=>`<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)"><span style="font-size:12px;color:#8B7779;line-height:1.6"><strong style="color:var(--ink)">${esc(h.label)}</strong><br>${esc(new Date(h.time).toLocaleString('zh-CN',{hour12:false}))} · 操作前的状态</span><button type="button" class="btn secondary" data-restore-index="${i}">恢复</button></div>`).join(''):'<p class="settings-note">暂无修改历史。保存或删除藏品后，这里会出现还原点。</p>';
+ list.querySelectorAll('[data-restore-index]').forEach(b=>b.addEventListener('click',()=>restoreHistory(Number(b.dataset.restoreIndex))));
+}
+function restoreHistory(index){
+ const point=history[index];if(!point)return;
+ let restored;try{restored=JSON.parse(point.data);if(!Array.isArray(restored))throw Error('invalid')}catch(e){toast('该还原点无法读取');return}
+ if(!confirm(`确定恢复到「${point.label}」操作之前吗？当前状态也会被保存为新的还原点。`))return;
+ const before=items;items=restored;nextHistoryLabel='恢复历史记录';
+ if(!save()){items=before;nextHistoryLabel='修改藏品';return}
+ activeDetailId=null;hideOverlay('detailOverlay');hideOverlay('formOverlay');hideOverlay('clearConfirmOverlay');
+ refreshAttributes();render();renderHistory();toast('已恢复历史记录');
+}
+$('undoChangeBtn').addEventListener('click',()=>restoreHistory(0));
+function toast(msg){const el=$('toast');el.textContent=msg;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2300)}
+function imageMarkup(item){const cover=item.image||(item.photos&&item.photos[0])||'';return cover?`<img src="${cover}" alt="${esc(item.name)}">`:`<div class="placeholder"><div class="big">${({小卡:'▤',吧唧:'✦',立牌:'♧',娃娃:'♡',海报:'▧',色纸:'▱',徽章:'✧',其他:'◇'})[item.type]||'◇'}</div><small>收藏留影处</small></div>`}
+function refreshAttributes(){
+ const sel=$('attribute'), chosen=sel.value;
+ sel.querySelectorAll('option[data-custom="1"]').forEach(o=>o.remove());
+ const custom=sel.querySelector('option[value="__custom__"]');
+ [...new Set([...customAttributes,...items.map(x=>x.attribute).filter(Boolean)])].filter(a=>!['Z&S','22X','SU','TOP','跨代','其他','__custom__'].includes(a)).forEach(a=>{const o=new Option(a,a);o.dataset.custom='1';sel.insertBefore(o,custom)});
+ if(chosen&&[...sel.options].some(o=>o.value===chosen))sel.value=chosen;
+}
+function setAttribute(v){refreshAttributes();if(v&&!Array.from($('attribute').options).some(o=>o.value===v)){customAttributes.push(v);localStorage.setItem(CUSTOM_ATTR_KEY,JSON.stringify(customAttributes));if(typeof queueCloudSync==='function')queueCloudSync();refreshAttributes()}$('attribute').value=v||'';$('customAttribute').hidden=true}
+$('attribute').addEventListener('change',()=>{$('customAttribute').hidden=$('attribute').value!=='__custom__';if(!$('customAttribute').hidden){$('customAttribute').value='';$('customAttribute').focus()}});
+// 全站属性统一排序：Z&S、22X、SU、TOP，其余属性排在后面。
+const ATTRIBUTE_PRIORITY=['Z&S','22X','SU','TOP'];
+function attributeRank(value){const index=ATTRIBUTE_PRIORITY.indexOf(String(value||'').trim().toUpperCase());return index<0?ATTRIBUTE_PRIORITY.length:index}
+function compareAttributeNames(a,b){return attributeRank(a)-attributeRank(b)||String(a||'').localeCompare(String(b||''),'zh-CN')}
+function refreshFilters(){
+ const specs=[['attributeFilter',[...new Set(items.map(x=>x.attribute).filter(Boolean))].sort(compareAttributeNames)]];
+ specs.forEach(([id,vals])=>{const sel=$(id),v=sel.value;sel.replaceChildren(new Option(id==='attributeFilter'?'所有属性':'所有套装',''));vals.forEach(x=>sel.add(new Option(typeof x==='string'?x:x.label,typeof x==='string'?x:x.value)));sel.value=[...sel.options].some(o=>o.value===v)?v:''});
+}
+// 兼容 Excel 导入的中文日期、斜杠日期、ISO 日期与 Excel 日期序列号。
+function parseDate(v){
+ const raw=String(v??'').trim();if(!raw)return '';
+ if(/^\d{5}(?:\.0+)?$/.test(raw)){
+  const serial=Number(raw),dt=new Date(Date.UTC(1899,11,30)+serial*86400000);
+  return dt.toISOString().slice(0,10);
+ }
+ const normalized=raw.replace(/[年月]/g,'-').replace(/日/g,'').replace(/[.／\/]/g,'-').replace(/\s+/g,'').replace(/-+$/,'');
+ const m=normalized.match(/^(\d{4})-(\d{1,2})-(\d{1,2})(?:T.*)?$/);
+ if(!m)return null;
+ const y=+m[1],mo=+m[2],d=+m[3],dt=new Date(Date.UTC(y,mo-1,d));
+ return dt.getUTCFullYear()===y&&dt.getUTCMonth()===mo-1&&dt.getUTCDate()===d?`${m[1]}-${m[2].padStart(2,'0')}-${m[3].padStart(2,'0')}`:null;
+}
+function effectiveRelease(x){return parseDate(x.releaseDate)||''}
+function displayDate(v){const date=parseDate(v);return date?date.replace(/-/g,'/'):String(v||'').trim()}
+function priceValue(value){const n=Number(String(value??'').replace(/[,，¥￥\s]/g,''));return Number.isFinite(n)?n:0}
+function effectiveAttribute(x){return x.attribute||items.find(p=>p.id===x.parentId)?.attribute||''}
+function suiteTotal(x){return priceValue(x.price)+items.filter(c=>c.parentId===x.id).reduce((sum,c)=>sum+priceValue(c.price),0)}
+function suiteSoldTotal(x){return priceValue(x.soldPrice)+items.filter(c=>c.parentId===x.id).reduce((sum,c)=>sum+priceValue(c.soldPrice),0)}
+function filteredItems(){
+ let arr=items.filter(x=>{
+  if(x.type!=='SET')return false;
+  
+  
+  
+  if($('attributeFilter').value&&x.attribute!==$('attributeFilter').value&&!items.some(c=>c.parentId===x.id&&c.attribute===$('attributeFilter').value))return false;
+  const q=$('searchInput').value.trim().toLowerCase();
+  if(q&&!['name','type','serial','source','notes','attribute'].some(k=>String(x[k]||'').toLowerCase().includes(q))&&!items.some(c=>c.parentId===x.id&&['name','serial','attribute','notes'].some(k=>String(c[k]||'').toLowerCase().includes(q))))return false;
+  return true;
+ });
+ const sort=$('sortSelect').value;
+ arr.sort((a,b)=>sort==='releaseNew'?((!effectiveRelease(a))-(!effectiveRelease(b))||effectiveRelease(b).localeCompare(effectiveRelease(a))):((!effectiveRelease(a))-(!effectiveRelease(b))||effectiveRelease(a).localeCompare(effectiveRelease(b))));
+ return arr;
+}
+function renderStats(visibleSuites){
+ // 首页统计与当前筛选结果保持一致；每条子记录只计入其所属套装一次。
+ const suites=visibleSuites||filteredItems();
+ const suiteIds=new Set(suites.map(x=>x.id));
+ const visibleRecords=items.filter(x=>suiteIds.has(x.id)|| (x.parentId&&suiteIds.has(x.parentId)));
+ const purchaseTotal=visibleRecords.reduce((s,x)=>s+priceValue(x.price),0);
+ const salesTotal=visibleRecords.reduce((s,x)=>s+priceValue(x.soldPrice),0);
+ $('statCount').textContent=visibleRecords.length;
+ $('statSpend').textContent=money(purchaseTotal);
+ $('statSales').textContent=money(salesTotal);
+ $('statWish').textContent=suites.length;
+ // 收藏报告继续显示全库数据，不受首页筛选影响。
+ const allPurchase=items.reduce((s,x)=>s+priceValue(x.price),0);
+ const allSales=items.reduce((s,x)=>s+priceValue(x.soldPrice),0);
+ $('reportSpend').textContent=money(allPurchase);
+ $('reportSales').textContent=money(allSales);
+ $('reportNet').textContent=money(allPurchase-allSales);
+ const counts={};items.forEach(x=>counts[x.type]=(counts[x.type]||0)+1);
+ $('typeBreakdown').innerHTML=Object.keys(counts).length?Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([type,count])=>`<div style="margin:13px 0"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px"><span>${esc(type)}</span><span>${count} 件</span></div><div style="height:6px;background:#F0E4E2;border-radius:8px;overflow:hidden"><div style="height:100%;width:${count/items.length*100}%;background:#B9868A;border-radius:8px"></div></div></div>`).join(''):'<div style="color:#9A8387;font-size:13px">添加藏品后，这里会显示你的收藏类别分布。</div>';
+}
+// 同名套装内固定按属性排列，不影响首页按发布时间排序。
+function compareSuiteAttributes(a,b){return compareAttributeNames(a.attribute,b.attribute)}
+function makeSuiteGroups(arr){
+ const groups=[],byName=new Map();
+ arr.forEach(x=>{const name=(x.name||'').trim();if(!name){groups.push([x]);return}const key=name.toLocaleLowerCase();if(byName.has(key))byName.get(key).push(x);else{const group=[x];byName.set(key,group);groups.push(group)}});
+ groups.forEach(group=>group.sort(compareSuiteAttributes));
+ return groups;
+}
+function openSuiteGroup(ids){
+ const group=ids.map(id=>items.find(x=>x.id===id)).filter(Boolean).sort(compareSuiteAttributes);
+ if(group.length===1){openDetail(group[0].id);return}
+ $('groupTitle').textContent=group[0].name||'套装分组';
+ $('groupSubtitle').textContent=`共 ${group.length} 个套装 · 请选择属性查看详情`;
+ const purchase=group.reduce((sum,x)=>sum+suiteTotal(x),0);
+ const sold=group.reduce((sum,x)=>sum+suiteSoldTotal(x),0);
+ $('groupTotals').innerHTML=`<div class="group-total-item"><span>所有套装购入合计</span><strong>${money(purchase)}</strong></div><div class="group-total-item"><span>所有套装售出合计</span><strong>${money(sold)}</strong></div>`;
+ $('groupRecords').innerHTML=group.map(x=>`<button type="button" class="related-child" data-group-suite="${esc(x.id)}"><span class="child-info"><strong>${esc(x.attribute||'未设置属性')}</strong><span>${esc([x.version,x.serial].filter(Boolean).join(' · ')||x.name||'套装')}</span><span class="child-price">购入 ${money(suiteTotal(x))} · 售出 ${money(suiteSoldTotal(x))}</span></span><span class="child-chevron">›</span></button>`).join('');
+ $('groupRecords').querySelectorAll('[data-group-suite]').forEach(b=>b.addEventListener('click',()=>{hideOverlay('groupOverlay');openDetail(b.dataset.groupSuite)}));
+ showOverlay('groupOverlay');
+}
+let expandedSuiteGroups=new Set();
+function render(){refreshFilters();
+ const arr=filteredItems();renderStats(arr);const groups=makeSuiteGroups(arr);
+ $('resultCount').textContent=`共 ${arr.length} 套 · ${groups.length} 个展示分组 · 点击查看套装`;
+ $('sectionTitle').textContent='全部套装';
+ $('attributeFilter').hidden=displayMode==='attributes';$('multiFilters').hidden=displayMode!=='attributes';
+ $('itemsGrid').classList.remove('atlas','attribute-layout');$('cardView').classList.toggle('active',displayMode==='cards');$('atlasView').classList.toggle('active',displayMode==='attributes');
+ if(displayMode==='attributes'){renderAttributeCollection();return;}
+ $('itemsGrid').innerHTML=groups.length?groups.map(group=>{const x=group[0],isGroup=group.length>1;const groupPrice=group.reduce((sum,p)=>sum+suiteTotal(p),0);const groupSold=group.reduce((sum,p)=>sum+suiteSoldTotal(p),0);const priced=group.some(p=>p.price!==''&&p.price!=null||items.some(c=>c.parentId===p.id&&c.price!==''&&c.price!=null));return `<div class="suite-group-wrap"><article class="item-card" data-ids="${esc(group.map(p=>p.id).join(','))}"><div class="item-body"><div class="item-type">${isGroup?'套装分组':esc(x.type)}</div><div class="item-name">${esc(x.name||'未命名套装')}</div><div class="item-meta">${isGroup?`属性：${esc([...new Set(group.map(p=>p.attribute||'未设置'))].join(' / '))}`:esc([x.attribute,x.version,x.serial].filter(Boolean).join(' · ')||'还没有添加描述')}</div><div class="item-meta">${isGroup?'点击选择具体套装':`子记录 ${items.filter(c=>c.parentId===x.id).length} 件`}</div><div class="group-card-totals"><div>购入合计 <strong>${money(groupPrice)}</strong></div><div>售出合计 <strong>${money(groupSold)}</strong></div></div><div class="item-bottom"><span class="date">${esc(displayDate(x.releaseDate))}</span></div></div></article>${isGroup?`<button class="suite-group-toggle" type="button" data-expand-group="${esc(group.map(p=>p.id).join(','))}" aria-expanded="${expandedSuiteGroups.has(group.map(p=>p.id).join(','))}">${expandedSuiteGroups.has(group.map(p=>p.id).join(','))?'收起套装 ↑':'展开 '+group.length+' 个套装 ↓'}</button><div class="suite-group-members" ${expandedSuiteGroups.has(group.map(p=>p.id).join(','))?'':'hidden'}>${group.map(p=>`<button class="related-child" type="button" data-inline-suite="${esc(p.id)}"><span class="child-info"><strong>${esc(p.attribute||'未设置属性')}</strong><span>${esc(p.version||p.name||'SET')} · 购入 ${money(suiteTotal(p))} · 售出 ${money(suiteSoldTotal(p))}</span></span><span class="child-chevron">›</span></button>`).join('')}</div>`:''}</div>`}).join(''):`<div class="empty"><div class="big">✧</div><strong>${$('searchInput').value?'没有找到相关藏品':'还没有套装'}</strong><p>可以添加一件套装开始收藏。</p><button class="btn primary" id="emptyAdd">＋ 添加藏品</button></div>`;
+ $('itemsGrid').querySelectorAll('[data-expand-group]').forEach(b=>b.addEventListener('click',()=>{const key=b.dataset.expandGroup;expandedSuiteGroups.has(key)?expandedSuiteGroups.delete(key):expandedSuiteGroups.add(key);render()}));
+ $('itemsGrid').querySelectorAll('[data-inline-suite]').forEach(b=>b.addEventListener('click',()=>openDetail(b.dataset.inlineSuite)));
+ $('itemsGrid').querySelectorAll('.item-card').forEach(el=>el.addEventListener('click',()=>openSuiteGroup(el.dataset.ids.split(','))));
+ const emptyAdd=$('emptyAdd');if(emptyAdd)emptyAdd.addEventListener('click',openForm);
+ $('collectionSection').hidden=currentView==='stats';$('statsSection').hidden=currentView!=='stats';
+ $('pageTitle').textContent='我的收藏柜';
+ $('pageSubtitle').textContent=currentView==='stats'?'看看这些喜欢，已经积累成了什么。':'把喜欢的周边好好收藏起来。';
+ document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===currentView));
+}
+
+// 属性视图独立的多选条件，不改变卡片视图原有的筛选。
+const selectedAttributes=new Set(),selectedTypes=new Set();
+function updateMultiFilter(id,values,selected,label){
+ const holder=$(id+'Options');
+ for(const value of [...selected])if(!values.includes(value))selected.delete(value);
+ holder.replaceChildren();
+ values.forEach(value=>{const line=document.createElement('label'),input=document.createElement('input');input.type='checkbox';input.checked=selected.has(value);input.value=value;input.addEventListener('change',()=>{input.checked?selected.add(value):selected.delete(value);updateMultiLabels();render()});line.append(input,document.createTextNode(value));holder.append(line)});
+ updateMultiLabels();
+}
+function updateMultiLabels(){
+ $('multiAttrLabel').textContent=selectedAttributes.size?`属性：${[...selectedAttributes].sort(compareAttributeNames).join('、')}`:'所有属性';
+ $('multiTypeLabel').textContent=selectedTypes.size?`类别：${[...selectedTypes].join('、')}`:'所有类别';
+}
+function refreshMultiFilters(){
+ const attributes=[...new Set(items.map(recordAttribute))].sort(compareAttributeNames);
+ const types=[...new Set(items.map(x=>x.type||'未分类'))];
+ updateMultiFilter('multiAttr',attributes,selectedAttributes,'属性');
+ updateMultiFilter('multiType',types,selectedTypes,'类别');
+}
+document.addEventListener('click',e=>{for(const id of ['multiAttr','multiType']){const el=$(id);if(el.open&&!el.contains(e.target))el.open=false}});
+// 按每一件藏品自身的属性分类，不以母套装属性代替已填写的子记录属性。
+function recordAttribute(x){return String(x.attribute||items.find(p=>p.id===x.parentId)?.attribute||'未设置属性').trim()||'未设置属性'}
+function renderAttributeCollection(){
+ refreshMultiFilters();
+ const q=$('searchInput').value.trim().toLowerCase();
+ const sort=$('sortSelect').value;
+ const records=items.filter(x=>(!selectedAttributes.size||selectedAttributes.has(recordAttribute(x)))&&(!selectedTypes.size||selectedTypes.has(x.type||'未分类'))&&(!q||['name','type','serial','source','notes','attribute','version'].some(k=>String(x[k]||'').toLowerCase().includes(q))));
+ records.sort((a,b)=>sort==='releaseNew'?((!effectiveRelease(a))-(!effectiveRelease(b))||effectiveRelease(b).localeCompare(effectiveRelease(a))):((!effectiveRelease(a))-(!effectiveRelease(b))||effectiveRelease(a).localeCompare(effectiveRelease(b))));
+ const byAttribute=new Map();records.forEach(x=>{const key=recordAttribute(x);if(!byAttribute.has(key))byAttribute.set(key,[]);byAttribute.get(key).push(x)});
+ $('sectionTitle').textContent='藏品属性';
+ $('resultCount').textContent=`共 ${records.length} 件藏品 · ${byAttribute.size} 个属性分类（含套装内藏品）`;
+ $('statCount').textContent=records.length;
+ $('statSpend').textContent=money(records.reduce((n,x)=>n+priceValue(x.price),0));
+ $('statSales').textContent=money(records.reduce((n,x)=>n+priceValue(x.soldPrice),0));
+ $('statWish').textContent=records.filter(x=>x.type==='SET').length;
+ $('itemsGrid').classList.add('attribute-layout');
+ $('itemsGrid').innerHTML=[...byAttribute].sort((a,b)=>compareAttributeNames(a[0],b[0])).map(([key,group])=>`<section class="attribute-section"><div class="attribute-heading"><div><strong>${esc(key)}</strong><span>${group.length} 件藏品</span></div><div class="attribute-totals">购入 ${money(group.reduce((n,x)=>n+priceValue(x.price),0))} · 售出 ${money(group.reduce((n,x)=>n+priceValue(x.soldPrice),0))}</div></div><div class="attribute-records">${group.map(x=>`<button class="attribute-record" type="button" data-record-id="${esc(x.id)}"><span class="attribute-record-main"><strong>${esc(x.name||'未命名藏品')}</strong><small>${esc([x.type,x.version,x.serial].filter(Boolean).join(' · ')||'藏品')}${x.parentId?' · 所属套装：'+esc(items.find(p=>p.id===x.parentId)?.name||'关联套装不存在'):''}</small></span><span class="attribute-record-prices">购入 ${money(priceValue(x.price))}<span>售出 ${money(priceValue(x.soldPrice))}</span></span><span class="child-chevron">›</span></button>`).join('')}</div></section>`).join('')||'<div class="empty"><strong>没有找到符合条件的藏品</strong><p>可以切换属性或清除搜索条件。</p></div>';
+ $('itemsGrid').querySelectorAll('[data-record-id]').forEach(b=>b.addEventListener('click',()=>openDetail(b.dataset.recordId)));
+ $('collectionSection').hidden=currentView==='stats';$('statsSection').hidden=currentView!=='stats';
+ $('pageTitle').textContent='我的收藏柜';$('pageSubtitle').textContent='按每件藏品的属性，整理每一份喜欢。';
+ document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===currentView));
+}
+
+function setView(v){currentView=v;currentStatus='';render();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
+$('cardView').addEventListener('click',()=>{displayMode='cards';render()});$('atlasView').addEventListener('click',()=>{displayMode='attributes';render()});
+$('searchInput').addEventListener('input',render);['attributeFilter','sortSelect'].forEach(id=>$(id).addEventListener('change',render));
+function showOverlay(id){$(id).classList.add('show')}
+function hideOverlay(id){$(id).classList.remove('show')}
+function closeFormAndReturn(id=null){
+ hideOverlay('formOverlay');
+ const target=id||editReturnDetailId;
+ editReturnDetailId=null;
+ if(target&&items.some(x=>x.id===target))openDetail(target);
+}
+
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>b.dataset.close==='formOverlay'?closeFormAndReturn():hideOverlay(b.dataset.close)));
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o){if(o.id==='formOverlay')closeFormAndReturn();else hideOverlay(o.id)}}));
+$('addBtn').addEventListener('click',()=>openForm());$('mobileAdd').addEventListener('click',()=>openForm());
+function refreshParentOptions(excludeId=''){
+ const opts=items.filter(x=>x.recordRole==='parent'&&x.id!==excludeId).map(x=>`<option value="${esc(x.id)}">${esc(x.name)}</option>`).join('');
+ $('parentId').innerHTML='<option value="">请选择所属套装</option>'+opts;
+}
+function updateReleaseField(){$('releaseDate').disabled=false;$('releaseDate').value=parseDate($('releaseDate').dataset.ownDate||'')||'';$('releaseHint').textContent='选填；子记录无需填写，填写套装的发布时间即可。'}
+function updateRoleFields(){ const isSuite=$('type').value==='SET';$('parentField').hidden=isSuite;if(isSuite)$('parentId').value='';updateReleaseField() }
+$('parentId').addEventListener('change',updateReleaseField);$('releaseDate').addEventListener('input',()=>{$('releaseDate').dataset.ownDate=$('releaseDate').value});
+$('type').addEventListener('change',updateRoleFields);
+function singlePhoto(x){return x.image||(Array.isArray(x.photos)?x.photos[0]:'')||''}
+function renderPhotoStrip(){
+ $('photoStrip').innerHTML=pendingImage?`<div class="photo-tile cover"><img src="${pendingImage}" alt="藏品图片"><small>当前图片</small><button type="button" id="removePhoto">删除图片</button></div>`:'';
+ const remove=$('removePhoto');if(remove)remove.onclick=()=>{pendingImage='';renderPhotoStrip()};
+}
+function openForm(id=null,parentId='',copy=false){
+ editReturnDetailId=$('detailOverlay').classList.contains('show')?activeDetailId:null;
+ $('itemForm').reset();refreshAttributes();$('customAttribute').hidden=true;$('itemId').value=copy?'':id||'';pendingImage='';refreshParentOptions(copy?'':id||'');$('type').value='';$('releaseDate').dataset.ownDate='';updateRoleFields();$('deleteBtn').hidden=!id||copy;
+ const x=id?items.find(i=>i.id===id):null;
+ $('formTitle').textContent=copy?'复制藏品':x?'编辑藏品':'添加一件藏品';
+ if(!x && parentId){const parent=items.find(i=>i.id===parentId&&i.recordRole==='parent');if(parent){$('type').value='小卡';$('parentId').value=parent.id;setAttribute(parent.attribute||'');updateRoleFields();$('formTitle').textContent='添加子记录 · '+parent.name}}
+ if(x){setAttribute(x.attribute||'');['name','type','version','serial','price','soldPrice','source','notes','releaseDate'].forEach(k=>$(k).value=['releaseDate'].includes(k)?(parseDate(x[k])||''):x[k]??'');refreshParentOptions(copy?'':id);$('parentId').value=x.parentId||'';$('releaseDate').dataset.ownDate=x.releaseDate||'';updateRoleFields();pendingImage=singlePhoto(x);if(copy){$('name').value=x.name?x.name+'（副本）':'';$('soldPrice').value='';if(x.type==='SET'){$('parentId').value='';updateRoleFields()}}}
+ renderPhotoStrip();hideOverlay('detailOverlay');showOverlay('formOverlay');
+}
+function compressPhoto(file){return new Promise((resolve,reject)=>{const img=new Image(),url=URL.createObjectURL(file);img.onload=()=>{try{const max=1300,scale=Math.min(1,max/Math.max(img.width,img.height));const canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(img.width*scale));canvas.height=Math.max(1,Math.round(img.height*scale));canvas.getContext('2d').drawImage(img,0,0,canvas.width,canvas.height);resolve(canvas.toDataURL('image/jpeg',.78))}catch(e){reject(e)}finally{URL.revokeObjectURL(url)}};img.onerror=()=>{URL.revokeObjectURL(url);reject(Error('图片读取失败'))};img.src=url})}
+$('imageFile').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{pendingImage=await compressPhoto(f);renderPhotoStrip()}catch(err){toast('图片无法读取，请重试')}e.target.value=''});
+$('itemForm').addEventListener('submit',e=>{
+ e.preventDefault();const id=$('itemId').value;const old=items.find(x=>x.id===id);
+ let attr=$('attribute').value;if(attr==='__custom__'){attr=$('customAttribute').value.trim();if(!attr){toast('请输入自定义属性名称');return}if(!customAttributes.includes(attr)){customAttributes.push(attr);localStorage.setItem(CUSTOM_ATTR_KEY,JSON.stringify(customAttributes))}}
+ const releaseValue=parseDate($('releaseDate').value);if(releaseValue===null){toast('请选择有效日期');return}
+ if(!attr&&$('parentId').value){attr=items.find(p=>p.id===$('parentId').value)?.attribute||''}
+ const x={id:id||crypto.randomUUID(),name:$('name').value.trim(),type:$('type').value,attribute:attr,version:$('version').value,serial:$('serial').value.trim(),recordRole:$('type').value==='SET'?'parent':($('parentId').value?'child':'normal'),parentId:$('type').value==='SET'?'':$('parentId').value,price:$('price').value,soldPrice:$('soldPrice').value,releaseDate:releaseValue,source:$('source').value.trim(),notes:$('notes').value.trim(),image:pendingImage,photos:[],createdAt:old?.createdAt||new Date().toISOString()};
+ 
+ if(old&&old.recordRole==='parent'&&x.recordRole!=='parent'&&items.some(c=>c.parentId===id)){toast('此套装仍有关联子记录，请先调整子记录');return}
+ if(old)items=items.map(i=>i.id===id?x:i);else items.unshift(x);
+ nextHistoryLabel=old?'编辑藏品':'新增藏品';
+ if(save()){const returnId=editReturnDetailId;hideOverlay('formOverlay');render();if(returnId)closeFormAndReturn(old?x.id:returnId);else editReturnDetailId=null;toast(old?'藏品已更新':'已收入收藏柜 ✦')}
+});
+$('deleteBtn').addEventListener('click',()=>{const id=$('itemId').value;if(!id)return;if(confirm(items.some(c=>c.parentId===id)?'该套装包含子记录。删除母记录后，子记录将保留但不再关联套装。确定删除吗？':'确定要删除这件藏品吗？此操作无法撤销。')){const previous=items;const oldParentId=items.find(x=>x.id===id)?.parentId;items=items.filter(x=>x.id!==id);nextHistoryLabel='删除藏品';if(!save()){items=previous;return}const returnId=editReturnDetailId;editReturnDetailId=null;activeDetailId=null;hideOverlay('formOverlay');hideOverlay('detailOverlay');render();if(returnId&&returnId!==id&&items.some(x=>x.id===returnId))openDetail(returnId);else if(oldParentId&&items.some(x=>x.id===oldParentId))openDetail(oldParentId);toast('藏品已删除，统计已更新')}});
+function openDetail(id){
+ const x=items.find(i=>i.id===id);if(!x)return;activeDetailId=id;
+ $('detailTitle').textContent=x.name;$('detailSubtitle').textContent=[x.type,effectiveAttribute(x)].filter(Boolean).join(' · ');
+ const photo=singlePhoto(x);$('detailGallery').innerHTML=photo?`<img class="detail-image" src="${photo}" alt="藏品照片">`:'<div class="detail-image" style="display:flex;align-items:center;justify-content:center;color:#aa9b8c">暂无图片</div>';
+ const parent=items.find(p=>p.id===x.parentId);
+ const children=items.filter(c=>c.parentId===x.id);
+ const rows=[['类别',x.type],['所属套装',parent?.name],['属性',effectiveAttribute(x)],['版本',x.version],['周边发布时间',displayDate(effectiveRelease(x))],['编号 / 款式',x.serial],['购入价格',x.price?money(x.price):'未记录'],...(x.type==='SET'?[['套装合计（含子记录购入价）',money(suiteTotal(x))]]:[]),['售出价格',x.soldPrice?money(x.soldPrice):'未记录'],...(x.type==='SET'?[['套装售出合计（含子记录售出价）',money(suiteSoldTotal(x))]]:[]),['购买渠道',x.source],['备注',x.notes]];
+ $('detailList').innerHTML=rows.filter(r=>r[1]).map(r=>`<div class="detail-row"><div class="detail-label">${esc(r[0])}</div><div class="detail-value">${esc(r[1])}</div></div>`).join('');
+ const related=$('relatedRecords');
+ if(x.recordRole==='parent'){
+  related.innerHTML=`<div class="suite-children-heading"><strong>套装内的藏品（${children.length}）</strong><button class="btn primary detail-icon-btn" id="addChildBtn" type="button" aria-label="添加子记录" data-tooltip="添加子记录"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>`+(children.length?`<div class="suite-children">${children.map(c=>`<button type="button" class="related-child" data-child-id="${esc(c.id)}"><span class="child-thumb">${singlePhoto(c)?`<img src="${singlePhoto(c)}" alt="">`:'<span>✧</span>'}</span><span class="child-info"><strong>${esc(c.name||'未命名藏品')}</strong><span>${esc([c.type,effectiveAttribute(c),c.version,c.serial].filter(Boolean).join(' · ')||'暂无其他信息')}</span>${c.releaseDate?`<span>发布时间：${esc(displayDate(c.releaseDate))}</span>`:''}${c.price!==''&&c.price!=null?`<span class="child-price">${money(c.price)}</span>`:''}</span><span class="child-chevron">›</span></button>`).join('')}</div>`:'<p style="font-size:13px;color:#9A8387">还没有子记录，可以从这里添加拆出的单件。</p>');
+  $('addChildBtn').addEventListener('click',()=>openForm(null,x.id));
+  related.querySelectorAll('[data-child-id]').forEach(b=>b.addEventListener('click',()=>openDetail(b.dataset.childId)));
+ }else if(x.recordRole==='child'){
+  related.innerHTML=parent?`<button class="btn detail-icon-btn" id="backToParent" type="button" aria-label="返回套装"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg></button>`:'<p style="font-size:13px;color:#9A8387">当前子记录未关联有效的套装。</p>';
+  if(parent)$('backToParent').addEventListener('click',()=>openDetail(parent.id));
+ }else related.innerHTML='';
+
+ const nav=$('detailNavigation');
+ if(parent){const siblings=items.filter(c=>c.parentId===parent.id);const index=siblings.findIndex(c=>c.id===x.id);nav.hidden=false;nav.innerHTML=`<button class="btn" id="previousChild" type="button" ${index<=0?'disabled':''} aria-label="上一件藏品">← 上一件</button><span style="font-size:12px;color:#9A8387">${index+1} / ${siblings.length}</span><button class="btn" id="nextChild" type="button" ${index>=siblings.length-1?'disabled':''} aria-label="下一件藏品">下一件 →</button>`;if(index>0)$('previousChild').onclick=()=>openDetail(siblings[index-1].id);if(index<siblings.length-1)$('nextChild').onclick=()=>openDetail(siblings[index+1].id)}else{nav.hidden=true;nav.innerHTML=''}
+ hideOverlay('formOverlay');showOverlay('detailOverlay');
+}
+$('detailEdit').addEventListener('click',()=>openForm(activeDetailId));$('detailCopy').addEventListener('click',()=>openForm(activeDetailId,'',true));
+$('exportBtn').addEventListener('click',()=>{
+ const blob=new Blob([JSON.stringify({app:'藏间',version:2,exportedAt:new Date().toISOString(),items},null,2)],{type:'application/json'});
+ const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='藏间收藏备份-'+today()+'.json';a.click();URL.revokeObjectURL(url);toast('备份文件已导出');
+});
+const importBtn=$('importBackupBtn');
+const importInput=document.createElement('input');importInput.type='file';importInput.accept='.json,application/json';importInput.hidden=true;document.body.appendChild(importInput);importBtn.addEventListener('click',()=>importInput.click());
+importInput.addEventListener('change',async()=>{const f=importInput.files[0];if(!f)return;try{const d=JSON.parse(await f.text());const incoming=Array.isArray(d)?d:d.items;if(!Array.isArray(incoming))throw Error('bad');if(confirm(`备份中有 ${incoming.length} 件藏品。导入会合并记录，同 ID 的记录将被覆盖，是否继续？`)){const map=new Map(items.map(x=>[x.id,x]));incoming.forEach(x=>{if(x.id)map.set(x.id,x)});items=[...map.values()];nextHistoryLabel='导入 JSON 备份';if(save()){render();toast('备份导入成功')}}}catch(e){toast('无法读取该备份文件。')}importInput.value=''});
+// Excel (.xlsx) import/export; the workbook library is loaded on demand.
+async function getXLSX(){
+ if(window.XLSX)return window.XLSX;
+ if(!window.__xlsxLoading)window.__xlsxLoading=new Promise((resolve,reject)=>{const t=document.createElement('script');t.src='https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';t.onload=()=>window.XLSX?resolve(window.XLSX):reject(Error('Excel library unavailable'));t.onerror=()=>reject(Error('Excel library unavailable'));document.head.appendChild(t)}).catch(e=>{window.__xlsxLoading=null;throw e});
+ return window.__xlsxLoading;
+}
+const EXCEL_COLUMNS=[['ID','id'],['名称','name'],['类别','type'],['属性','attribute'],['版本','version'],['编号 / 款式','serial'],['所属套装ID','parentId'],['所属套装名称','parentName'],['购入价格','price'],['售出价格','soldPrice'],['周边发布时间','releaseDate'],['购买渠道','source'],['备注','notes'],['创建时间','createdAt']];
+$('excelExportBtn').addEventListener('click',async()=>{try{const XLSX=await getXLSX();const rows=items.map(x=>Object.fromEntries(EXCEL_COLUMNS.map(([label,key])=>[label,key==='parentName'?items.find(p=>p.id===x.parentId)?.name||'':x[key]??''])));const ws=XLSX.utils.json_to_sheet(rows,{header:EXCEL_COLUMNS.map(x=>x[0])});ws['!cols']=EXCEL_COLUMNS.map(([label])=>({wch:Math.min(35,Math.max(14,label.length*2+6))}));const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'藏品');XLSX.writeFile(wb,'藏间收藏-'+today()+'.xlsx');toast('Excel 已导出（图片请使用 JSON 备份）')}catch(e){toast('Excel 功能需要联网加载组件，请检查网络')}});
+const excelInput=document.createElement('input');excelInput.type='file';excelInput.accept='.xlsx,.xls';excelInput.hidden=true;document.body.appendChild(excelInput);$('excelImportBtn').addEventListener('click',()=>excelInput.click());
+excelInput.addEventListener('change',async()=>{const f=excelInput.files[0];if(!f)return;try{const XLSX=await getXLSX(),wb=XLSX.read(await f.arrayBuffer(),{type:'array',cellDates:false}),sheet=wb.Sheets[wb.SheetNames[0]],rows=XLSX.utils.sheet_to_json(sheet,{defval:'',raw:false});if(!rows.length)throw Error('empty');const records=rows.filter(r=>Object.values(r).some(v=>String(v??'').trim())).map(r=>{const x={};EXCEL_COLUMNS.forEach(([label,key])=>{if(key!=='parentName')x[key]=String(r[label]??'').trim()});if(x.type==='周边套装')x.type='SET';x.releaseDate=parseDate(x.releaseDate)||'';x.id=x.id||crypto.randomUUID();x.recordRole=x.type==='SET'?'parent':x.parentId?'child':'normal';if(x.recordRole==='parent')x.parentId='';x.image=items.find(old=>old.id===x.id)?.image||'';x.photos=[];x.createdAt=x.createdAt||new Date().toISOString();x.__parentName=String(r['所属套装名称']||'').trim();return x});const all=[...items,...records];records.forEach(x=>{if(x.recordRole!=='parent'&&!x.parentId&&x.__parentName){const match=all.find(p=>p.recordRole==='parent'&&p.name===x.__parentName);if(match){x.parentId=match.id;x.recordRole='child'}}if(!x.attribute&&x.parentId)x.attribute=all.find(p=>p.id===x.parentId)?.attribute||'';delete x.__parentName});if(!confirm(`读取到 ${records.length} 件藏品。将按 ID 合并，同 ID 覆盖；Excel 不包含图片，已有相同 ID 的图片会保留。确定导入吗？`))return;const map=new Map(items.map(x=>[x.id,x]));records.forEach(x=>{const old=map.get(x.id);map.set(x.id,{...old,...x,image:x.image||old?.image||''})});items=[...map.values()];nextHistoryLabel='导入 Excel';if(save()){refreshAttributes();render();toast(`成功导入 ${records.length} 件藏品`)}}catch(e){console.error(e);toast('导入失败：请检查 Excel 格式或网络连接')}finally{excelInput.value=''}});
+const BASE_ATTRIBUTES=['Z&S','22X','SU','TOP','跨代'];
+function persistCustomAttributes(){localStorage.setItem(CUSTOM_ATTR_KEY,JSON.stringify(customAttributes));if(typeof queueCloudSync==='function')queueCloudSync();refreshAttributes();refreshFilters();renderCustomAttributeSettings()}
+function renderCustomAttributeSettings(){
+ const list=$('customAttrList');if(!list)return;
+ list.replaceChildren();
+ if(!customAttributes.length){const hint=document.createElement('p');hint.className='settings-note';hint.textContent='还没有自定义属性，可以在下面添加。';list.append(hint)}
+ customAttributes.forEach((name,i)=>{
+  const row=document.createElement('div');row.className='settings-attr-row';
+  const label=document.createElement('span');label.className='attr-name';label.textContent=name;row.append(label);
+  const mk=(txt,title,handler,disabled=false)=>{const b=document.createElement('button');b.type='button';b.textContent=txt;b.title=title;b.setAttribute('aria-label',title+'：'+name);b.disabled=disabled;b.addEventListener('click',handler);row.append(b)};
+  mk('↑','上移',()=>{[customAttributes[i-1],customAttributes[i]]=[customAttributes[i],customAttributes[i-1]];persistCustomAttributes()},i===0);
+  mk('↓','下移',()=>{[customAttributes[i+1],customAttributes[i]]=[customAttributes[i],customAttributes[i+1]];persistCustomAttributes()},i===customAttributes.length-1);
+  mk('编辑','重命名',()=>{const next=prompt('将属性「'+name+'」改名为：',name);if(next===null)return;const v=next.trim();if(!v||v==='__custom__'){toast('请输入有效的属性名称');return}if(v===name)return;if([...BASE_ATTRIBUTES,...customAttributes].some(a=>a===v)){toast('属性名称已存在');return}const affected=items.filter(x=>x.attribute===name).length;if(affected&&!confirm(`有 ${affected} 件藏品使用「${name}」，将同步改为「${v}」。确定吗？`))return;
+  const old=items.map(x=>x.attribute);items.forEach(x=>{if(x.attribute===name)x.attribute=v});nextHistoryLabel='重命名属性';if(!save()){items.forEach((x,j)=>x.attribute=old[j]);return}customAttributes[i]=v;persistCustomAttributes();render();toast('属性已重命名')});
+  mk('移除','从可选属性移除',()=>{const used=items.filter(x=>x.attribute===name).length;if(!confirm(used?`「${name}」已用于 ${used} 件藏品。移除后这些藏品仍保留原属性，且编辑时仍可选用。确定移除吗？`:`确定移除自定义属性「${name}」吗？`))return;customAttributes.splice(i,1);persistCustomAttributes();toast('已移除属性选项')});
+  list.append(row)
+ });
+ $('settingsDataStats').textContent=`当前 ${items.length} 条藏品记录 · ${items.filter(x=>x.type==='SET').length} 个套装 · ${customAttributes.length} 个自定义属性`;
+}
+$('settingsAddAttr').addEventListener('click',()=>{const v=$('settingsNewAttr').value.trim();if(!v||v==='__custom__'){toast('请输入有效的属性名称');return}if([...BASE_ATTRIBUTES,...customAttributes].includes(v)){toast('该属性已存在');return}customAttributes.push(v);$('settingsNewAttr').value='';persistCustomAttributes();toast('已添加属性')});
+$('settingsNewAttr').addEventListener('keydown',e=>{if(e.key==='Enter')$('settingsAddAttr').click()});
+document.querySelectorAll('[data-data-action]').forEach(b=>b.addEventListener('click',()=>{const target=$(b.dataset.dataAction);if(target)target.click()}));
+function runDataCheck(){
+ const findings=[];const byId=new Map();items.forEach((x,i)=>{if(!x.id){findings.push(['缺少 ID',`第 ${i+1} 条记录缺少 ID`]);return}if(byId.has(x.id))findings.push(['重复 ID',`${x.name||'未命名'} 与 ${byId.get(x.id).name||'未命名'}：${x.id}`]);else byId.set(x.id,x)});
+ items.forEach(x=>{if(x.parentId&&!items.some(p=>p.id===x.parentId&&p.type==='SET'))findings.push(['关联异常',`${x.name||'未命名藏品'}：所属套装 ID ${x.parentId} 不存在或不是 SET`]);if(x.type==='SET'&&!effectiveRelease(x))findings.push(['缺少发布时间',`${x.name||'未命名 SET'}（${x.attribute||'未设置属性'}）`])});
+ const duplicates=new Map();items.forEach(x=>{const key=[x.type,(x.name||'').trim().toLowerCase(),effectiveAttribute(x),(x.serial||'').trim()].join('|');if(!x.name&&!x.serial)return;if(duplicates.has(key))findings.push(['疑似重复',`${x.name||'未命名'}（${effectiveAttribute(x)||'未设置属性'}）与另一条记录的类别、名称、属性、编号相同`]);else duplicates.set(key,x)});
+ const types=['重复 ID','关联异常','缺少发布时间','疑似重复'];const result=$('dataCheckResults');result.innerHTML=types.map(t=>{const rows=findings.filter(f=>f[0]===t);return `<section><h4>${esc(t)} · ${rows.length} 项</h4>${rows.length?rows.slice(0,30).map(f=>`<p>• ${esc(f[1])}</p>`).join('')+(rows.length>30?`<p>另有 ${rows.length-30} 项未展开</p>`:''):'<p>未发现问题</p>'}</section>`}).join('');toast(findings.length?`检查完成：发现 ${findings.length} 项待核对`:'检查完成：未发现问题');
+}
+$('runDataCheck').addEventListener('click',runDataCheck);
+$('settingsBtn').addEventListener('click',()=>{renderCustomAttributeSettings();renderHistory();showOverlay('settingsOverlay')});
+$('clearAllBtn').addEventListener('click',()=>{
+ $('clearCount').textContent=items.length;
+ $('clearConfirmText').value='';$('clearConfirmBtn').disabled=true;
+ hideOverlay('settingsOverlay');showOverlay('clearConfirmOverlay');
+});
+$('clearConfirmText').addEventListener('input',()=>{$('clearConfirmBtn').disabled=$('clearConfirmText').value.trim()!=='清空'});
+$('clearConfirmBtn').addEventListener('click',()=>{
+ if($('clearConfirmText').value.trim()!=='清空')return;
+ const previous=items;
+ items=[];nextHistoryLabel='清空全部藏品';
+ if(!save()){items=previous;return}
+ hideOverlay('clearConfirmOverlay');
+ $('searchInput').value='';$('attributeFilter').value='';selectedAttributes.clear();selectedTypes.clear();
+ render();toast('所有藏品已清空，可以重新导入 Excel');
+});
+window.addEventListener('storage',event=>{if(event.key!==STORAGE_KEY)return;try{const incoming=JSON.parse(event.newValue||'[]');if(!Array.isArray(incoming))return;items=incoming;lastSaved=event.newValue||'[]';items.forEach(x=>{if(x.type==='周边套装')x.type='SET';x.recordRole=x.type==='SET'?'parent':x.parentId?'child':'normal'});render();if(activeDetailId&&$('detailOverlay').classList.contains('show')){if(items.some(x=>x.id===activeDetailId))openDetail(activeDetailId);else hideOverlay('detailOverlay')}}catch(e){console.warn('同步藏品数据失败',e)}});
+
+// 自动同步：以服务器 updated_at 为版本依据；检测到并发修改时停止写入，防止静默覆盖。
+const CLOUD_URL='https://pudjdntqworatbwdjxth.supabase.co';
+const CLOUD_KEY='sb_publishable_68q_82ULEuEPjJUf-SUiiw_-Mp_XP2M';
+let cloudClient=null,cloudUser=null,cloudBusy=false,cloudReady=false,cloudTimer=null,cloudBaseline=new Map(),cloudSnapshot=new Map(),cloudSyncRunning=false,cloudDirty=false,cloudConflicts=[],cloudSyncGeneration=0,cloudConflictPrompted='';
+const cloudStorageKey=id=>'cangjian_cloud_cache_'+id;
+function cloudStatus(message){$('cloudStatus').textContent=message;$('syncPill').textContent='☁ '+message}
+function cloudUI(){
+ const logged=!!cloudUser;
+ $('cloudAuthFields').hidden=logged;$('cloudLogin').hidden=logged;$('cloudSignup').hidden=logged;
+ $('cloudLogout').hidden=!logged;$('cloudSyncActions').hidden=!logged;
+ if(!logged)cloudStatus('请先登录');
+}
+function gateMessage(s){$('gateStatus').textContent=s}
+function gateOpen(){document.body.classList.add('auth-locked');$('authGate').hidden=false}
+function gateClose(){document.body.classList.remove('auth-locked');$('authGate').hidden=true}
+async function getCloudClient(){
+ if(cloudClient)return cloudClient;
+ if(!window.supabase?.createClient){
+  if(!window.__cloudSdkPromise)window.__cloudSdkPromise=new Promise((resolve,reject)=>{const t=document.createElement('script');t.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js';t.onload=resolve;t.onerror=()=>reject(Error('无法加载 Supabase 组件，请检查网络'));document.head.append(t)}).catch(e=>{window.__cloudSdkPromise=null;throw e});
+  await window.__cloudSdkPromise;
+ }
+ cloudClient=window.supabase.createClient(CLOUD_URL,CLOUD_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+ return cloudClient;
+}
+async function cloudAction(fn){if(cloudBusy)return;cloudBusy=true;try{await fn()}catch(e){console.error(e);cloudStatus('同步失败：'+e.message);gateMessage(e.message)}finally{cloudBusy=false}}
+async function signIn(signup=false){
+ const email=$('gateEmail').value.trim()||$('cloudEmail').value.trim(),password=$('gatePassword').value||$('cloudPassword').value;
+ if(!email||password.length<6)throw Error('请填写邮箱和至少 6 位密码');
+ const c=await getCloudClient();const {data,error}=signup?await c.auth.signUp({email,password}):await c.auth.signInWithPassword({email,password});if(error)throw error;
+ if(!data.session){gateMessage('注册成功，请先通过邮件验证，再回来登录。');return}
+ await activateCloud(data.session.user);
+}
+$('gateLogin').onclick=()=>cloudAction(()=>signIn(false));$('gateSignup').onclick=()=>cloudAction(()=>signIn(true));
+$('cloudLogin').onclick=()=>cloudAction(()=>signIn(false));$('cloudSignup').onclick=()=>cloudAction(()=>signIn(true));
+$('gatePassword').addEventListener('keydown',e=>{if(e.key==='Enter')$('gateLogin').click()});
+async function cloudRequireUser(){const c=await getCloudClient();const {data,error}=await c.auth.getUser();if(error||!data.user)throw Error('登录已过期，请重新登录');return c}
+function imageToBlob(dataUrl){const [header,body]=dataUrl.split(',');if(!body||!/^data:image\//i.test(header))throw Error('图片格式不支持');const mime=header.match(/^data:([^;]+)/i)?.[1]||'image/jpeg';const bytes=atob(body),out=new Uint8Array(bytes.length);for(let i=0;i<bytes.length;i++)out[i]=bytes.charCodeAt(i);return new Blob([out],{type:mime})}
+async function cloudPrepareRecord(c,x){
+ const row={...x},img=singlePhoto(x);
+ if(img.startsWith('data:image/')){
+  const path=cloudUser.id+'/'+encodeURIComponent(String(x.id))+'.jpg';
+  const {error}=await c.storage.from('collection-images').upload(path,imageToBlob(img),{upsert:true,contentType:'image/jpeg'});if(error)throw Error('图片上传失败（'+(x.name||x.id)+'）：'+error.message);
+  row.cloudImagePath=path;row.image='';row.photos=[];
+ }else if(x.cloudImagePath){row.image='';row.photos=[]}
+ return row;
+}
+async function cloudSignedImage(c,row){
+ if(!row.cloudImagePath)return row;
+ const {data,error}=await c.storage.from('collection-images').createSignedUrl(row.cloudImagePath,60*60*24*7);
+ if(error)throw Error('图片访问失败：'+error.message);
+ return {...row,image:data.signedUrl,photos:[]};
+}
+function normalizedRecord(x){const o={...x};if(o.cloudImagePath&&!String(o.image||'').startsWith('data:')){o.image='';o.photos=[]}return JSON.stringify(o)}
+function snapshotLocal(){return new Map(items.filter(x=>x.id).map(x=>[String(x.id),normalizedRecord(x)]))}
+async function fetchCloudRows(c){
+ const rows=[];for(let from=0;;from+=500){const {data,error}=await c.from('collections').select('id,data,updated_at').order('id').range(from,from+499);if(error)throw error;rows.push(...data);if(data.length<500)break}return rows;
+}
+function cacheCurrent(){if(!cloudUser)return;try{localStorage.setItem(cloudStorageKey(cloudUser.id),JSON.stringify({items,customAttributes}))}catch(e){console.warn('云端缓存空间不足',e)}}
+function applyCloudItems(next){
+ items=next;const str=JSON.stringify(items);try{localStorage.setItem(STORAGE_KEY,str);lastSaved=str}catch(e){console.warn('无法写入本地缓存',e)}
+ refreshAttributes();render();cacheCurrent();
+ if(activeDetailId&&$('detailOverlay').classList.contains('show')){if(items.some(x=>x.id===activeDetailId))openDetail(activeDetailId);else hideOverlay('detailOverlay')}
+}
+async function activateCloud(user){
+ if(!user)return;
+ const switched=cloudUser?.id!==user.id;
+ if(switched){cloudSyncGeneration++;cloudReady=false;cloudBaseline.clear();cloudSnapshot.clear();cloudConflicts=[];cloudConflictPrompted='';clearTimeout(cloudTimer);}
+ cloudUser=user;cloudUI();gateMessage('正在载入你的云端收藏…');cloudStatus('正在加载云端收藏…');
+ try{
+  const c=await cloudRequireUser(),rows=await fetchCloudRows(c);
+  if(cloudUser?.id!==user.id)return;
+  const settings=rows.find(x=>x.id==='__cangjian_settings__')?.data;
+  if(Array.isArray(settings?.customAttributes)){customAttributes=[...new Set(settings.customAttributes.filter(x=>typeof x==='string'))];try{localStorage.setItem(CUSTOM_ATTR_KEY,JSON.stringify(customAttributes))}catch(e){}}
+  const remote=rows.filter(x=>x.id!=='__cangjian_settings__'&&x.data&&typeof x.data==='object');
+  const loaded=[];for(const r of remote)loaded.push(await cloudSignedImage(c,{...r.data,id:r.id}));
+  // 账号数据隔离：只展示当前用户的云端数据；绝不自动把旧浏览器记录上传到新账号。
+  cloudBaseline=new Map(remote.map(r=>[String(r.id),r.updated_at]));
+  applyCloudItems(loaded);cloudSnapshot=snapshotLocal();cloudReady=true;gateClose();
+  cloudStatus('已同步 · '+loaded.length+' 件');startCloudPolling();
+ }catch(e){
+  console.error(e);const raw=localStorage.getItem(cloudStorageKey(user.id));
+  if(raw){try{const cache=JSON.parse(raw);items=Array.isArray(cache.items)?cache.items:[];customAttributes=Array.isArray(cache.customAttributes)?cache.customAttributes:[];refreshAttributes();render();cloudSnapshot=snapshotLocal();cloudReady=true;gateClose();cloudStatus('离线缓存 · 等待连接');startCloudPolling();return}catch(_){}}
+  gateOpen();gateMessage('云端加载失败：'+e.message+'。请联网后重试登录。');
+ }
+}
+function queueCloudSync(){if(!cloudReady||!cloudUser)return;cloudDirty=true;cloudStatus(navigator.onLine?'待同步…':'离线 · 待同步');clearTimeout(cloudTimer);cloudTimer=setTimeout(()=>syncCloud(),900)}
+function startCloudPolling(){clearTimeout(cloudTimer);cloudTimer=setTimeout(()=>syncCloud(),1200)}
+async function syncCloud(){
+ if(!cloudReady||!cloudUser||cloudSyncRunning)return;
+ const generation=cloudSyncGeneration;cloudSyncRunning=true;
+ try{
+  if(!navigator.onLine){cloudStatus('离线 · 等待网络恢复');return}
+  const c=await cloudRequireUser();if(generation!==cloudSyncGeneration)return;
+  cloudStatus('同步中…');const rows=await fetchCloudRows(c);if(generation!==cloudSyncGeneration)return;
+  const remote=new Map(rows.filter(r=>r.id!=='__cangjian_settings__').map(r=>[String(r.id),r]));
+  const local=snapshotLocal(),previous=cloudSnapshot;
+  const changed=new Set([...local.keys(),...previous.keys()].filter(id=>local.get(id)!==previous.get(id)));
+  const conflicts=[];
+  for(const id of changed){const before=cloudBaseline.get(id),now=remote.get(id)?.updated_at||null;if((before||null)!==now)conflicts.push(id)}
+  if(conflicts.length){
+   cloudConflicts=conflicts;cloudStatus('冲突 · '+conflicts.length+' 件待处理');
+   const conflictKey=conflicts.join('|')+':'+conflicts.map(id=>remote.get(id)?.updated_at||'deleted').join('|');
+   if(cloudConflictPrompted===conflictKey)return;cloudConflictPrompted=conflictKey;
+   // 冲突需要明确人工选择，绝不直接覆盖服务器。
+   const names=conflicts.map(id=>items.find(x=>String(x.id)===id)?.name||id).slice(0,4).join('、');
+   if(confirm('检测到其他设备同时修改：'+names+'。\n确定：保留云端版本（本地冲突修改将被替换）\n取消：保留本地修改，暂停同步，之后可再选择。')){
+    const map=new Map(items.map(x=>[String(x.id),x]));for(const id of conflicts){const r=remote.get(id);if(r)map.set(id,await cloudSignedImage(c,{...r.data,id}));else map.delete(id)}
+    applyCloudItems([...map.values()]);cloudSnapshot=snapshotLocal();cloudBaseline=new Map(remote.values().map(r=>[String(r.id),r.updated_at]));cloudConflicts=[];cloudConflictPrompted='';queueCloudSync();
+   }return;
+  }
+  // 若另一设备有非冲突修改，自动合并；本机未修改的记录跟随云端（包括删除）。
+  const merged=new Map(items.map(x=>[String(x.id),x]));
+  for(const [id,r] of remote){if(!changed.has(id)&&cloudBaseline.get(id)!==r.updated_at)merged.set(id,await cloudSignedImage(c,{...r.data,id}));}
+  for(const id of cloudBaseline.keys())if(!changed.has(id)&&!remote.has(id))merged.delete(id);
+  if(changed.size){
+   for(const id of changed){
+    const x=items.find(y=>String(y.id)===id);
+    if(x){const data=await cloudPrepareRecord(c,x);const {error}=await c.from('collections').upsert({id,user_id:cloudUser.id,data},{onConflict:'user_id,id'});if(error)throw error;}
+    else{const {error}=await c.from('collections').delete().eq('id',id).eq('user_id',cloudUser.id);if(error)throw error}
+   }
+  }
+  // 保存属性配置；独立于藏品的变化。
+  const settings=rows.find(r=>r.id==='__cangjian_settings__')?.data;
+  if(JSON.stringify(settings?.customAttributes||[])!==JSON.stringify(customAttributes)){
+   const {error}=await c.from('collections').upsert({id:'__cangjian_settings__',user_id:cloudUser.id,data:{customAttributes:[...customAttributes]}},{onConflict:'user_id,id'});if(error)throw error;
+  }
+  if(generation!==cloudSyncGeneration)return;
+  if([...snapshotLocal()].some(([id,value])=>local.get(id)!==value)||[...local.keys()].some(id=>!snapshotLocal().has(id))){cloudStatus('检测到新修改 · 继续同步');return}
+  if(changed.size||[...merged.keys()].some(id=>!local.has(id))||[...local.keys()].some(id=>!merged.has(id))||[...remote].some(([id,r])=>!changed.has(id)&&cloudBaseline.get(id)!==r.updated_at))applyCloudItems([...merged.values()]);
+  // 再次获取版本号，避免把本次写入误认为其他设备修改。
+  const fresh=await fetchCloudRows(c);cloudBaseline=new Map(fresh.filter(r=>r.id!=='__cangjian_settings__').map(r=>[String(r.id),r.updated_at]));
+  cloudSnapshot=snapshotLocal();cloudDirty=false;cacheCurrent();cloudStatus('已同步 · '+items.length+' 件');
+ }catch(e){console.error('自动同步失败',e);cloudStatus('同步失败 · '+e.message)}
+ finally{cloudSyncRunning=false;if(cloudReady&&generation===cloudSyncGeneration){clearTimeout(cloudTimer);cloudTimer=setTimeout(()=>syncCloud(),15000)}}
+}
+$('cloudUpload').onclick=()=>cloudAction(async()=>{
+ if(!cloudReady)throw Error('请先登录并等待云端加载');
+ if(!confirm('手动上传会以当前页面记录更新同 ID 云端记录。建议先导出 JSON 备份。确定继续吗？'))return;
+ cloudConflictPrompted='';cloudSnapshot=new Map();cloudBaseline=new Map();await syncCloud();
+});
+$('cloudDownload').onclick=()=>cloudAction(async()=>{if(!cloudUser)return;await activateCloud(cloudUser)});
+$('cloudLogout').onclick=()=>cloudAction(async()=>{
+ const c=await getCloudClient();const {error}=await c.auth.signOut();if(error)throw error;
+ cloudSyncGeneration++;cloudReady=false;cloudUser=null;clearTimeout(cloudTimer);cloudBaseline.clear();cloudSnapshot.clear();
+ items=[];render();gateOpen();cloudUI();gateMessage('已退出登录。请输入邮箱和密码。');
+});
+window.addEventListener('online',()=>{if(cloudReady)queueCloudSync()});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&cloudReady)syncCloud()});
+getCloudClient().then(async c=>{
+ const {data}=await c.auth.getSession();
+ if(data.session?.user)await activateCloud(data.session.user);else{gateOpen();gateMessage('请输入邮箱和密码登录。')}
+ c.auth.onAuthStateChange((event,session)=>{
+  if(event==='SIGNED_OUT'&&cloudUser){cloudSyncGeneration++;cloudReady=false;cloudUser=null;clearTimeout(cloudTimer);gateOpen();gateMessage('登录已退出，请重新登录。')}
+ });
+}).catch(e=>{gateOpen();gateMessage('连接失败：'+e.message+'。请检查网络后刷新。')});
+refreshAttributes();render();
+</script>
+</body>
+</html>
