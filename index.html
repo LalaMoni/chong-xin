@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>重Xin · 我的周边收藏柜</title>
+<title>重Xin</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQTY2QzcwIiBzdHJva2Utd2lkdGg9IjIuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48cGF0aCBkPSJNMjIgMjBRMjIgMTUgMjkgMTVMNTQgMTJRNjAgMTIgNjAgMThWMjIiLz48cGF0aCBkPSJNMjQgMjRRMjQgMjAgMzAgMjBINTdRNjMgMjAgNjMgMjdWNjBRNjMgNjYgNTcgNjZIMjZRMTkgNjYgMTkgNTlWMzFRMTkgMjYgMjQgMjRaIi8+PHBhdGggZD0iTTQyIDMzTDQ0LjUgNDAuNUw1MiA0M0w0NC41IDQ1LjVMNDIgNTNMMzkuNSA0NS41TDMyIDQzTDM5LjUgNDAuNVoiIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg==">
 <style>
 :root{--bg:#FAF4F2;--panel:#FFFCFA;--ink:#543E42;--muted:#8B7779;--line:#EBDDD9;--accent:#A66C70;--accent-soft:#EBD5D3;--green:#8B9880;--shadow:0 10px 35px rgba(58,45,34,.06)}
@@ -151,7 +151,7 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
   </aside>
   <main>
     <div class="topbar">
-      <div><div class="eyebrow">YOUR PERSONAL ARCHIVE</div><h1 class="page-title" id="pageTitle">我的收藏柜</h1><p class="subtitle" id="pageSubtitle">把喜欢的周边好好收藏起来。</p></div>
+      <div><div class="eyebrow">MY PERSONAL ARCHIVE</div><h1 class="page-title" id="pageTitle">我的收藏柜</h1><p class="subtitle" id="pageSubtitle">把喜欢的周边好好收藏起来。</p></div>
       <div class="top-actions"><span id="syncPill" aria-live="polite">☁ 正在连接…</span><button class="btn primary" id="addBtn" title="添加藏品" data-tooltip="添加藏品" aria-label="添加藏品"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>添加藏品</span></button></div><div id="dataActionTriggers" hidden aria-hidden="true"><button class="btn secondary" id="excelImportBtn" title="从 Excel 表格导入藏品" data-tooltip="导入 Excel" aria-label="导入 Excel"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4"/><path d="M4 17v3h16v-3"/></svg><span>导入 Excel</span></button><button class="btn secondary" id="excelExportBtn" title="将藏品导出为 Excel 表格" data-tooltip="导出 Excel" aria-label="导出 Excel"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4m-4 4 4-4 4 4"/><path d="M4 17v3h16v-3"/></svg><span>导出 Excel</span></button><button class="btn secondary" id="importBackupBtn" title="从 JSON 备份恢复藏品" data-tooltip="恢复备份" aria-label="恢复备份"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a8 8 0 1 1 2 6"/><path d="M4 5v6h6"/><path d="M12 8v5l3 2"/></svg><span>恢复备份</span></button><button class="btn secondary" id="exportBtn" title="保存包含图片的完整 JSON 备份" data-tooltip="保存备份" aria-label="保存备份"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V4h16v3M5 10h14v10H5z"/><path d="M9 14h6"/></svg><span>保存备份</span></button></div>
     </div>
     <section class="stats">
@@ -172,7 +172,7 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
       <div class="stat" style="margin-bottom:16px"><div class="stat-top">净支出（购入总额 - 售出总额）</div><div class="stat-value" id="reportNet">¥0</div></div>
       <div class="stat"><div class="section-title" style="margin-bottom:15px">类别分布</div><div id="typeBreakdown"></div></div>
     </section>
-    <div class="footer-note">重Xin · 一个只属于你的收藏角落</div>
+    <div class="footer-note">重Xin · 我陪你走过的路你不能忘</div>
   </main>
 </div>
 <nav class="mobile-top"><button class="active" data-view="all"><span>▦</span>收藏柜</button><button id="mobileAdd"><span>＋</span>添加</button></nav>
@@ -369,7 +369,7 @@ function openSuiteGroup(ids){
 let expandedSuiteGroups=new Set();
 function render(){refreshFilters();
  const arr=filteredItems();renderStats(arr);const groups=makeSuiteGroups(arr);
- $('resultCount').textContent=`共 ${arr.length} 套 · ${groups.length} 个展示分组 · 点击查看套装`;
+ $('resultCount').textContent=`共 ${arr.length} 套 · ${groups.length} 个展示分组`;
  $('sectionTitle').textContent='全部套装';
  $('attributeFilter').hidden=displayMode==='attributes';$('multiFilters').hidden=displayMode!=='attributes';
  $('itemsGrid').classList.remove('atlas','attribute-layout');$('cardView').classList.toggle('active',displayMode==='cards');$('atlasView').classList.toggle('active',displayMode==='attributes');
@@ -381,7 +381,7 @@ function render(){refreshFilters();
  const emptyAdd=$('emptyAdd');if(emptyAdd)emptyAdd.addEventListener('click',openForm);
  $('collectionSection').hidden=currentView==='stats';$('statsSection').hidden=currentView!=='stats';
  $('pageTitle').textContent='我的收藏柜';
- $('pageSubtitle').textContent=currentView==='stats'?'看看这些喜欢，已经积累成了什么。':'把喜欢的周边好好收藏起来。';
+ $('pageSubtitle').textContent=currentView==='stats'?'看看这些喜欢，已经积累成了什么。':'朱志鑫苏新皓相爱的痕迹。';
  document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===currentView));
 }
 
