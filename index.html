@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>藏间 · 我的周边收藏柜</title>
+<title>重Xin · 我的周边收藏柜</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQTY2QzcwIiBzdHJva2Utd2lkdGg9IjIuNyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48cGF0aCBkPSJNMjIgMjBRMjIgMTUgMjkgMTVMNTQgMTJRNjAgMTIgNjAgMThWMjIiLz48cGF0aCBkPSJNMjQgMjRRMjQgMjAgMzAgMjBINTdRNjMgMjAgNjMgMjdWNjBRNjMgNjYgNTcgNjZIMjZRMTkgNjYgMTkgNTlWMzFRMTkgMjYgMjQgMjRaIi8+PHBhdGggZD0iTTQyIDMzTDQ0LjUgNDAuNUw1MiA0M0w0NC41IDQ1LjVMNDIgNTNMMzkuNSA0NS41TDMyIDQzTDM5LjUgNDAuNVoiIHN0cm9rZS13aWR0aD0iMiIvPjwvc3ZnPg==">
 <style>
 :root{--bg:#FAF4F2;--panel:#FFFCFA;--ink:#543E42;--muted:#8B7779;--line:#EBDDD9;--accent:#A66C70;--accent-soft:#EBD5D3;--green:#8B9880;--shadow:0 10px 35px rgba(58,45,34,.06)}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}
@@ -62,6 +63,23 @@ main{padding:35px clamp(20px,4vw,58px) 60px;max-width:1500px;width:100%;margin:a
 .multi-filter-options{position:absolute;z-index:8;top:calc(100% + 5px);left:0;min-width:180px;max-height:260px;overflow:auto;background:#FFFCFA;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 26px #543E4220;padding:7px}
 .multi-filter-options label{display:flex;align-items:center;gap:9px;padding:9px 8px;border-radius:8px;cursor:pointer;white-space:nowrap}.multi-filter-options label:hover{background:#F5E7E5}.multi-filter-options input{accent-color:#A66C70}
 @media(max-width:760px){.multi-filters{width:100%}.multi-filter{flex:1;min-width:0}.multi-filter summary{max-width:none}}
+
+/* 重Xin 字标：中文和英文统一使用龙藏体 Long Cang */
+@import url('https://fonts.googleapis.com/css2?family=Long+Cang&display=swap');
+.brand .brand-name,
+.brand .brand-name .brand-chong,
+.brand .brand-name .brand-xin {
+  font-family: 'Long Cang', 'STKaiti', 'KaiTi', cursive !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
+.brand .brand-name { display: flex; align-items: baseline; gap: 1px; line-height: 1.15; }
+.brand .brand-name .brand-chong { font-size: 38px !important; color: var(--ink); }
+.brand .brand-name .brand-xin { font-size: 34px !important; color: var(--accent); }
+
 </style>
 <style>
 .settings-section{padding:5px 0 20px;margin-bottom:17px;border-bottom:1px solid var(--line)}.settings-section:last-child{border-bottom:0;margin-bottom:0}.settings-section h3{font-size:15px;margin:0 0 9px;color:var(--ink)}.settings-note{font-size:12px;color:var(--muted);line-height:1.75;margin:5px 0 13px}.settings-defaults{font-size:12px;background:#F5E7E5;border-radius:10px;padding:10px 12px;margin-bottom:10px}.settings-attr-list{display:grid;gap:7px}.settings-attr-row{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:10px;padding:8px 10px}.settings-attr-row .attr-name{flex:1;min-width:0;overflow-wrap:anywhere;font-size:13px}.settings-attr-row button{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:8px;padding:6px 9px;cursor:pointer}.settings-attr-row button:disabled{opacity:.3;cursor:default}.settings-add{display:flex;gap:8px;margin-top:12px}.settings-add input{flex:1;min-width:0;padding:10px;border:1px solid var(--line);border-radius:9px;background:#FFFCFA}.settings-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.settings-data-stats{font-size:12px;color:var(--muted);margin:10px 0 14px}.settings-danger{margin-top:22px;padding-top:17px;border-top:1px solid var(--line)}@media(max-width:440px){.settings-actions{grid-template-columns:1fr}.settings-attr-row{flex-wrap:wrap}}
@@ -75,19 +93,61 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
 #authGate[hidden]{display:none!important}.auth-box{width:min(420px,100%);background:#FFFCFA;border:1px solid #EBD5D3;border-radius:22px;padding:30px;box-shadow:0 16px 50px #543E4212}.auth-box h1{font-family:Georgia,serif;color:#543E42;font-size:29px;font-weight:500;margin:0 0 8px}.auth-box p{font-size:13px;color:#8B7779;line-height:1.7}.auth-box input{display:block;width:100%;padding:13px;margin:10px 0;border:1px solid #EBD5D3;border-radius:11px;background:white;color:#543E42}.auth-box .btn{width:100%;margin-top:8px}.auth-error{font-size:12px;color:#a34d59;line-height:1.7;margin-top:12px;overflow-wrap:anywhere}
 #syncPill{font-size:12px;color:#87565E;display:inline-flex;align-items:center;gap:5px;padding:7px 10px;border-radius:99px;background:#EBD5D3;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style>
+
+<style>
+/* 藏间：电脑端左侧固定，右侧内容正常滚动 */
+@media (min-width:761px) {
+  .app { display:block; min-height:100vh; }
+  .app > .sidebar {
+    position:fixed; top:0; left:0; bottom:0; width:238px;
+    height:100vh; height:100dvh; overflow-y:auto;
+    z-index:4; overscroll-behavior:contain;
+  }
+  .app > main {
+    margin-left:238px; margin-right:0;
+    width:calc(100% - 238px);
+    max-width:none; min-height:100vh;
+  }
+}
+@media (max-width:760px) {
+  .app > .sidebar {position:static; width:auto; height:auto;}
+  .app > main {margin-left:auto; margin-right:auto; width:100%;}
+}
+</style>
+<style>
+/* 左下角 CP 纪念日：不改变现有固定侧栏布局 */
+.anniversary-card{text-align:center;padding:19px 12px 16px;line-height:1.4}
+.anniversary-title{font-size:14px;font-weight:600;color:var(--accent);letter-spacing:.4px}
+.anniversary-prefix{font-size:13px;color:var(--muted);margin-top:14px}
+.anniversary-count{display:flex;align-items:baseline;justify-content:center;gap:7px;margin:3px 0 15px;color:var(--accent)}
+#anniversaryDays{font-family:Georgia,serif;font-size:38px;font-weight:500;line-height:1.1;font-variant-numeric:tabular-nums}
+.anniversary-unit{font-size:14px;color:var(--ink)}
+.anniversary-date{padding-top:12px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);letter-spacing:.7px}
+</style>
+<style>
+/* 重Xin · 极简星星卡册品牌标志 */
+.brand-mark{background:transparent;border-radius:0;color:var(--accent);flex:0 0 42px;width:42px;height:42px}
+.brand-mark svg{width:42px;height:42px;display:block}
+.brand-name{font-family:Georgia,"PingFang SC","Microsoft YaHei",serif;white-space:nowrap;letter-spacing:.3px}
+.brand-xin{color:var(--accent);font-family:Georgia,serif;font-weight:500;letter-spacing:0}
+/* 品牌字标：花体「重」与简洁 Xin，移除英文副标题 */
+.brand-name{display:flex;align-items:baseline;gap:2px;white-space:nowrap;line-height:1.1;font-size:25px;letter-spacing:0}
+.brand-chong{font-family:"STKaiti","Kaiti SC","KaiTi","DFKai-SB","Songti SC",serif;font-style:italic;font-weight:600;font-size:32px;color:var(--ink);transform:rotate(-7deg) skewX(-5deg);display:inline-block;transform-origin:center bottom;text-shadow:.5px .5px 0 #A66C7040}
+.brand-xin{font-family:Georgia,"Times New Roman",serif;font-size:25px;font-style:italic;font-weight:500;color:var(--accent);letter-spacing:-.8px}
+</style>
 </head>
 <body class="auth-locked">
-<div id="authGate"><div class="auth-box"><div style="font-size:12px;letter-spacing:2px;color:#A66C70;margin-bottom:9px">MY LITTLE ARCHIVE</div><h1>藏间</h1><p>登录后开启私人收藏柜，收藏会自动保存至云端。</p><input id="gateEmail" type="email" autocomplete="email" placeholder="邮箱地址"><input id="gatePassword" type="password" autocomplete="current-password" placeholder="密码"><button class="btn primary" id="gateLogin" type="button">登录藏间</button><button class="btn" id="gateSignup" type="button">注册账号</button><div class="auth-error" id="gateStatus">正在检查登录状态…</div></div></div>
+<div id="authGate"><div class="auth-box"><div style="font-size:12px;letter-spacing:2px;color:#A66C70;margin-bottom:9px">MY LITTLE ARCHIVE</div><h1>重Xin</h1><p>登录后开启私人收藏柜，收藏会自动保存至云端。</p><input id="gateEmail" type="email" autocomplete="email" placeholder="邮箱地址"><input id="gatePassword" type="password" autocomplete="current-password" placeholder="密码"><button class="btn primary" id="gateLogin" type="button">登录重Xin</button><button class="btn" id="gateSignup" type="button">注册账号</button><div class="auth-error" id="gateStatus">正在检查登录状态…</div></div></div>
 <div class="app">
   <aside class="sidebar">
-    <div class="brand"><div class="brand-mark">藏</div><div><div class="brand-name">藏间</div><div class="brand-sub">MY LITTLE ARCHIVE</div></div></div>
+    <div class="brand"><div class="brand-mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="#A66C70" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"><path d="M22 20Q22 15 29 15L54 12Q60 12 60 18V22"/><path d="M24 24Q24 20 30 20H57Q63 20 63 27V60Q63 66 57 66H26Q19 66 19 59V31Q19 26 24 24Z"/><path d="M42 33L44.5 40.5L52 43L44.5 45.5L42 53L39.5 45.5L32 43L39.5 40.5Z" stroke-width="2"/></svg></div><div class="brand-name" aria-label="重Xin"><span class="brand-chong">重</span><span class="brand-xin">Xin</span></div></div>
     <div><div class="nav-label">COLLECTION</div><nav class="nav">
       <button class="active" data-view="all"><span class="ico">▦</span>我的收藏</button>
     </nav></div>
     <div><div class="nav-label">MANAGE</div><nav class="nav">
       <button type="button" id="settingsBtn"><span class="ico">⚙</span>设置</button>
     </nav></div>
-    <div class="side-note"><strong>给喜欢的东西一个位置。</strong>记录每一次心动，也记下每一件珍藏。<br>你的私人周边档案。</div>
+    <div class="side-note anniversary-card" aria-label="纪念日"><div class="anniversary-title">♡ 纪念日</div><div class="anniversary-prefix">第</div><div class="anniversary-count"><span id="anniversaryDays">504</span><span class="anniversary-unit">天</span></div><div class="anniversary-date">2025/06/01</div></div>
   </aside>
   <main>
     <div class="topbar">
@@ -112,7 +172,7 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
       <div class="stat" style="margin-bottom:16px"><div class="stat-top">净支出（购入总额 - 售出总额）</div><div class="stat-value" id="reportNet">¥0</div></div>
       <div class="stat"><div class="section-title" style="margin-bottom:15px">类别分布</div><div id="typeBreakdown"></div></div>
     </section>
-    <div class="footer-note">藏间 · 一个只属于你的收藏角落</div>
+    <div class="footer-note">重Xin · 一个只属于你的收藏角落</div>
   </main>
 </div>
 <nav class="mobile-top"><button class="active" data-view="all"><span>▦</span>收藏柜</button><button id="mobileAdd"><span>＋</span>添加</button></nav>
@@ -664,6 +724,22 @@ getCloudClient().then(async c=>{
  });
 }).catch(e=>{gateOpen();gateMessage('连接失败：'+e.message+'。请检查网络后刷新。')});
 refreshAttributes();render();
+</script>
+<script>
+/* 2025/06/01 为喜欢 CP 的第 1 天；以本地日历日期计算，避免时区偏差 */
+(function(){
+  const start=Date.UTC(2025,5,1);
+  function updateAnniversary(){
+    const el=document.getElementById('anniversaryDays');if(!el)return;
+    const now=new Date();
+    const current=Date.UTC(now.getFullYear(),now.getMonth(),now.getDate());
+    el.textContent=String(Math.max(1,Math.round((current-start)/86400000)+1));
+  }
+  updateAnniversary();
+  window.addEventListener('focus',updateAnniversary);
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateAnniversary()});
+  setInterval(updateAnniversary,60000);
+})();
 </script>
 </body>
 </html>
