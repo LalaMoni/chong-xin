@@ -559,7 +559,9 @@ excelInput.addEventListener('change',async()=>{
   if(!rows.length)throw Error('Excel 没有藏品记录，已取消导入');
   if(!['ID','名称','类别'].every(k=>Object.prototype.hasOwnProperty.call(rows[0],k)))throw Error('缺少 ID、名称或类别列');
   const missing=rows.filter(r=>!String(r['ID']??'').trim());
-  if(missing.length)throw Error(`有 ${missing.length} 行缺少 ID，无法安全完整同步`);
+  // Only fill blank IDs; preserve every existing ID so edits keep their images.
+  const reservedIds=new Set(rows.map(r=>String(r['ID']??'').trim()).filter(Boolean));
+  missing.forEach(r=>{let id;do{id=crypto.randomUUID()}while(reservedIds.has(id));r['ID']=id;reservedIds.add(id)});
   const ids=rows.map(r=>String(r['ID']).trim());
   if(new Set(ids).size!==ids.length)throw Error('Excel 存在重复 ID，无法安全完整同步');
   const oldById=new Map(items.map(x=>[String(x.id),x]));
@@ -583,11 +585,18 @@ excelInput.addEventListener('change',async()=>{
   const updated=records.length-added.length;
   const broken=records.filter(x=>x.parentId&&!records.some(p=>p.id===x.parentId&&p.type==='SET'));
   if(broken.length)throw Error(`有 ${broken.length} 件藏品关联的所属套装不在 Excel 中，请先修正`);
-  if(!confirm(`以 Excel 为准完整同步：\n新增 ${added.length} 件\n更新 ${updated} 件\n删除 ${removed.length} 件\n\n相同 ID 的原有图片将保留。删除的藏品及图片可能随云端同步删除。\n请先保存完整 JSON 备份。\n\n确定继续吗？`))return;
+  if(!confirm(`以 Excel 为准完整同步：\n新增 ${added.length} 件\n更新 ${updated} 件\n删除 ${removed.length} 件\n自动补齐 ID ${missing.length} 行\n\n相同 ID 的原有图片将保留。删除的藏品及图片可能随云端同步删除。\n请先保存完整 JSON 备份。${missing.length?'\n\n导入成功后将自动下载补齐 ID 的 Excel。今后请只修改和导入这份新表，以免重复新增或丢失图片。':''}\n\n确定继续吗？`))return;
   if(!confirm(`最后确认：网站中 ${removed.length} 件 Excel 未列出的藏品将被删除。\n此操作会同步至云端。确认执行？`))return;
   const previous=items;items=records.map(x=>({...oldById.get(x.id),...x}));nextHistoryLabel='Excel 完整同步';
   if(!save()){items=previous;return}
-  refreshAttributes();render();toast(`同步完成：新增 ${added.length}、更新 ${updated}、删除 ${removed.length}`);
+  refreshAttributes();render();
+  if(missing.length){
+   // Export the corrected source rows, including generated IDs, for future imports.
+   const correctedSheet=XLSX.utils.json_to_sheet(rows,{header:Object.keys(rows[0])});
+   const correctedBook=XLSX.utils.book_new();XLSX.utils.book_append_sheet(correctedBook,correctedSheet,'藏品');
+   try{XLSX.writeFile(correctedBook,'重Xin_已补齐ID_请以后使用_'+today()+'.xlsx')}catch(exportError){console.error('ID 补全表格下载失败',exportError);alert('藏品已导入，但补齐 ID 的 Excel 下载失败！请立即从网站导出 Excel，并用导出的文件作为今后的总表。')}
+  }
+  toast(`同步完成：新增 ${added.length}、更新 ${updated}、删除 ${removed.length}${missing.length?'；已补齐 '+missing.length+' 个 ID':''}`);
  }catch(e){console.error(e);alert('Excel 导入未执行：'+(e.message||'请检查格式或网络连接'))}finally{excelInput.value=''}
 });
 const BASE_ATTRIBUTES=['Z&S','22X','SU','TOP','跨代'];
