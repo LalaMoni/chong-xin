@@ -135,6 +135,14 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
 .brand-chong{font-family:"STKaiti","Kaiti SC","KaiTi","DFKai-SB","Songti SC",serif;font-style:italic;font-weight:600;font-size:32px;color:var(--ink);transform:rotate(-7deg) skewX(-5deg);display:inline-block;transform-origin:center bottom;text-shadow:.5px .5px 0 #A66C7040}
 .brand-xin{font-family:Georgia,"Times New Roman",serif;font-size:25px;font-style:italic;font-weight:500;color:var(--accent);letter-spacing:-.8px}
 </style>
+<style>
+/* B2 奶油白手账：侧边栏底部的筛选金额 */
+.balance-card{background:#FFFCFA;border:1px solid #EBD5D3;border-radius:16px;padding:21px 11px 17px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;min-width:0;box-shadow:0 4px 14px #543E4208}
+.balance-brand{font-size:12px;color:#A66C70;letter-spacing:.7px}
+.balance-amount{font-family:Georgia,'Times New Roman',serif;color:#87565E;font-size:30px;line-height:1.25;font-variant-numeric:tabular-nums;max-width:100%;overflow-wrap:anywhere}
+.balance-divider{width:100%;height:1px;background:#EBDDD9}
+.balance-caption{font-size:11px;color:#8B7779;line-height:1.5;white-space:nowrap;letter-spacing:-.2px}
+</style>
 </head>
 <body class="auth-locked">
 <div id="authGate"><div class="auth-box"><div style="font-size:12px;letter-spacing:2px;color:#A66C70;margin-bottom:9px">MY LITTLE ARCHIVE</div><h1>重Xin</h1><p>登录后开启私人收藏柜，收藏会自动保存至云端。</p><input id="gateEmail" type="email" autocomplete="email" placeholder="邮箱地址"><input id="gatePassword" type="password" autocomplete="current-password" placeholder="密码"><button class="btn primary" id="gateLogin" type="button">登录</button><button class="btn" id="gateSignup" type="button">注册</button><div class="auth-error" id="gateStatus">正在检查登录状态…</div></div></div>
@@ -147,7 +155,7 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
     <div><div class="nav-label">MANAGE</div><nav class="nav">
       <button type="button" id="settingsBtn"><span class="ico">⚙</span>设置</button>
     </nav></div>
-    <div class="side-note anniversary-card" aria-label="纪念日"><div class="anniversary-title">♡ 纪念日</div><div class="anniversary-prefix">第</div><div class="anniversary-count"><span id="anniversaryDays">504</span><span class="anniversary-unit">天</span></div><div class="anniversary-date">2025/06/01</div></div>
+    <div class="side-note balance-card" aria-label="筛选后购入减去售出的金额"><div class="balance-brand">✦ 重Xin ✦</div><div class="balance-amount" id="sidebarBalance" aria-live="polite">¥0</div><div class="balance-divider"></div><div class="balance-caption">每一份喜欢，都有迹可循</div></div>
   </aside>
   <main>
     <div class="topbar">
@@ -337,6 +345,7 @@ function renderStats(visibleSuites){
  $('statSpend').textContent=money(purchaseTotal);
  $('statSales').textContent=money(salesTotal);
  $('statWish').textContent=suites.length;
+ $('sidebarBalance').textContent=money(purchaseTotal-salesTotal);
  // 收藏报告继续显示全库数据，不受首页筛选影响。
  const allPurchase=items.reduce((s,x)=>s+priceValue(x.price),0);
  const allSales=items.reduce((s,x)=>s+priceValue(x.soldPrice),0);
@@ -420,6 +429,7 @@ function renderAttributeCollection(){
  $('statSpend').textContent=money(records.reduce((n,x)=>n+priceValue(x.price),0));
  $('statSales').textContent=money(records.reduce((n,x)=>n+priceValue(x.soldPrice),0));
  $('statWish').textContent=records.filter(x=>x.type==='SET').length;
+ $('sidebarBalance').textContent=money(records.reduce((n,x)=>n+priceValue(x.price)-priceValue(x.soldPrice),0));
  $('itemsGrid').classList.add('attribute-layout');
  $('itemsGrid').innerHTML=[...byAttribute].sort((a,b)=>compareAttributeNames(a[0],b[0])).map(([key,group])=>`<section class="attribute-section"><div class="attribute-heading"><div><strong>${esc(key)}</strong><span>${group.length} 件藏品</span></div><div class="attribute-totals">购入 ${money(group.reduce((n,x)=>n+priceValue(x.price),0))} · 售出 ${money(group.reduce((n,x)=>n+priceValue(x.soldPrice),0))}</div></div><div class="attribute-records">${group.map(x=>`<button class="attribute-record" type="button" data-record-id="${esc(x.id)}"><span class="attribute-record-main"><strong>${esc(x.name||'未命名藏品')}</strong><small>${esc([x.type,x.version,x.serial].filter(Boolean).join(' · ')||'藏品')}${x.parentId?' · 所属套装：'+esc(items.find(p=>p.id===x.parentId)?.name||'关联套装不存在'):''}</small></span><span class="attribute-record-prices">购入 ${money(priceValue(x.price))}<span>售出 ${money(priceValue(x.soldPrice))}</span></span><span class="child-chevron">›</span></button>`).join('')}</div></section>`).join('')||'<div class="empty"><strong>没有找到符合条件的藏品</strong><p>可以切换属性或清除搜索条件。</p></div>';
  $('itemsGrid').querySelectorAll('[data-record-id]').forEach(b=>b.addEventListener('click',()=>openDetail(b.dataset.recordId)));
@@ -725,21 +735,6 @@ getCloudClient().then(async c=>{
 }).catch(e=>{gateOpen();gateMessage('连接失败：'+e.message+'。请检查网络后刷新。')});
 refreshAttributes();render();
 </script>
-<script>
-/* 2025/06/01 为喜欢 CP 的第 1 天；以本地日历日期计算，避免时区偏差 */
-(function(){
-  const start=Date.UTC(2025,5,1);
-  function updateAnniversary(){
-    const el=document.getElementById('anniversaryDays');if(!el)return;
-    const now=new Date();
-    const current=Date.UTC(now.getFullYear(),now.getMonth(),now.getDate());
-    el.textContent=String(Math.max(1,Math.round((current-start)/86400000)+1));
-  }
-  updateAnniversary();
-  window.addEventListener('focus',updateAnniversary);
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden)updateAnniversary()});
-  setInterval(updateAnniversary,60000);
-})();
-</script>
+
 </body>
 </html>
