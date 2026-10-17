@@ -424,7 +424,7 @@ function renderAttributeCollection(){
  records.sort((a,b)=>sort==='releaseNew'?((!effectiveRelease(a))-(!effectiveRelease(b))||effectiveRelease(b).localeCompare(effectiveRelease(a))):((!effectiveRelease(a))-(!effectiveRelease(b))||effectiveRelease(a).localeCompare(effectiveRelease(b))));
  const byAttribute=new Map();records.forEach(x=>{const key=recordAttribute(x);if(!byAttribute.has(key))byAttribute.set(key,[]);byAttribute.get(key).push(x)});
  $('sectionTitle').textContent='藏品属性';
- $('resultCount').textContent=`共 ${records.length} 件藏品 · ${byAttribute.size} 个属性分类（含套装内藏品）`;
+ $('resultCount').textContent=`共 ${records.length} 件藏品 · ${byAttribute.size} 个属性分类`;
  $('statCount').textContent=records.length;
  $('statSpend').textContent=money(records.reduce((n,x)=>n+priceValue(x.price),0));
  $('statSales').textContent=money(records.reduce((n,x)=>n+priceValue(x.soldPrice),0));
@@ -434,7 +434,7 @@ function renderAttributeCollection(){
  $('itemsGrid').innerHTML=[...byAttribute].sort((a,b)=>compareAttributeNames(a[0],b[0])).map(([key,group])=>`<section class="attribute-section"><div class="attribute-heading"><div><strong>${esc(key)}</strong><span>${group.length} 件藏品</span></div><div class="attribute-totals">购入 ${money(group.reduce((n,x)=>n+priceValue(x.price),0))} · 售出 ${money(group.reduce((n,x)=>n+priceValue(x.soldPrice),0))}</div></div><div class="attribute-records">${group.map(x=>`<button class="attribute-record" type="button" data-record-id="${esc(x.id)}"><span class="attribute-record-main"><strong>${esc(x.name||'未命名藏品')}</strong><small>${esc([x.type,x.version,x.serial].filter(Boolean).join(' · ')||'藏品')}${x.parentId?' · 所属套装：'+esc(items.find(p=>p.id===x.parentId)?.name||'关联套装不存在'):''}</small></span><span class="attribute-record-prices">购入 ${money(priceValue(x.price))}<span>售出 ${money(priceValue(x.soldPrice))}</span></span><span class="child-chevron">›</span></button>`).join('')}</div></section>`).join('')||'<div class="empty"><strong>没有找到符合条件的藏品</strong><p>可以切换属性或清除搜索条件。</p></div>';
  $('itemsGrid').querySelectorAll('[data-record-id]').forEach(b=>b.addEventListener('click',()=>openDetail(b.dataset.recordId)));
  $('collectionSection').hidden=currentView==='stats';$('statsSection').hidden=currentView!=='stats';
- $('pageTitle').textContent='我的收藏柜';$('pageSubtitle').textContent='按每件藏品的属性，整理每一份喜欢。';
+ $('pageTitle').textContent='我的收藏柜';$('pageSubtitle').textContent='朱志鑫苏新皓相爱的痕迹。';
  document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===currentView));
 }
 
