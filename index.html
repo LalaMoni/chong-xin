@@ -143,6 +143,25 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
 .balance-divider{width:100%;height:1px;background:#EBDDD9}
 .balance-caption{font-size:11px;color:#8B7779;line-height:1.5;white-space:nowrap;letter-spacing:-.2px}
 </style>
+<style>
+/* 属性模式：每个大属性默认折叠，点击标题展开明细 */
+.attribute-section{padding:0;overflow:hidden}
+.attribute-section>summary{list-style:none;cursor:pointer;padding:16px;display:block;user-select:none}
+.attribute-section>summary::-webkit-details-marker{display:none}
+.attribute-section>summary .attribute-heading{margin-bottom:0}
+.attribute-section>summary .attribute-heading:after{content:'⌄';color:var(--accent);font-size:20px;line-height:1;transition:transform .2s;flex:none}
+.attribute-section[open]>summary .attribute-heading:after{transform:rotate(180deg)}
+/* 属性汇总金额靠右，展开箭头放在金额左侧 */
+.attribute-section>summary .attribute-heading>div:first-child{min-width:0;flex:1 1 auto}
+.attribute-section>summary .attribute-totals{order:2;margin-left:auto;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.attribute-section>summary .attribute-heading:after{order:3;margin-left:8px}
+@media(max-width:760px){.attribute-section>summary .attribute-heading{flex-wrap:wrap;gap:8px}.attribute-section>summary .attribute-heading>div:first-child{flex:1 1 auto}.attribute-section>summary .attribute-totals{flex:0 0 auto;margin-left:auto;text-align:right}}
+
+.attribute-section>summary:hover{background:#FFF7F5}
+.attribute-section>summary:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
+.attribute-section>.attribute-records{padding:0 16px 16px;border-top:1px solid var(--line);padding-top:12px}
+@media(max-width:760px){.attribute-section>summary{padding:13px}.attribute-section>.attribute-records{padding:11px}}
+</style>
 </head>
 <body class="auth-locked">
 <div id="authGate"><div class="auth-box"><div style="font-size:12px;letter-spacing:2px;color:#A66C70;margin-bottom:9px">MY LITTLE ARCHIVE</div><h1>重Xin</h1><p>登录后开启私人收藏柜，收藏会自动保存至云端。</p><input id="gateEmail" type="email" autocomplete="email" placeholder="邮箱地址"><input id="gatePassword" type="password" autocomplete="current-password" placeholder="密码"><button class="btn primary" id="gateLogin" type="button">登录</button><button class="btn" id="gateSignup" type="button">注册</button><div class="auth-error" id="gateStatus">正在检查登录状态…</div></div></div>
@@ -225,7 +244,7 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
   <section class="settings-section"><h3>数据检查</h3><p class="settings-note">检查重复 ID、未成功关联套装的子记录、未填写发布时间的 SET，以及可能重复的记录。只检查，不会自动修改或删除数据。</p><button class="btn secondary" id="runDataCheck" type="button">检查收藏数据</button><div id="dataCheckResults" class="check-report" aria-live="polite"></div></section>
   <section class="settings-section"><h3>数据管理中心</h3>
     <div class="settings-data-stats" id="settingsDataStats"></div>
-    <div class="settings-actions"><button class="btn secondary" type="button" data-data-action="excelImportBtn">↓ 导入 Excel</button><button class="btn secondary" type="button" data-data-action="excelExportBtn">↑ 导出 Excel</button><button class="btn secondary" type="button" data-data-action="exportBtn">▣ 保存 JSON 备份</button><button class="btn secondary" type="button" data-data-action="importBackupBtn">↶ 恢复 JSON 备份</button></div>
+    <div class="settings-actions"><button class="btn secondary" type="button" data-data-action="excelImportBtn">↓ 导入 Excel（完整同步）</button><button class="btn secondary" type="button" data-data-action="excelExportBtn">↑ 导出 Excel</button><button class="btn secondary" type="button" data-data-action="exportBtn">▣ 保存 JSON 备份</button><button class="btn secondary" type="button" data-data-action="importBackupBtn">↶ 恢复 JSON 备份</button></div>
     <div class="settings-danger"><strong>清空所有藏品</strong><p class="settings-note">永久删除本浏览器保存的套装、小卡、价格及图片。自定义属性保留。建议先保存 JSON 备份。</p><button type="button" class="btn" id="clearAllBtn" style="border-color:#c77c75;color:#ae4c46">清空所有藏品…</button></div>
   </section>
 </div></div>
@@ -416,6 +435,7 @@ function refreshMultiFilters(){
 document.addEventListener('click',e=>{for(const id of ['multiAttr','multiType']){const el=$(id);if(el.open&&!el.contains(e.target))el.open=false}});
 // 按每一件藏品自身的属性分类，不以母套装属性代替已填写的子记录属性。
 function recordAttribute(x){return String(x.attribute||items.find(p=>p.id===x.parentId)?.attribute||'未设置属性').trim()||'未设置属性'}
+const expandedAttributeGroups=new Set();
 function renderAttributeCollection(){
  refreshMultiFilters();
  const q=$('searchInput').value.trim().toLowerCase();
@@ -431,7 +451,8 @@ function renderAttributeCollection(){
  $('statWish').textContent=records.filter(x=>x.type==='SET').length;
  $('sidebarBalance').textContent=money(records.reduce((n,x)=>n+priceValue(x.price)-priceValue(x.soldPrice),0));
  $('itemsGrid').classList.add('attribute-layout');
- $('itemsGrid').innerHTML=[...byAttribute].sort((a,b)=>compareAttributeNames(a[0],b[0])).map(([key,group])=>`<section class="attribute-section"><div class="attribute-heading"><div><strong>${esc(key)}</strong><span>${group.length} 件藏品</span></div><div class="attribute-totals">购入 ${money(group.reduce((n,x)=>n+priceValue(x.price),0))} · 售出 ${money(group.reduce((n,x)=>n+priceValue(x.soldPrice),0))}</div></div><div class="attribute-records">${group.map(x=>`<button class="attribute-record" type="button" data-record-id="${esc(x.id)}"><span class="attribute-record-main"><strong>${esc(x.name||'未命名藏品')}</strong><small>${esc([x.type,x.version,x.serial].filter(Boolean).join(' · ')||'藏品')}${x.parentId?' · 所属套装：'+esc(items.find(p=>p.id===x.parentId)?.name||'关联套装不存在'):''}</small></span><span class="attribute-record-prices">购入 ${money(priceValue(x.price))}<span>售出 ${money(priceValue(x.soldPrice))}</span></span><span class="child-chevron">›</span></button>`).join('')}</div></section>`).join('')||'<div class="empty"><strong>没有找到符合条件的藏品</strong><p>可以切换属性或清除搜索条件。</p></div>';
+ $('itemsGrid').innerHTML=[...byAttribute].sort((a,b)=>compareAttributeNames(a[0],b[0])).map(([key,group])=>`<details class="attribute-section" data-attribute-group="${esc(key)}" ${expandedAttributeGroups.has(key)?'open':''}><summary><div class="attribute-heading"><div><strong>${esc(key)}</strong><span>${group.length} 件藏品</span></div><div class="attribute-totals">购入 ${money(group.reduce((n,x)=>n+priceValue(x.price),0))} · 售出 ${money(group.reduce((n,x)=>n+priceValue(x.soldPrice),0))}</div></div></summary><div class="attribute-records">${group.map(x=>`<button class="attribute-record" type="button" data-record-id="${esc(x.id)}"><span class="attribute-record-main"><strong>${esc(x.name||'未命名藏品')}</strong><small>${esc([x.type,x.version,x.serial].filter(Boolean).join(' · ')||'藏品')}${x.parentId?' · 所属套装：'+esc(items.find(p=>p.id===x.parentId)?.name||'关联套装不存在'):''}</small></span><span class="attribute-record-prices">购入 ${money(priceValue(x.price))}<span>售出 ${money(priceValue(x.soldPrice))}</span></span><span class="child-chevron">›</span></button>`).join('')}</div></details>`).join('')||'<div class="empty"><strong>没有找到符合条件的藏品</strong><p>可以切换属性或清除搜索条件。</p></div>';
+ $('itemsGrid').querySelectorAll('[data-attribute-group]').forEach(el=>el.addEventListener('toggle',()=>{const key=el.dataset.attributeGroup;if(el.open)expandedAttributeGroups.add(key);else expandedAttributeGroups.delete(key)}));
  $('itemsGrid').querySelectorAll('[data-record-id]').forEach(b=>b.addEventListener('click',()=>openDetail(b.dataset.recordId)));
  $('collectionSection').hidden=currentView==='stats';$('statsSection').hidden=currentView!=='stats';
  $('pageTitle').textContent='我的收藏柜';$('pageSubtitle').textContent='朱志鑫苏新皓相爱的痕迹。';
@@ -530,7 +551,45 @@ async function getXLSX(){
 const EXCEL_COLUMNS=[['ID','id'],['名称','name'],['类别','type'],['属性','attribute'],['版本','version'],['编号 / 款式','serial'],['所属套装ID','parentId'],['所属套装名称','parentName'],['购入价格','price'],['售出价格','soldPrice'],['周边发布时间','releaseDate'],['购买渠道','source'],['备注','notes'],['创建时间','createdAt']];
 $('excelExportBtn').addEventListener('click',async()=>{try{const XLSX=await getXLSX();const rows=items.map(x=>Object.fromEntries(EXCEL_COLUMNS.map(([label,key])=>[label,key==='parentName'?items.find(p=>p.id===x.parentId)?.name||'':x[key]??''])));const ws=XLSX.utils.json_to_sheet(rows,{header:EXCEL_COLUMNS.map(x=>x[0])});ws['!cols']=EXCEL_COLUMNS.map(([label])=>({wch:Math.min(35,Math.max(14,label.length*2+6))}));const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,'藏品');XLSX.writeFile(wb,'藏间收藏-'+today()+'.xlsx');toast('Excel 已导出（图片请使用 JSON 备份）')}catch(e){toast('Excel 功能需要联网加载组件，请检查网络')}});
 const excelInput=document.createElement('input');excelInput.type='file';excelInput.accept='.xlsx,.xls';excelInput.hidden=true;document.body.appendChild(excelInput);$('excelImportBtn').addEventListener('click',()=>excelInput.click());
-excelInput.addEventListener('change',async()=>{const f=excelInput.files[0];if(!f)return;try{const XLSX=await getXLSX(),wb=XLSX.read(await f.arrayBuffer(),{type:'array',cellDates:false}),sheet=wb.Sheets[wb.SheetNames[0]],rows=XLSX.utils.sheet_to_json(sheet,{defval:'',raw:false});if(!rows.length)throw Error('empty');const records=rows.filter(r=>Object.values(r).some(v=>String(v??'').trim())).map(r=>{const x={};EXCEL_COLUMNS.forEach(([label,key])=>{if(key!=='parentName')x[key]=String(r[label]??'').trim()});if(x.type==='周边套装')x.type='SET';x.releaseDate=parseDate(x.releaseDate)||'';x.id=x.id||crypto.randomUUID();x.recordRole=x.type==='SET'?'parent':x.parentId?'child':'normal';if(x.recordRole==='parent')x.parentId='';x.image=items.find(old=>old.id===x.id)?.image||'';x.photos=[];x.createdAt=x.createdAt||new Date().toISOString();x.__parentName=String(r['所属套装名称']||'').trim();return x});const all=[...items,...records];records.forEach(x=>{if(x.recordRole!=='parent'&&!x.parentId&&x.__parentName){const match=all.find(p=>p.recordRole==='parent'&&p.name===x.__parentName);if(match){x.parentId=match.id;x.recordRole='child'}}if(!x.attribute&&x.parentId)x.attribute=all.find(p=>p.id===x.parentId)?.attribute||'';delete x.__parentName});if(!confirm(`读取到 ${records.length} 件藏品。将按 ID 合并，同 ID 覆盖；Excel 不包含图片，已有相同 ID 的图片会保留。确定导入吗？`))return;const map=new Map(items.map(x=>[x.id,x]));records.forEach(x=>{const old=map.get(x.id);map.set(x.id,{...old,...x,image:x.image||old?.image||''})});items=[...map.values()];nextHistoryLabel='导入 Excel';if(save()){refreshAttributes();render();toast(`成功导入 ${records.length} 件藏品`)}}catch(e){console.error(e);toast('导入失败：请检查 Excel 格式或网络连接')}finally{excelInput.value=''}});
+excelInput.addEventListener('change',async()=>{
+ const f=excelInput.files[0];if(!f)return;
+ try{
+  const XLSX=await getXLSX(),wb=XLSX.read(await f.arrayBuffer(),{type:'array',cellDates:false}),sheet=wb.Sheets[wb.SheetNames[0]];
+  const rows=XLSX.utils.sheet_to_json(sheet,{defval:'',raw:false}).filter(r=>Object.values(r).some(v=>String(v??'').trim()));
+  if(!rows.length)throw Error('Excel 没有藏品记录，已取消导入');
+  if(!['ID','名称','类别'].every(k=>Object.prototype.hasOwnProperty.call(rows[0],k)))throw Error('缺少 ID、名称或类别列');
+  const missing=rows.filter(r=>!String(r['ID']??'').trim());
+  if(missing.length)throw Error(`有 ${missing.length} 行缺少 ID，无法安全完整同步`);
+  const ids=rows.map(r=>String(r['ID']).trim());
+  if(new Set(ids).size!==ids.length)throw Error('Excel 存在重复 ID，无法安全完整同步');
+  const oldById=new Map(items.map(x=>[String(x.id),x]));
+  const records=rows.map(r=>{
+   const x={};EXCEL_COLUMNS.forEach(([label,key])=>{if(key!=='parentName')x[key]=String(r[label]??'').trim()});
+   if(x.type==='周边套装')x.type='SET';x.releaseDate=parseDate(x.releaseDate)||'';
+   x.id=x.id||crypto.randomUUID();const old=oldById.get(x.id);
+   x.recordRole=x.type==='SET'?'parent':x.parentId?'child':'normal';if(x.recordRole==='parent')x.parentId='';
+   x.image=old?.image||'';x.photos=old?.photos||[];x.createdAt=x.createdAt||old?.createdAt||new Date().toISOString();
+   x.__parentName=String(r['所属套装名称']||'').trim();return x;
+  });
+  const parentPool=records;
+  records.forEach(x=>{
+   if(x.recordRole!=='parent'&&!x.parentId&&x.__parentName){const match=parentPool.find(p=>p.type==='SET'&&p.name===x.__parentName);if(match){x.parentId=match.id;x.recordRole='child'}}
+   if(!x.attribute&&x.parentId)x.attribute=parentPool.find(p=>p.id===x.parentId)?.attribute||'';
+   delete x.__parentName;
+  });
+  const incomingIds=new Set(records.map(x=>x.id));
+  const removed=items.filter(x=>!incomingIds.has(String(x.id)));
+  const added=records.filter(x=>!oldById.has(x.id));
+  const updated=records.length-added.length;
+  const broken=records.filter(x=>x.parentId&&!records.some(p=>p.id===x.parentId&&p.type==='SET'));
+  if(broken.length)throw Error(`有 ${broken.length} 件藏品关联的所属套装不在 Excel 中，请先修正`);
+  if(!confirm(`以 Excel 为准完整同步：\n新增 ${added.length} 件\n更新 ${updated} 件\n删除 ${removed.length} 件\n\n相同 ID 的原有图片将保留。删除的藏品及图片可能随云端同步删除。\n请先保存完整 JSON 备份。\n\n确定继续吗？`))return;
+  if(!confirm(`最后确认：网站中 ${removed.length} 件 Excel 未列出的藏品将被删除。\n此操作会同步至云端。确认执行？`))return;
+  const previous=items;items=records.map(x=>({...oldById.get(x.id),...x}));nextHistoryLabel='Excel 完整同步';
+  if(!save()){items=previous;return}
+  refreshAttributes();render();toast(`同步完成：新增 ${added.length}、更新 ${updated}、删除 ${removed.length}`);
+ }catch(e){console.error(e);alert('Excel 导入未执行：'+(e.message||'请检查格式或网络连接'))}finally{excelInput.value=''}
+});
 const BASE_ATTRIBUTES=['Z&S','22X','SU','TOP','跨代'];
 function persistCustomAttributes(){localStorage.setItem(CUSTOM_ATTR_KEY,JSON.stringify(customAttributes));if(typeof queueCloudSync==='function')queueCloudSync();refreshAttributes();refreshFilters();renderCustomAttributeSettings()}
 function renderCustomAttributeSettings(){
