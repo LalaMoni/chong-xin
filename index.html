@@ -164,7 +164,7 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
 </style>
 </head>
 <body class="auth-locked">
-<div id="authGate"><div class="auth-box"><div style="font-size:12px;letter-spacing:2px;color:#A66C70;margin-bottom:9px">MY LITTLE ARCHIVE</div><h1>重Xin</h1><p>登录后开启私人收藏柜，收藏会自动保存至云端。</p><input id="gateEmail" type="email" autocomplete="email" placeholder="邮箱地址"><input id="gatePassword" type="password" autocomplete="current-password" placeholder="密码"><button class="btn primary" id="gateLogin" type="button">登录</button><button class="btn" id="gateSignup" type="button">注册</button><div class="auth-error" id="gateStatus">正在检查登录状态…</div></div></div>
+<div id="authGate"><div class="auth-box"><div style="font-size:12px;letter-spacing:2px;color:#A66C70;margin-bottom:9px">MY LITTLE ARCHIVE</div><h1>重Xin</h1><p>登录后开启私人收藏柜，收藏会自动保存至云端。</p><input id="gateEmail" type="email" autocomplete="email" placeholder="邮箱地址"><input id="gatePassword" type="password" autocomplete="current-password" placeholder="密码"><button class="btn primary" id="gateLogin" type="button">登录</button><div class="auth-error" id="gateStatus">正在检查登录状态…</div></div></div>
 <div class="app">
   <aside class="sidebar">
     <div class="brand"><div class="brand-mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="#A66C70" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"><path d="M22 20Q22 15 29 15L54 12Q60 12 60 18V22"/><path d="M24 24Q24 20 30 20H57Q63 20 63 27V60Q63 66 57 66H26Q19 66 19 59V31Q19 26 24 24Z"/><path d="M42 33L44.5 40.5L52 43L44.5 45.5L42 53L39.5 45.5L32 43L39.5 40.5Z" stroke-width="2"/></svg></div><div class="brand-name" aria-label="重Xin"><span class="brand-chong">重</span><span class="brand-xin">Xin</span></div></div>
@@ -234,7 +234,7 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
 </div></div>
 <div class="overlay" id="settingsOverlay"><div class="modal" style="max-width:610px">
   <div class="modal-head"><div><h2>设置</h2><div class="modal-desc">管理属性选项与本地收藏数据</div></div><button class="close" data-close="settingsOverlay" aria-label="关闭"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
-  <section class="settings-section"><h3>云端同步 · Supabase</h3><p class="settings-note">登录后自动加载云端数据，编辑后自动同步。离线改动会等待联网，发生冲突时暂停同步并提示处理。建议定期保存 JSON 备份。</p><div class="cloud-panel"><div id="cloudStatus" class="cloud-status">正在准备云端连接…</div><div id="cloudAuthFields" class="cloud-auth-fields"><input id="cloudEmail" type="email" autocomplete="email" placeholder="邮箱地址" aria-label="邮箱地址"><input id="cloudPassword" type="password" autocomplete="current-password" placeholder="密码（至少 6 位）" aria-label="密码"></div><div class="cloud-buttons" id="cloudAuthActions"><button class="btn primary" type="button" id="cloudLogin">登录</button><button class="btn" type="button" id="cloudSignup">注册</button><button class="btn" type="button" id="cloudLogout" hidden>退出登录</button></div><div class="cloud-buttons" id="cloudSyncActions" style="margin-top:12px" hidden><button class="btn primary" type="button" id="cloudUpload">↑ 手动上传（谨慎）</button><button class="btn" type="button" id="cloudDownload">↓ 手动合并</button></div><p class="cloud-warning">自动同步默认开启。发生同一藏品的跨设备冲突时，不会静默覆盖；请先备份并选择保留哪个版本。手动上传仅作为紧急恢复工具，图片存入私人 Storage。</p></div></section>
+  <section class="settings-section"><h3>云端同步 · Supabase</h3><p class="settings-note">登录后自动加载云端数据，编辑后自动同步。离线改动会等待联网，发生冲突时暂停同步并提示处理。建议定期保存 JSON 备份。</p><div class="cloud-panel"><div id="cloudStatus" class="cloud-status">正在准备云端连接…</div><div id="cloudAuthFields" class="cloud-auth-fields"><input id="cloudEmail" type="email" autocomplete="email" placeholder="邮箱地址" aria-label="邮箱地址"><input id="cloudPassword" type="password" autocomplete="current-password" placeholder="密码（至少 6 位）" aria-label="密码"></div><div class="cloud-buttons" id="cloudAuthActions"><button class="btn primary" type="button" id="cloudLogin">登录</button><button class="btn" type="button" id="cloudLogout" hidden>退出登录</button></div><div class="cloud-buttons" id="cloudSyncActions" style="margin-top:12px" hidden><button class="btn primary" type="button" id="cloudUpload">↑ 手动上传（谨慎）</button><button class="btn" type="button" id="cloudDownload">↓ 手动合并</button></div><p class="cloud-warning">自动同步默认开启。发生同一藏品的跨设备冲突时，不会静默覆盖；请先备份并选择保留哪个版本。手动上传仅作为紧急恢复工具，图片存入私人 Storage。</p></div></section>
   <section class="settings-section"><h3>自定义属性管理</h3><p class="settings-note">默认属性保持不变。自定义属性可以改名、调整顺序或移出选项。改名会同步更新已使用该属性的藏品；移除选项不会删除藏品。</p>
     <div class="settings-defaults">默认属性：Z&S · 22X · SU · TOP · 跨代</div>
     <div id="customAttrList" class="settings-attr-list"></div>
@@ -645,7 +645,7 @@ const cloudStorageKey=id=>'cangjian_cloud_cache_'+id;
 function cloudStatus(message){$('cloudStatus').textContent=message;$('syncPill').textContent='☁ '+message}
 function cloudUI(){
  const logged=!!cloudUser;
- $('cloudAuthFields').hidden=logged;$('cloudLogin').hidden=logged;$('cloudSignup').hidden=logged;
+ $('cloudAuthFields').hidden=logged;$('cloudLogin').hidden=logged;
  $('cloudLogout').hidden=!logged;$('cloudSyncActions').hidden=!logged;
  if(!logged)cloudStatus('请先登录');
 }
@@ -662,15 +662,15 @@ async function getCloudClient(){
  return cloudClient;
 }
 async function cloudAction(fn){if(cloudBusy)return;cloudBusy=true;try{await fn()}catch(e){console.error(e);cloudStatus('同步失败：'+e.message);gateMessage(e.message)}finally{cloudBusy=false}}
-async function signIn(signup=false){
+async function signIn(){
  const email=$('gateEmail').value.trim()||$('cloudEmail').value.trim(),password=$('gatePassword').value||$('cloudPassword').value;
  if(!email||password.length<6)throw Error('请填写邮箱和至少 6 位密码');
- const c=await getCloudClient();const {data,error}=signup?await c.auth.signUp({email,password}):await c.auth.signInWithPassword({email,password});if(error)throw error;
- if(!data.session){gateMessage('注册成功，请先通过邮件验证，再回来登录。');return}
+ const c=await getCloudClient();const {data,error}=await c.auth.signInWithPassword({email,password});if(error)throw error;
+ if(!data.session)throw Error('登录未成功，请重试');
  await activateCloud(data.session.user);
 }
-$('gateLogin').onclick=()=>cloudAction(()=>signIn(false));$('gateSignup').onclick=()=>cloudAction(()=>signIn(true));
-$('cloudLogin').onclick=()=>cloudAction(()=>signIn(false));$('cloudSignup').onclick=()=>cloudAction(()=>signIn(true));
+$('gateLogin').onclick=()=>cloudAction(()=>signIn());
+$('cloudLogin').onclick=()=>cloudAction(()=>signIn());
 $('gatePassword').addEventListener('keydown',e=>{if(e.key==='Enter')$('gateLogin').click()});
 async function cloudRequireUser(){const c=await getCloudClient();const {data,error}=await c.auth.getUser();if(error||!data.user)throw Error('登录已过期，请重新登录');return c}
 function imageToBlob(dataUrl){const [header,body]=dataUrl.split(',');if(!body||!/^data:image\//i.test(header))throw Error('图片格式不支持');const mime=header.match(/^data:([^;]+)/i)?.[1]||'image/jpeg';const bytes=atob(body),out=new Uint8Array(bytes.length);for(let i=0;i<bytes.length;i++)out[i]=bytes.charCodeAt(i);return new Blob([out],{type:mime})}
