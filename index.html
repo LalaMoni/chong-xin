@@ -162,6 +162,88 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
 .attribute-section>.attribute-records{padding:0 16px 16px;border-top:1px solid var(--line);padding-top:12px}
 @media(max-width:760px){.attribute-section>summary{padding:13px}.attribute-section>.attribute-records{padding:11px}}
 </style>
+<style>
+
+/* 重Xin 手机端独立响应式布局：仅在窄屏启用，保留电脑端设计 */
+@media (max-width:760px) {
+ html,body{max-width:100%;overflow-x:hidden}
+ body{font-size:14px}
+ .app>main{padding:15px 14px calc(100px + env(safe-area-inset-bottom));min-width:0}
+ .topbar{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;margin-bottom:16px}
+ .topbar>div:first-child{min-width:0}
+ .eyebrow{display:none}
+ .page-title{font-size:25px;line-height:1.25}
+ .subtitle{font-size:11px;line-height:1.45;margin-top:5px;max-width:none}
+ .top-actions{display:flex;flex-direction:column;align-items:flex-end;gap:7px;justify-content:center}
+ #syncPill{font-size:10px;max-width:126px;padding:5px 8px}
+ .top-actions #addBtn{width:38px;height:38px;border-radius:12px}
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:19px}
+ .stat{padding:12px 13px;border-radius:13px;min-width:0;box-shadow:none}
+ .stat-top{font-size:11px;gap:5px}
+ .stat-icon{width:25px;height:25px;font-size:12px;flex:none}
+ .stat-value{font-size:clamp(18px,5.5vw,25px);line-height:1.25;margin-top:8px;overflow-wrap:anywhere}
+ .stat-foot{margin-top:3px}
+ .section-head{margin-bottom:12px}
+ .controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9px;margin-bottom:15px;align-items:stretch}
+ .controls .search{grid-column:1/-1;grid-row:1;min-width:0}
+ .controls .search input{min-height:44px;font-size:14px}
+ .controls .view-switch{grid-column:1/-1;grid-row:2;justify-content:stretch}
+ .view-switch button{flex:1;min-height:38px}
+ .controls #attributeFilter,.controls #sortSelect{width:100%;min-width:0;max-width:none;min-height:42px;font-size:12px}
+ .controls .multi-filters{grid-column:1/-1;min-width:0;gap:8px}
+ .multi-filter summary{min-height:42px;padding-top:12px}
+ .grid:not(.attribute-layout){grid-template-columns:1fr;gap:12px}
+ .suite-group-wrap .item-card .item-body{padding:14px 15px}
+ .suite-group-wrap .item-card .item-name{font-size:15px}
+ .suite-group-wrap .item-card .item-image{aspect-ratio:16/8;max-height:160px}
+ .suite-group-wrap .group-card-totals{margin-top:10px}
+ .suite-group-wrap .related-child{min-height:58px}
+ .group-total-item,.group-card-totals>div{padding:10px}
+ .attribute-heading{align-items:flex-start}
+ .attribute-section>summary .attribute-heading{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px}
+ .attribute-section>summary .attribute-heading>div:first-child{grid-column:1;grid-row:1;min-width:0}
+ .attribute-section>summary .attribute-heading:after{grid-column:2;grid-row:1;margin:0 0 0 6px}
+ .attribute-section>summary .attribute-totals{grid-column:1/-1;grid-row:2;justify-self:end;white-space:normal;text-align:right;max-width:100%;font-size:11px}
+ .attribute-record{min-width:0}
+ .attribute-record-prices{max-width:45%;white-space:normal;text-align:right}
+ .mobile-top{display:flex;justify-content:space-around;align-items:stretch;padding:8px 8px calc(8px + env(safe-area-inset-bottom));z-index:9;box-shadow:0 -5px 20px #543E4209}
+ .mobile-top button{flex:1;min-height:47px;min-width:0;font-size:11px;border-radius:12px;touch-action:manipulation}
+ .mobile-top button span{font-size:21px;line-height:1.15}
+ .mobile-top button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+ .overlay{padding:0;align-items:stretch;justify-content:stretch;z-index:15}
+ .overlay.show{display:flex}
+ .modal,.overlay .modal{width:100%;max-width:none!important;max-height:none;height:100vh;height:100dvh;border-radius:0;box-shadow:none;padding:0 16px calc(22px + env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+ .modal-head{position:sticky;top:0;z-index:2;align-items:center;gap:10px;background:var(--panel);padding:17px 0 13px;margin-bottom:14px;border-bottom:1px solid var(--line)}
+ .modal h2{font-size:22px;line-height:1.35;overflow-wrap:anywhere}
+ .modal-desc{line-height:1.5}
+ .close{min-width:40px;width:40px;height:40px}
+ .detail-layout{grid-template-columns:minmax(0,1fr);gap:16px}
+ .detail-gallery{max-width:100%;margin:0 auto;width:min(100%,330px)}
+ .detail-gallery .detail-image,.detail-image{max-height:320px;object-fit:contain}
+ .detail-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .detail-row{min-width:0}
+ .detail-value{font-size:13px}
+ .detail-head-actions{gap:6px}
+ .detail-icon-btn{width:38px;height:38px}
+ .detail-heading h2{font-size:20px}
+ .related-child{gap:10px}
+ .child-thumb{flex:0 0 60px;width:60px;height:75px}
+ .form-grid{grid-template-columns:minmax(0,1fr);gap:13px}
+ .field input,.field select,.field textarea{font-size:16px;min-height:44px}
+ .modal-actions{position:sticky;bottom:calc(-22px - env(safe-area-inset-bottom));z-index:3;background:var(--panel);padding:12px 0 calc(12px + env(safe-area-inset-bottom));margin-top:18px;border-top:1px solid var(--line);align-items:center;flex-wrap:wrap}
+ .modal-actions .right-actions{margin-left:auto;flex-wrap:wrap;justify-content:flex-end}
+ .modal-actions .btn{min-height:43px}
+ .settings-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .settings-actions .btn{min-width:0;white-space:normal;line-height:1.4}
+ .toast{bottom:calc(80px + env(safe-area-inset-bottom));max-width:calc(100vw - 30px);text-align:center}
+}
+@media (max-width:380px){
+ .detail-list{grid-template-columns:1fr}
+ .settings-actions{grid-template-columns:1fr}
+ .stat{padding:11px}
+ .topbar{gap:4px}
+}
+</style>
 </head>
 <body class="auth-locked">
 <div id="authGate"><div class="auth-box"><div style="font-size:12px;letter-spacing:2px;color:#A66C70;margin-bottom:9px">MY LITTLE ARCHIVE</div><h1>重Xin</h1><p>登录后开启私人收藏柜，收藏会自动保存至云端。</p><input id="gateEmail" type="email" autocomplete="email" placeholder="邮箱地址"><input id="gatePassword" type="password" autocomplete="current-password" placeholder="密码"><button class="btn primary" id="gateLogin" type="button">登录</button><div class="auth-error" id="gateStatus">正在检查登录状态…</div></div></div>
@@ -202,7 +284,7 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
     <div class="footer-note">重Xin · 我陪你走过的路你不能忘</div>
   </main>
 </div>
-<nav class="mobile-top"><button class="active" data-view="all"><span>▦</span>收藏柜</button><button id="mobileAdd"><span>＋</span>添加</button></nav>
+<nav class="mobile-top" aria-label="手机端快捷导航"><button class="active" data-view="all" type="button"><span>▦</span>收藏柜</button><button id="mobileAdd" type="button"><span>＋</span>添加</button><button id="mobileSettings" type="button"><span>⚙</span>设置</button></nav>
 
 <div class="overlay" id="formOverlay"><div class="modal">
   <div class="modal-head"><div><h2 id="formTitle">添加一件藏品</h2><div class="modal-desc">类别选择「SET」时自动作为母套装；其他藏品可选择所属套装。</div></div><button class="close" data-close="formOverlay"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
@@ -628,7 +710,9 @@ function runDataCheck(){
  const types=['重复 ID','关联异常','缺少发布时间','疑似重复'];const result=$('dataCheckResults');result.innerHTML=types.map(t=>{const rows=findings.filter(f=>f[0]===t);return `<section><h4>${esc(t)} · ${rows.length} 项</h4>${rows.length?rows.slice(0,30).map(f=>`<p>• ${esc(f[1])}</p>`).join('')+(rows.length>30?`<p>另有 ${rows.length-30} 项未展开</p>`:''):'<p>未发现问题</p>'}</section>`}).join('');toast(findings.length?`检查完成：发现 ${findings.length} 项待核对`:'检查完成：未发现问题');
 }
 $('runDataCheck').addEventListener('click',runDataCheck);
-$('settingsBtn').addEventListener('click',()=>{renderCustomAttributeSettings();renderHistory();showOverlay('settingsOverlay')});
+function openSettingsPanel(){renderCustomAttributeSettings();renderHistory();showOverlay('settingsOverlay')}
+$('settingsBtn').addEventListener('click',openSettingsPanel);
+$('mobileSettings').addEventListener('click',openSettingsPanel);
 $('clearAllBtn').addEventListener('click',()=>{
  $('clearCount').textContent=items.length;
  $('clearConfirmText').value='';$('clearConfirmBtn').disabled=true;
