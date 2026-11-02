@@ -213,6 +213,11 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
  .overlay{padding:0;align-items:stretch;justify-content:stretch;z-index:15}
  .overlay.show{display:flex}
  .modal,.overlay .modal{width:100%;max-width:none!important;max-height:none;height:100vh;height:100dvh;border-radius:0;box-shadow:none;padding:0 16px calc(22px + env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+ /* 编辑藏品弹层：只允许纵向滑动，防止横向晃动 */
+ #formOverlay{overflow:hidden;overscroll-behavior:contain;touch-action:pan-y}
+ #formOverlay>.modal{min-width:0;max-width:100%;box-sizing:border-box;overflow-x:hidden;overflow-y:auto;touch-action:pan-y;overscroll-behavior-x:none}
+ #formOverlay .form-grid,#formOverlay .field,#formOverlay .modal-head,#formOverlay .modal-actions{min-width:0;max-width:100%;box-sizing:border-box}
+ #formOverlay .field input,#formOverlay .field select,#formOverlay .field textarea{max-width:100%;box-sizing:border-box}
  .modal-head{position:sticky;top:0;z-index:2;align-items:center;gap:10px;background:var(--panel);padding:17px 0 13px;margin-bottom:14px;border-bottom:1px solid var(--line)}
  .modal h2{font-size:22px;line-height:1.35;overflow-wrap:anywhere}
  .modal-desc{line-height:1.5}
