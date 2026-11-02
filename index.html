@@ -213,6 +213,15 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
  .overlay{padding:0;align-items:stretch;justify-content:stretch;z-index:15}
  .overlay.show{display:flex}
  .modal,.overlay .modal{width:100%;max-width:none!important;max-height:none;height:100vh;height:100dvh;border-radius:0;box-shadow:none;padding:0 16px calc(22px + env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+ /* iPhone Safari 日期控件具有较大的固有宽度：将表单及控件严格限制在视口内 */
+ #formOverlay,#formOverlay>.modal,#formOverlay form,#formOverlay .form-grid,#formOverlay .field{width:100%;min-width:0;max-width:100%;box-sizing:border-box}
+ #formOverlay>.modal{overflow-x:clip}
+ #formOverlay .form-grid{display:grid;grid-template-columns:minmax(0,1fr)}
+ #formOverlay .field{overflow-wrap:anywhere}
+ #formOverlay input,#formOverlay select,#formOverlay textarea{display:block;width:100%;min-width:0;max-width:100%;box-sizing:border-box}
+ #formOverlay input[type="date"]{display:block;width:100%;min-width:0;max-width:100%;font-size:16px;-webkit-appearance:none;appearance:none;line-height:1.35;min-height:44px}
+ #formOverlay input[type="date"]::-webkit-date-and-time-value{text-align:left;min-width:0}
+ #formOverlay input[type="date"]::-webkit-datetime-edit{min-width:0;max-width:100%;padding:0}
  /* 编辑藏品弹层：只允许纵向滑动，防止横向晃动 */
  #formOverlay{overflow:hidden;overscroll-behavior:contain;touch-action:pan-y}
  #formOverlay>.modal{min-width:0;max-width:100%;box-sizing:border-box;overflow-x:hidden;overflow-y:auto;touch-action:pan-y;overscroll-behavior-x:none}
