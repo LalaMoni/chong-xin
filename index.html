@@ -258,6 +258,12 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
  .topbar{gap:4px}
 }
 </style>
+<style>
+#addBtn[hidden],#mobileAdd[hidden],#collectionStats[hidden],#collectionSection[hidden],#concertSection[hidden],#statsSection[hidden]{display:none!important}
+.group-card-totals .suite-net,.group-totals .suite-net{grid-column:1/-1;background:#F0DDDB;color:#87565E}
+.concert-summary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:16px}.concert-list{display:grid;gap:12px}.concert-card{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:17px;min-width:0}.concert-card-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.concert-card h3{margin:0 0 6px;font-size:16px;overflow-wrap:anywhere}.concert-meta{font-size:12px;color:var(--muted);line-height:1.7}.concert-costs{display:flex;gap:8px 16px;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--muted)}.concert-costs strong{color:var(--accent)}.concert-notice{font-size:12px;color:var(--muted);margin:10px 0 16px;line-height:1.6}.concert-card .btn{flex:none}.concert-empty{padding:42px 15px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:16px}
+@media(max-width:760px){.concert-summary .stat{min-width:0}.concert-card{padding:14px}.concert-card-head{gap:7px}.concert-card .btn{padding:9px}.concert-summary .stat-value{overflow-wrap:anywhere}#concertOverlay{touch-action:pan-y;overflow:hidden}#concertOverlay>.modal{overflow-x:hidden;touch-action:pan-y}#concertOverlay .form-grid,#concertOverlay .field{min-width:0;max-width:100%}#concertOverlay input,#concertOverlay textarea{min-width:0;max-width:100%}#concertOverlay input[type=date]{-webkit-appearance:none;appearance:none;min-width:0;width:100%}}
+</style>
 </head>
 <body class="auth-locked">
 <div id="authGate"><div class="auth-box"><div style="font-size:12px;letter-spacing:2px;color:#A66C70;margin-bottom:9px">MY LITTLE ARCHIVE</div><h1>重Xin</h1><p>登录后开启私人收藏柜，收藏会自动保存至云端。</p><input id="gateEmail" type="email" autocomplete="email" placeholder="邮箱地址"><input id="gatePassword" type="password" autocomplete="current-password" placeholder="密码"><button class="btn primary" id="gateLogin" type="button">登录</button><div class="auth-error" id="gateStatus">正在检查登录状态…</div></div></div>
@@ -265,7 +271,7 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
   <aside class="sidebar">
     <div class="brand"><div class="brand-mark" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" fill="none" stroke="#A66C70" stroke-width="2.7" stroke-linejoin="round" stroke-linecap="round"><path d="M22 20Q22 15 29 15L54 12Q60 12 60 18V22"/><path d="M24 24Q24 20 30 20H57Q63 20 63 27V60Q63 66 57 66H26Q19 66 19 59V31Q19 26 24 24Z"/><path d="M42 33L44.5 40.5L52 43L44.5 45.5L42 53L39.5 45.5L32 43L39.5 40.5Z" stroke-width="2"/></svg></div><div class="brand-name" aria-label="重Xin"><span class="brand-chong">重</span><span class="brand-xin">Xin</span></div></div>
     <div><div class="nav-label">COLLECTION</div><nav class="nav">
-      <button class="active" data-view="all"><span class="ico">▦</span>我的收藏</button>
+      <button class="active" data-view="all"><span class="ico">▦</span>我的收藏</button><button type="button" data-page="concert"><span class="ico">♫</span>观演记录</button>
     </nav></div>
     <div><div class="nav-label">MANAGE</div><nav class="nav">
       <button type="button" id="settingsBtn"><span class="ico">⚙</span>设置</button>
@@ -277,11 +283,16 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
       <div><div class="eyebrow">MY PERSONAL ARCHIVE</div><h1 class="page-title" id="pageTitle">我的收藏柜</h1><p class="subtitle" id="pageSubtitle">把喜欢的周边好好收藏起来。</p></div>
       <div class="top-actions"><span id="syncPill" aria-live="polite">☁ 正在连接…</span><button class="btn primary" id="addBtn" title="添加藏品" data-tooltip="添加藏品" aria-label="添加藏品"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>添加藏品</span></button></div><div id="dataActionTriggers" hidden aria-hidden="true"><button class="btn secondary" id="excelImportBtn" title="从 Excel 表格导入藏品" data-tooltip="导入 Excel" aria-label="导入 Excel"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4"/><path d="M4 17v3h16v-3"/></svg><span>导入 Excel</span></button><button class="btn secondary" id="excelExportBtn" title="将藏品导出为 Excel 表格" data-tooltip="导出 Excel" aria-label="导出 Excel"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4m-4 4 4-4 4 4"/><path d="M4 17v3h16v-3"/></svg><span>导出 Excel</span></button><button class="btn secondary" id="importBackupBtn" title="从 JSON 备份恢复藏品" data-tooltip="恢复备份" aria-label="恢复备份"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a8 8 0 1 1 2 6"/><path d="M4 5v6h6"/><path d="M12 8v5l3 2"/></svg><span>恢复备份</span></button><button class="btn secondary" id="exportBtn" title="保存包含图片的完整 JSON 备份" data-tooltip="保存备份" aria-label="保存备份"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V4h16v3M5 10h14v10H5z"/><path d="M9 14h6"/></svg><span>保存备份</span></button></div>
     </div>
-    <section class="stats">
-      <div class="stat"><div class="stat-top">收藏总数 <span class="stat-icon">▦</span></div><div class="stat-value" id="statCount">0</div><div class="stat-foot"></div></div>
+    <section class="stats" id="collectionStats">
+      <div class="stat"><div class="stat-top">藏品数量 <span class="stat-icon">▦</span></div><div class="stat-value" id="statCount">0</div><div class="stat-foot">不包含母套装</div></div>
+      <div class="stat"><div class="stat-top">套装数量 <span class="stat-icon">♡</span></div><div class="stat-value" id="statWish">0</div><div class="stat-foot"></div></div>
       <div class="stat"><div class="stat-top">购入总额 <span class="stat-icon">￥</span></div><div class="stat-value" id="statSpend">¥0</div><div class="stat-foot"></div></div>
       <div class="stat"><div class="stat-top">售出总额 <span class="stat-icon">↗</span></div><div class="stat-value" id="statSales">¥0</div><div class="stat-foot"></div></div>
-      <div class="stat"><div class="stat-top">套装数量 <span class="stat-icon">♡</span></div><div class="stat-value" id="statWish">0</div><div class="stat-foot"></div></div>
+    </section>
+    <section id="concertSection" hidden>
+      <div class="section-head"><div><h2 class="section-title">观演记账</h2><div class="section-desc">门票、酒店与其他费用，和收藏账目分开计算</div></div><button class="btn primary" type="button" id="concertAdd">＋ 新增观演</button></div>
+      <div class="concert-summary"><div class="stat"><div class="stat-top">观演场次</div><div class="stat-value" id="concertCount">0</div></div><div class="stat"><div class="stat-top">观演总支出</div><div class="stat-value" id="concertTotal">¥0</div></div></div>
+      <div class="concert-notice" id="concertSyncStatus">观演记录单独保存在云端。</div><div id="concertList" class="concert-list"></div>
     </section>
     <section id="collectionSection">
       <div class="section-head"><div><h2 class="section-title" id="sectionTitle">全部藏品</h2><div class="section-desc" id="resultCount">你的收藏，一目了然</div></div></div>
@@ -298,8 +309,24 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
     <div class="footer-note">重Xin · 我陪你走过的路你不能忘</div>
   </main>
 </div>
-<nav class="mobile-top" aria-label="手机端快捷导航"><button class="active" data-view="all" type="button"><span>▦</span>收藏柜</button><button id="mobileAdd" type="button"><span>＋</span>添加</button><button id="mobileSettings" type="button"><span>⚙</span>设置</button></nav>
+<nav class="mobile-top" aria-label="手机端快捷导航"><button class="active" data-view="all" type="button"><span>▦</span>收藏柜</button><button id="mobileAdd" type="button"><span>＋</span>添加</button><button type="button" data-page="concert"><span>♫</span>观演</button><button id="mobileSettings" type="button"><span>⚙</span>设置</button></nav>
 
+<div class="overlay" id="concertOverlay"><div class="modal">
+  <div class="modal-head"><div><h2 id="concertFormTitle">新增观演记录</h2><div class="modal-desc">按一次观演行程记录花销；所有金额均为人民币</div></div><button class="close" type="button" data-close="concertOverlay" aria-label="关闭">×</button></div>
+  <form id="concertForm"><input type="hidden" id="concertId"><div class="form-grid">
+    <div class="field full"><label for="concertName">演唱会名称</label><input id="concertName" maxlength="120" required placeholder="例如：演唱会名称"></div>
+    <div class="field"><label for="concertArtist">艺人 / 组合</label><input id="concertArtist" maxlength="80"></div>
+    <div class="field"><label for="concertDate">观演日期</label><input id="concertDate" type="date"></div>
+    <div class="field"><label for="concertCity">城市</label><input id="concertCity" maxlength="60"></div>
+    <div class="field"><label for="concertVenue">场馆</label><input id="concertVenue" maxlength="100"></div>
+    <div class="field"><label for="concertTicket">门票（元）</label><input id="concertTicket" type="number" min="0" step="0.01" placeholder="0.00"></div>
+    <div class="field"><label for="concertHotel">酒店（元）</label><input id="concertHotel" type="number" min="0" step="0.01" placeholder="0.00"></div>
+    <div class="field"><label for="concertTransport">交通（元）</label><input id="concertTransport" type="number" min="0" step="0.01" placeholder="0.00"></div>
+    <div class="field"><label for="concertFood">餐饮（元）</label><input id="concertFood" type="number" min="0" step="0.01" placeholder="0.00"></div>
+    <div class="field"><label for="concertOther">其他（元）</label><input id="concertOther" type="number" min="0" step="0.01" placeholder="0.00"></div>
+    <div class="field full"><label for="concertNotes">备注</label><textarea id="concertNotes" maxlength="2000" placeholder="票档、酒店信息、费用说明等"></textarea></div>
+  </div><div class="modal-actions"><button type="button" class="btn" id="concertDelete" hidden>删除记录</button><div class="right-actions"><button type="button" class="btn" data-close="concertOverlay">取消</button><button type="submit" class="btn primary" id="concertSave">保存观演</button></div></div></form>
+</div></div>
 <div class="overlay" id="formOverlay"><div class="modal">
   <div class="modal-head"><div><h2 id="formTitle">添加一件藏品</h2><div class="modal-desc">类别选择「SET」时自动作为母套装；其他藏品可选择所属套装。</div></div><button class="close" data-close="formOverlay"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
   <form id="itemForm">
@@ -456,7 +483,7 @@ function renderStats(visibleSuites){
  const visibleRecords=items.filter(x=>suiteIds.has(x.id)|| (x.parentId&&suiteIds.has(x.parentId)));
  const purchaseTotal=visibleRecords.reduce((s,x)=>s+priceValue(x.price),0);
  const salesTotal=visibleRecords.reduce((s,x)=>s+priceValue(x.soldPrice),0);
- $('statCount').textContent=visibleRecords.length;
+ $('statCount').textContent=visibleRecords.filter(x=>x.type!=='SET').length;
  $('statSpend').textContent=money(purchaseTotal);
  $('statSales').textContent=money(salesTotal);
  $('statWish').textContent=suites.length;
@@ -485,8 +512,8 @@ function openSuiteGroup(ids){
  $('groupSubtitle').textContent=`共 ${group.length} 个套装 · 请选择属性查看详情`;
  const purchase=group.reduce((sum,x)=>sum+suiteTotal(x),0);
  const sold=group.reduce((sum,x)=>sum+suiteSoldTotal(x),0);
- $('groupTotals').innerHTML=`<div class="group-total-item"><span>所有套装购入合计</span><strong>${money(purchase)}</strong></div><div class="group-total-item"><span>所有套装售出合计</span><strong>${money(sold)}</strong></div>`;
- $('groupRecords').innerHTML=group.map(x=>`<button type="button" class="related-child" data-group-suite="${esc(x.id)}"><span class="child-info"><strong>${esc(x.attribute||'未设置属性')}</strong><span>${esc([x.version,x.serial].filter(Boolean).join(' · ')||x.name||'套装')}</span><span class="child-price">购入 ${money(suiteTotal(x))} · 售出 ${money(suiteSoldTotal(x))}</span></span><span class="child-chevron">›</span></button>`).join('');
+ $('groupTotals').innerHTML=`<div class="group-total-item"><span>所有套装购入合计</span><strong>${money(purchase)}</strong></div><div class="group-total-item"><span>所有套装售出合计</span><strong>${money(sold)}</strong></div><div class="group-total-item suite-net"><span>所有套装净支出</span><strong>${money(purchase-sold)}</strong></div>`;
+ $('groupRecords').innerHTML=group.map(x=>`<button type="button" class="related-child" data-group-suite="${esc(x.id)}"><span class="child-info"><strong>${esc(x.attribute||'未设置属性')}</strong><span>${esc([x.version,x.serial].filter(Boolean).join(' · ')||x.name||'套装')}</span><span class="child-price">购入 ${money(suiteTotal(x))} · 售出 ${money(suiteSoldTotal(x))} · 净支出 ${money(suiteTotal(x)-suiteSoldTotal(x))}</span></span><span class="child-chevron">›</span></button>`).join('');
  $('groupRecords').querySelectorAll('[data-group-suite]').forEach(b=>b.addEventListener('click',()=>{hideOverlay('groupOverlay');openDetail(b.dataset.groupSuite)}));
  showOverlay('groupOverlay');
 }
@@ -497,8 +524,8 @@ function render(){refreshFilters();
  $('sectionTitle').textContent='全部套装';
  $('attributeFilter').hidden=displayMode==='attributes';$('multiFilters').hidden=displayMode!=='attributes';
  $('itemsGrid').classList.remove('atlas','attribute-layout');$('cardView').classList.toggle('active',displayMode==='cards');$('atlasView').classList.toggle('active',displayMode==='attributes');
- if(displayMode==='attributes'){renderAttributeCollection();return;}
- $('itemsGrid').innerHTML=groups.length?groups.map(group=>{const x=group[0],isGroup=group.length>1;const groupPrice=group.reduce((sum,p)=>sum+suiteTotal(p),0);const groupSold=group.reduce((sum,p)=>sum+suiteSoldTotal(p),0);const priced=group.some(p=>p.price!==''&&p.price!=null||items.some(c=>c.parentId===p.id&&c.price!==''&&c.price!=null));return `<div class="suite-group-wrap"><article class="item-card" data-ids="${esc(group.map(p=>p.id).join(','))}"><div class="item-body"><div class="item-type">${isGroup?'套装分组':esc(x.type)}</div><div class="item-name">${esc(x.name||'未命名套装')}</div><div class="item-meta">${isGroup?`属性：${esc([...new Set(group.map(p=>p.attribute||'未设置'))].join(' / '))}`:esc([x.attribute,x.version,x.serial].filter(Boolean).join(' · ')||'还没有添加描述')}</div><div class="item-meta">${isGroup?'点击选择具体套装':`子记录 ${items.filter(c=>c.parentId===x.id).length} 件`}</div><div class="group-card-totals"><div>购入合计 <strong>${money(groupPrice)}</strong></div><div>售出合计 <strong>${money(groupSold)}</strong></div></div><div class="item-bottom"><span class="date">${esc(displayDate(x.releaseDate))}</span></div></div></article>${isGroup?`<button class="suite-group-toggle" type="button" data-expand-group="${esc(group.map(p=>p.id).join(','))}" aria-expanded="${expandedSuiteGroups.has(group.map(p=>p.id).join(','))}">${expandedSuiteGroups.has(group.map(p=>p.id).join(','))?'收起套装 ↑':'展开 '+group.length+' 个套装 ↓'}</button><div class="suite-group-members" ${expandedSuiteGroups.has(group.map(p=>p.id).join(','))?'':'hidden'}>${group.map(p=>`<button class="related-child" type="button" data-inline-suite="${esc(p.id)}"><span class="child-info"><strong>${esc(p.attribute||'未设置属性')}</strong><span>${esc(p.version||p.name||'SET')} · 购入 ${money(suiteTotal(p))} · 售出 ${money(suiteSoldTotal(p))}</span></span><span class="child-chevron">›</span></button>`).join('')}</div>`:''}</div>`}).join(''):`<div class="empty"><div class="big">✧</div><strong>${$('searchInput').value?'没有找到相关藏品':'还没有套装'}</strong><p>可以添加一件套装开始收藏。</p><button class="btn primary" id="emptyAdd">＋ 添加藏品</button></div>`;
+ if(displayMode==='attributes'){renderAttributeCollection();if(typeof mainPage!=='undefined'&&mainPage==='concert')showMainPage('concert');return;}
+ $('itemsGrid').innerHTML=groups.length?groups.map(group=>{const x=group[0],isGroup=group.length>1;const groupPrice=group.reduce((sum,p)=>sum+suiteTotal(p),0);const groupSold=group.reduce((sum,p)=>sum+suiteSoldTotal(p),0);const priced=group.some(p=>p.price!==''&&p.price!=null||items.some(c=>c.parentId===p.id&&c.price!==''&&c.price!=null));return `<div class="suite-group-wrap"><article class="item-card" data-ids="${esc(group.map(p=>p.id).join(','))}"><div class="item-body"><div class="item-type">${isGroup?'套装分组':esc(x.type)}</div><div class="item-name">${esc(x.name||'未命名套装')}</div><div class="item-meta">${isGroup?`属性：${esc([...new Set(group.map(p=>p.attribute||'未设置'))].join(' / '))}`:esc([x.attribute,x.version,x.serial].filter(Boolean).join(' · ')||'还没有添加描述')}</div><div class="item-meta">${isGroup?'点击选择具体套装':`子记录 ${items.filter(c=>c.parentId===x.id).length} 件`}</div><div class="group-card-totals"><div>购入合计 <strong>${money(groupPrice)}</strong></div><div>售出合计 <strong>${money(groupSold)}</strong></div><div class="suite-net">净支出 <strong>${money(groupPrice-groupSold)}</strong></div></div><div class="item-bottom"><span class="date">${esc(displayDate(x.releaseDate))}</span></div></div></article>${isGroup?`<button class="suite-group-toggle" type="button" data-expand-group="${esc(group.map(p=>p.id).join(','))}" aria-expanded="${expandedSuiteGroups.has(group.map(p=>p.id).join(','))}">${expandedSuiteGroups.has(group.map(p=>p.id).join(','))?'收起套装 ↑':'展开 '+group.length+' 个套装 ↓'}</button><div class="suite-group-members" ${expandedSuiteGroups.has(group.map(p=>p.id).join(','))?'':'hidden'}>${group.map(p=>`<button class="related-child" type="button" data-inline-suite="${esc(p.id)}"><span class="child-info"><strong>${esc(p.attribute||'未设置属性')}</strong><span>${esc(p.version||p.name||'SET')} · 购入 ${money(suiteTotal(p))} · 售出 ${money(suiteSoldTotal(p))} · 净支出 ${money(suiteTotal(p)-suiteSoldTotal(p))}</span></span><span class="child-chevron">›</span></button>`).join('')}</div>`:''}</div>`}).join(''):`<div class="empty"><div class="big">✧</div><strong>${$('searchInput').value?'没有找到相关藏品':'还没有套装'}</strong><p>可以添加一件套装开始收藏。</p><button class="btn primary" id="emptyAdd">＋ 添加藏品</button></div>`;
  $('itemsGrid').querySelectorAll('[data-expand-group]').forEach(b=>b.addEventListener('click',()=>{const key=b.dataset.expandGroup;expandedSuiteGroups.has(key)?expandedSuiteGroups.delete(key):expandedSuiteGroups.add(key);render()}));
  $('itemsGrid').querySelectorAll('[data-inline-suite]').forEach(b=>b.addEventListener('click',()=>openDetail(b.dataset.inlineSuite)));
  $('itemsGrid').querySelectorAll('.item-card').forEach(el=>el.addEventListener('click',()=>openSuiteGroup(el.dataset.ids.split(','))));
@@ -507,6 +534,7 @@ function render(){refreshFilters();
  $('pageTitle').textContent='我的收藏柜';
  $('pageSubtitle').textContent=currentView==='stats'?'看看这些喜欢，已经积累成了什么。':'朱志鑫苏新皓相爱的痕迹。';
  document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===currentView));
+ if(typeof mainPage!=='undefined'&&mainPage==='concert')showMainPage('concert');
 }
 
 // 属性视图独立的多选条件，不改变卡片视图原有的筛选。
@@ -541,7 +569,7 @@ function renderAttributeCollection(){
  const byAttribute=new Map();records.forEach(x=>{const key=recordAttribute(x);if(!byAttribute.has(key))byAttribute.set(key,[]);byAttribute.get(key).push(x)});
  $('sectionTitle').textContent='藏品属性';
  $('resultCount').textContent=`共 ${records.length} 件藏品 · ${byAttribute.size} 个属性分类`;
- $('statCount').textContent=records.length;
+ $('statCount').textContent=records.filter(x=>x.type!=='SET').length;
  $('statSpend').textContent=money(records.reduce((n,x)=>n+priceValue(x.price),0));
  $('statSales').textContent=money(records.reduce((n,x)=>n+priceValue(x.soldPrice),0));
  $('statWish').textContent=records.filter(x=>x.type==='SET').length;
@@ -553,6 +581,7 @@ function renderAttributeCollection(){
  $('collectionSection').hidden=currentView==='stats';$('statsSection').hidden=currentView!=='stats';
  $('pageTitle').textContent='我的收藏柜';$('pageSubtitle').textContent='朱志鑫苏新皓相爱的痕迹。';
  document.querySelectorAll('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===currentView));
+ if(typeof mainPage!=='undefined'&&mainPage==='concert')showMainPage('concert');
 }
 
 function setView(v){currentView=v;currentStatus='';render();window.scrollTo({top:0,behavior:'smooth'})}
@@ -572,7 +601,7 @@ document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',
 document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o){if(o.id==='formOverlay')closeFormAndReturn();else hideOverlay(o.id)}}));
 $('addBtn').addEventListener('click',()=>openForm());$('mobileAdd').addEventListener('click',()=>openForm());
 function refreshParentOptions(excludeId=''){
- const opts=items.filter(x=>x.recordRole==='parent'&&x.id!==excludeId).map(x=>`<option value="${esc(x.id)}">${esc(x.name)}</option>`).join('');
+ const opts=items.filter(x=>x.recordRole==='parent'&&x.id!==excludeId).map(x=>`<option value="${esc(x.id)}">${esc([x.name||'未命名套装',x.attribute||'未设置属性',x.version||'未设置版本'].join('｜'))}</option>`).join('');
  $('parentId').innerHTML='<option value="">请选择所属套装</option>'+opts;
 }
 function updateReleaseField(){$('releaseDate').disabled=false;$('releaseDate').value=parseDate($('releaseDate').dataset.ownDate||'')||'';$('releaseHint').textContent='选填；子记录无需填写，填写套装的发布时间即可。'}
@@ -614,7 +643,7 @@ function openDetail(id){
  const photo=singlePhoto(x);$('detailGallery').innerHTML=photo?`<img class="detail-image" src="${photo}" alt="藏品照片">`:'<div class="detail-image" style="display:flex;align-items:center;justify-content:center;color:#aa9b8c">暂无图片</div>';
  const parent=items.find(p=>p.id===x.parentId);
  const children=items.filter(c=>c.parentId===x.id);
- const rows=[['类别',x.type],['所属套装',parent?.name],['属性',effectiveAttribute(x)],['版本',x.version],['周边发布时间',displayDate(effectiveRelease(x))],['编号 / 款式',x.serial],['购入价格',x.price?money(x.price):'未记录'],...(x.type==='SET'?[['套装合计（含子记录购入价）',money(suiteTotal(x))]]:[]),['售出价格',x.soldPrice?money(x.soldPrice):'未记录'],...(x.type==='SET'?[['套装售出合计（含子记录售出价）',money(suiteSoldTotal(x))]]:[]),['购买渠道',x.source],['备注',x.notes]];
+ const rows=[['类别',x.type],['所属套装',parent?.name],['属性',effectiveAttribute(x)],['版本',x.version],['周边发布时间',displayDate(effectiveRelease(x))],['编号 / 款式',x.serial],['购入价格',x.price?money(x.price):'未记录'],...(x.type==='SET'?[['套装合计（含子记录购入价）',money(suiteTotal(x))]]:[]),['售出价格',x.soldPrice?money(x.soldPrice):'未记录'],...(x.type==='SET'?[['套装售出合计（含子记录售出价）',money(suiteSoldTotal(x))],['套装净支出（购入－售出）',money(suiteTotal(x)-suiteSoldTotal(x))]]:[]),['购买渠道',x.source],['备注',x.notes]];
  $('detailList').innerHTML=rows.filter(r=>r[1]).map(r=>`<div class="detail-row"><div class="detail-label">${esc(r[0])}</div><div class="detail-value">${esc(r[1])}</div></div>`).join('');
  const related=$('relatedRecords');
  if(x.recordRole==='parent'){
@@ -744,6 +773,70 @@ $('clearConfirmBtn').addEventListener('click',()=>{
 });
 window.addEventListener('storage',event=>{if(event.key!==STORAGE_KEY)return;try{const incoming=JSON.parse(event.newValue||'[]');if(!Array.isArray(incoming))return;items=incoming;lastSaved=event.newValue||'[]';items.forEach(x=>{if(x.type==='周边套装')x.type='SET';x.recordRole=x.type==='SET'?'parent':x.parentId?'child':'normal'});render();if(activeDetailId&&$('detailOverlay').classList.contains('show')){if(items.some(x=>x.id===activeDetailId))openDetail(activeDetailId);else hideOverlay('detailOverlay')}}catch(e){console.warn('同步藏品数据失败',e)}});
 
+
+// 观演记账：独立 Supabase 表，绝不混入收藏 Excel、收藏统计及 collections 同步。
+let concertRecords=[],concertLoaded=false,concertBusy=false,concertUserId=null;
+const concertFields=['name','artist','date','city','venue','ticket','hotel','transport','food','other','notes'];
+const concertCostFields=['ticket','hotel','transport','food','other'];
+function concertAmount(x){return concertCostFields.reduce((sum,k)=>sum+(Number(x[k])||0),0)}
+function concertStatus(message){$('concertSyncStatus').textContent=message}
+function renderConcerts(){
+ const sorted=[...concertRecords].sort((a,b)=>(b.date||'').localeCompare(a.date||'')||(b.created_at||'').localeCompare(a.created_at||''));
+ $('concertCount').textContent=String(sorted.length);
+ $('concertTotal').textContent=money(sorted.reduce((sum,x)=>sum+concertAmount(x),0));
+ $('concertList').innerHTML=sorted.length?sorted.map(x=>`<article class="concert-card"><div class="concert-card-head"><div><h3>${esc(x.name||'未命名演唱会')}</h3><div class="concert-meta">${esc([x.artist,x.date,x.city,x.venue].filter(Boolean).join(' · ')||'尚未填写演出信息')}</div></div><button class="btn" type="button" data-concert-edit="${esc(x.id)}">编辑</button></div><div class="concert-costs">${[['门票','ticket'],['酒店','hotel'],['交通','transport'],['餐饮','food'],['其他','other']].map(([label,key])=>`<span>${label} ${money(x[key])}</span>`).join('')}<strong>合计 ${money(concertAmount(x))}</strong></div>${x.notes?`<div class="concert-meta" style="margin-top:9px;white-space:pre-wrap">${esc(x.notes)}</div>`:''}</article>`).join(''):'<div class="concert-empty">还没有观演记录，点击「新增观演」开始记账。</div>';
+ $('concertList').querySelectorAll('[data-concert-edit]').forEach(b=>b.onclick=()=>openConcertForm(b.dataset.concertEdit));
+}
+async function loadConcerts(){
+ if(!cloudUser)return;
+ const userId=cloudUser.id;concertUserId=userId;concertLoaded=false;concertStatus('正在读取云端观演账目…');
+ try{const c=await cloudRequireUser();const {data,error}=await c.from('concert_expenses').select('*').eq('user_id',userId).order('date',{ascending:false});if(error)throw error;
+ if(concertUserId!==userId)return;concertRecords=data||[];concertLoaded=true;concertStatus('观演记录已从云端加载 · 与收藏数据分开保存');renderConcerts();}
+ catch(e){if(concertUserId!==userId)return;concertRecords=[];renderConcerts();concertStatus('观演云端读取失败：'+e.message+'。请先按说明创建 concert_expenses 表；读取成功前不可保存。');}
+}
+function openConcertForm(id=''){
+ if(!concertLoaded){toast('观演账目尚未成功加载，请先检查云端配置');return}
+ const x=concertRecords.find(v=>v.id===id)||{};
+ $('concertForm').reset();$('concertId').value=id;$('concertFormTitle').textContent=id?'编辑观演记录':'新增观演记录';
+ concertFields.forEach(k=>{$('concert'+k[0].toUpperCase()+k.slice(1)).value=x[k]??''});
+ $('concertDelete').hidden=!id;showOverlay('concertOverlay');
+}
+$('concertAdd').onclick=()=>openConcertForm();
+$('concertForm').addEventListener('submit',async e=>{
+ e.preventDefault();if(concertBusy||!concertLoaded||!cloudUser)return;
+ const id=$('concertId').value||crypto.randomUUID(),existing=concertRecords.find(x=>x.id===id);
+ const record={id,user_id:cloudUser.id,created_at:existing?.created_at||new Date().toISOString()};
+ for(const k of concertFields){const value=$('concert'+k[0].toUpperCase()+k.slice(1)).value;record[k]=concertCostFields.includes(k)?(value===''?0:Number(value)):(k==='date'?(value||null):value.trim())}
+ if(!record.name){toast('请填写演唱会名称');return}
+ if(concertCostFields.some(k=>!Number.isFinite(record[k])||record[k]<0)){toast('费用必须为非负数');return}
+ concertBusy=true;$('concertSave').disabled=true;concertStatus('正在保存观演账目…');
+ try{const c=await cloudRequireUser();if(cloudUser.id!==record.user_id)throw Error('登录账号已切换');const {data,error}=await c.from('concert_expenses').upsert(record,{onConflict:'id'}).select().single();if(error)throw error;
+ const idx=concertRecords.findIndex(x=>x.id===id);if(idx>=0)concertRecords[idx]=data;else concertRecords.push(data);
+ renderConcerts();hideOverlay('concertOverlay');concertStatus('已保存到云端');toast('观演账目已保存');}
+ catch(err){concertStatus('保存失败：'+err.message);toast('保存失败，请检查云端配置和网络')}
+ finally{concertBusy=false;$('concertSave').disabled=false}
+});
+$('concertDelete').onclick=async()=>{
+ const id=$('concertId').value;if(!id||concertBusy||!confirm('确定删除这条观演账目吗？删除后不可恢复。'))return;
+ concertBusy=true;
+ try{const c=await cloudRequireUser();const {error}=await c.from('concert_expenses').delete().eq('id',id).eq('user_id',cloudUser.id);if(error)throw error;concertRecords=concertRecords.filter(x=>x.id!==id);renderConcerts();hideOverlay('concertOverlay');concertStatus('删除已同步到云端');toast('观演记录已删除')}
+ catch(e){concertStatus('删除失败：'+e.message);toast('删除失败')}
+ finally{concertBusy=false}
+};
+function showMainPage(page){
+ const isConcert=page==='concert';
+ $('collectionStats').hidden=isConcert;$('collectionSection').hidden=isConcert;$('statsSection').hidden=true;$('concertSection').hidden=!isConcert;
+ $('addBtn').hidden=isConcert;$('mobileAdd').hidden=isConcert;
+ $('pageTitle').textContent=isConcert?'观演记录':'我的收藏柜';
+ $('pageSubtitle').textContent=isConcert?'把每一次奔赴，都记成清楚的账。':'朱志鑫苏新皓相爱的痕迹。';
+ document.querySelectorAll('[data-page="concert"]').forEach(b=>b.classList.toggle('active',isConcert));
+ document.querySelectorAll('[data-view="all"]').forEach(b=>b.classList.toggle('active',!isConcert));
+ if(isConcert&&cloudUser&&!concertLoaded)loadConcerts();
+}
+let mainPage='collection';
+document.querySelectorAll('[data-page="concert"]').forEach(b=>b.addEventListener('click',()=>{mainPage='concert';showMainPage('concert')}));
+document.querySelectorAll('[data-view="all"]').forEach(b=>b.addEventListener('click',()=>{mainPage='collection';showMainPage('collection')}));
+
 // 自动同步：以服务器 updated_at 为版本依据；检测到并发修改时停止写入，防止静默覆盖。
 const CLOUD_URL='https://pudjdntqworatbwdjxth.supabase.co';
 const CLOUD_KEY='sb_publishable_68q_82ULEuEPjJUf-SUiiw_-Mp_XP2M';
@@ -821,7 +914,7 @@ async function activateCloud(user){
   const loaded=[];for(const r of remote)loaded.push(await cloudSignedImage(c,{...r.data,id:r.id}));
   // 账号数据隔离：只展示当前用户的云端数据；绝不自动把旧浏览器记录上传到新账号。
   cloudBaseline=new Map(remote.map(r=>[String(r.id),r.updated_at]));
-  applyCloudItems(loaded);cloudSnapshot=snapshotLocal();cloudReady=true;gateClose();
+  applyCloudItems(loaded);cloudSnapshot=snapshotLocal();cloudReady=true;gateClose();loadConcerts();if(mainPage==='concert')showMainPage('concert');
   cloudStatus('已同步 · '+loaded.length+' 件');startCloudPolling();
  }catch(e){
   console.error(e);const raw=localStorage.getItem(cloudStorageKey(user.id));
@@ -888,7 +981,7 @@ $('cloudDownload').onclick=()=>cloudAction(async()=>{if(!cloudUser)return;await 
 $('cloudLogout').onclick=()=>cloudAction(async()=>{
  const c=await getCloudClient();const {error}=await c.auth.signOut();if(error)throw error;
  cloudSyncGeneration++;cloudReady=false;cloudUser=null;clearTimeout(cloudTimer);cloudBaseline.clear();cloudSnapshot.clear();
- items=[];render();gateOpen();cloudUI();gateMessage('已退出登录。请输入邮箱和密码。');
+ items=[];concertRecords=[];concertLoaded=false;concertUserId=null;renderConcerts();render();gateOpen();cloudUI();gateMessage('已退出登录。请输入邮箱和密码。');
 });
 window.addEventListener('online',()=>{if(cloudReady)queueCloudSync()});
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&cloudReady)syncCloud()});
@@ -896,7 +989,7 @@ getCloudClient().then(async c=>{
  const {data}=await c.auth.getSession();
  if(data.session?.user)await activateCloud(data.session.user);else{gateOpen();gateMessage('请输入邮箱和密码登录。')}
  c.auth.onAuthStateChange((event,session)=>{
-  if(event==='SIGNED_OUT'&&cloudUser){cloudSyncGeneration++;cloudReady=false;cloudUser=null;clearTimeout(cloudTimer);gateOpen();gateMessage('登录已退出，请重新登录。')}
+  if(event==='SIGNED_OUT'&&cloudUser){concertRecords=[];concertLoaded=false;concertUserId=null;renderConcerts();cloudSyncGeneration++;cloudReady=false;cloudUser=null;clearTimeout(cloudTimer);gateOpen();gateMessage('登录已退出，请重新登录。')}
  });
 }).catch(e=>{gateOpen();gateMessage('连接失败：'+e.message+'。请检查网络后刷新。')});
 refreshAttributes();render();
