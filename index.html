@@ -282,7 +282,7 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
     <div><div class="nav-label">MANAGE</div><nav class="nav">
       <button type="button" id="settingsBtn"><span class="ico">⚙</span>设置</button>
     </nav></div>
-    <div class="side-note balance-card" id="collectionBalanceCard" aria-label="筛选后购入减去售出的金额"><div class="balance-brand">✦ 重Xin ✦</div><div class="balance-amount" id="sidebarBalance" aria-live="polite">¥0</div><div class="balance-divider"></div><div class="balance-caption">不要再给朱志鑫苏新皓花钱了</div></div><div class="side-note balance-card" id="concertBalanceCard" hidden aria-label="观演总场次与总花销"><div class="balance-brand">✦ 观演记录 ✦</div><div class="concert-balance-label">观演总场次</div><div class="balance-amount" id="concertSidebarCount" aria-live="polite">0 场</div><div class="balance-divider"></div><div class="concert-balance-label">观演总花销</div><div class="balance-amount" id="concertSidebarTotal" aria-live="polite">¥0</div></div>
+    <div class="side-note balance-card" id="collectionBalanceCard" aria-label="筛选后购入减去售出的金额"><div class="balance-brand">✦ 重Xin ✦</div><div class="balance-amount" id="sidebarBalance" aria-live="polite">¥0</div><div class="balance-divider"></div><div class="balance-caption">不要再给朱志鑫苏新皓花钱了</div></div><div class="side-note balance-card" id="concertBalanceCard" hidden aria-label="观演总场次与总花销"><div class="balance-brand">✦ 重Xin ✦</div><div class="concert-balance-label"></div><div class="balance-amount" id="concertSidebarCount" aria-live="polite">0 场</div><div class="balance-divider"></div><div class="concert-balance-label"></div><div class="balance-amount" id="concertSidebarTotal" aria-live="polite">¥0</div></div>
   </aside>
   <main>
     <div class="topbar">
@@ -290,13 +290,13 @@ body.auth-locked .app,body.auth-locked .mobile-top,body.auth-locked .overlay,bod
       <div class="top-actions"><span id="syncPill" aria-live="polite">☁ 正在连接…</span><button class="btn primary" id="addBtn" title="添加藏品" data-tooltip="添加藏品" aria-label="添加藏品"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>添加藏品</span></button></div><div id="dataActionTriggers" hidden aria-hidden="true"><button class="btn secondary" id="excelImportBtn" title="从 Excel 表格导入藏品" data-tooltip="导入 Excel" aria-label="导入 Excel"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4"/><path d="M4 17v3h16v-3"/></svg><span>导入 Excel</span></button><button class="btn secondary" id="excelExportBtn" title="将藏品导出为 Excel 表格" data-tooltip="导出 Excel" aria-label="导出 Excel"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4m-4 4 4-4 4 4"/><path d="M4 17v3h16v-3"/></svg><span>导出 Excel</span></button><button class="btn secondary" id="importBackupBtn" title="从 JSON 备份恢复藏品" data-tooltip="恢复备份" aria-label="恢复备份"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a8 8 0 1 1 2 6"/><path d="M4 5v6h6"/><path d="M12 8v5l3 2"/></svg><span>恢复备份</span></button><button class="btn secondary" id="exportBtn" title="保存包含图片的完整 JSON 备份" data-tooltip="保存备份" aria-label="保存备份"><svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7V4h16v3M5 10h14v10H5z"/><path d="M9 14h6"/></svg><span>保存备份</span></button></div>
     </div>
     <section class="stats" id="collectionStats">
-      <div class="stat"><div class="stat-top">藏品数量 <span class="stat-icon">▦</span></div><div class="stat-value" id="statCount">0</div><div class="stat-foot">不包含母套装</div></div>
+      <div class="stat"><div class="stat-top">藏品数量 <span class="stat-icon">▦</span></div><div class="stat-value" id="statCount">0</div><div class="stat-foot"></div></div>
       <div class="stat"><div class="stat-top">套装数量 <span class="stat-icon">♡</span></div><div class="stat-value" id="statWish">0</div><div class="stat-foot"></div></div>
       <div class="stat"><div class="stat-top">购入总额 <span class="stat-icon">￥</span></div><div class="stat-value" id="statSpend">¥0</div><div class="stat-foot"></div></div>
       <div class="stat"><div class="stat-top">售出总额 <span class="stat-icon">↗</span></div><div class="stat-value" id="statSales">¥0</div><div class="stat-foot"></div></div>
     </section>
     <section id="concertSection" hidden>
-      <div class="section-head"><div><h2 class="section-title">观演记录</h2><div class="section-desc">按巡演站次记录多场演出与花销</div></div><div class="concert-toolbar"><button class="btn" type="button" id="concertStatsBtn">▥ 年度统计</button><button class="btn primary" type="button" id="concertAdd">＋ 新增观演</button></div></div>
+      <div class="section-head"><div><h2 class="section-title">观演记录</h2><div class="section-desc"></div></div><div class="concert-toolbar"><button class="btn" type="button" id="concertStatsBtn">▥ 年度统计</button><button class="btn primary" type="button" id="concertAdd">＋ 新增观演</button></div></div>
       <div class="concert-notice" id="concertSyncStatus">观演记录单独保存在云端。</div><div id="concertList" class="concert-list"></div>
     </section>
     <section id="collectionSection">
@@ -806,7 +806,7 @@ function renderConcerts(){
 }
 async function loadConcerts(){
  if(!cloudUser)return;const userId=cloudUser.id;concertUserId=userId;concertLoaded=false;concertStatus('正在读取云端观演账目…');
- try{const c=await cloudRequireUser();const {data,error}=await c.from('concert_expenses').select('*').eq('user_id',userId).order('date',{ascending:false});if(error)throw error;if(concertUserId!==userId)return;concertRecords=data||[];concertLoaded=true;concertStatus('观演记录已从云端加载 · 与收藏数据分开保存');renderConcerts()}
+ try{const c=await cloudRequireUser();const {data,error}=await c.from('concert_expenses').select('*').eq('user_id',userId).order('date',{ascending:false});if(error)throw error;if(concertUserId!==userId)return;concertRecords=data||[];concertLoaded=true;concertStatus('观演记录已从云端加载');renderConcerts()}
  catch(e){if(concertUserId!==userId)return;concertRecords=[];renderConcerts();concertStatus('观演云端读取失败：'+e.message+'；读取成功前不可保存。')}
 }
 function concertField(label,name,value='',type='text',extra=''){
@@ -852,7 +852,7 @@ function showMainPage(page){
  $('collectionStats').hidden=isConcert;$('collectionSection').hidden=isConcert;$('statsSection').hidden=true;$('concertSection').hidden=!isConcert;
  $('addBtn').hidden=isConcert;$('mobileAdd').hidden=isConcert;
  $('pageTitle').textContent=isConcert?'观演记录':'我的收藏柜';
- $('pageSubtitle').textContent=isConcert?'把每一次奔赴，都记成清楚的账。':'朱志鑫苏新皓相爱的痕迹。';
+ $('pageSubtitle').textContent=isConcert?'这次朱志鑫苏新皓有双人舞台吗？':'朱志鑫苏新皓相爱的痕迹。';
  document.querySelectorAll('[data-page="concert"]').forEach(b=>b.classList.toggle('active',isConcert));
  document.querySelectorAll('[data-view="all"]').forEach(b=>b.classList.toggle('active',!isConcert));
  if(isConcert&&cloudUser&&!concertLoaded)loadConcerts();
