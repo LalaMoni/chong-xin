@@ -465,6 +465,8 @@ function parseDate(v){
 function effectiveRelease(x){return parseDate(x.releaseDate)||''}
 function displayDate(v){const date=parseDate(v);return date?date.replace(/-/g,'/'):String(v||'').trim()}
 function priceValue(value){const n=Number(String(value??'').replace(/[,，¥￥\s]/g,''));return Number.isFinite(n)?n:0}
+// 现存藏品：不含母套装及已填写售出价格的藏品（包括 0 元）。
+function isOwnedCollectible(x){return x.type!=='SET'&&String(x.soldPrice??'').trim()===''}
 function effectiveAttribute(x){return x.attribute||items.find(p=>p.id===x.parentId)?.attribute||''}
 function suiteTotal(x){return priceValue(x.price)+items.filter(c=>c.parentId===x.id).reduce((sum,c)=>sum+priceValue(c.price),0)}
 function suiteSoldTotal(x){return priceValue(x.soldPrice)+items.filter(c=>c.parentId===x.id).reduce((sum,c)=>sum+priceValue(c.soldPrice),0)}
@@ -490,7 +492,7 @@ function renderStats(visibleSuites){
  const visibleRecords=items.filter(x=>suiteIds.has(x.id)|| (x.parentId&&suiteIds.has(x.parentId)));
  const purchaseTotal=visibleRecords.reduce((s,x)=>s+priceValue(x.price),0);
  const salesTotal=visibleRecords.reduce((s,x)=>s+priceValue(x.soldPrice),0);
- $('statCount').textContent=visibleRecords.filter(x=>x.type!=='SET').length;
+ $('statCount').textContent=visibleRecords.filter(isOwnedCollectible).length;
  $('statSpend').textContent=money(purchaseTotal);
  $('statSales').textContent=money(salesTotal);
  $('statWish').textContent=suites.length;
@@ -501,8 +503,9 @@ function renderStats(visibleSuites){
  $('reportSpend').textContent=money(allPurchase);
  $('reportSales').textContent=money(allSales);
  $('reportNet').textContent=money(allPurchase-allSales);
- const counts={};items.forEach(x=>counts[x.type]=(counts[x.type]||0)+1);
- $('typeBreakdown').innerHTML=Object.keys(counts).length?Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([type,count])=>`<div style="margin:13px 0"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px"><span>${esc(type)}</span><span>${count} 件</span></div><div style="height:6px;background:#F0E4E2;border-radius:8px;overflow:hidden"><div style="height:100%;width:${count/items.length*100}%;background:#B9868A;border-radius:8px"></div></div></div>`).join(''):'<div style="color:#9A8387;font-size:13px">添加藏品后，这里会显示你的收藏类别分布。</div>';
+ const reportRecords=items.filter(x=>x.type==='SET'||isOwnedCollectible(x));
+ const counts={};reportRecords.forEach(x=>counts[x.type]=(counts[x.type]||0)+1);
+ $('typeBreakdown').innerHTML=Object.keys(counts).length?Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([type,count])=>`<div style="margin:13px 0"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:7px"><span>${esc(type)}</span><span>${count} 件</span></div><div style="height:6px;background:#F0E4E2;border-radius:8px;overflow:hidden"><div style="height:100%;width:${count/reportRecords.length*100}%;background:#B9868A;border-radius:8px"></div></div></div>`).join(''):'<div style="color:#9A8387;font-size:13px">添加藏品后，这里会显示你的收藏类别分布。</div>';
 }
 // 同名套装内固定按属性排列，不影响首页按发布时间排序。
 function compareSuiteAttributes(a,b){return compareAttributeNames(a.attribute,b.attribute)}
@@ -575,14 +578,14 @@ function renderAttributeCollection(){
  records.sort((a,b)=>sort==='releaseNew'?((!effectiveRelease(a))-(!effectiveRelease(b))||effectiveRelease(b).localeCompare(effectiveRelease(a))):((!effectiveRelease(a))-(!effectiveRelease(b))||effectiveRelease(a).localeCompare(effectiveRelease(b))));
  const byAttribute=new Map();records.forEach(x=>{const key=recordAttribute(x);if(!byAttribute.has(key))byAttribute.set(key,[]);byAttribute.get(key).push(x)});
  $('sectionTitle').textContent='藏品属性';
- $('resultCount').textContent=`共 ${records.length} 件藏品 · ${byAttribute.size} 个属性分类`;
- $('statCount').textContent=records.filter(x=>x.type!=='SET').length;
+ $('resultCount').textContent=`共 ${records.filter(isOwnedCollectible).length} 件藏品 · ${byAttribute.size} 个属性分类`;
+ $('statCount').textContent=records.filter(isOwnedCollectible).length;
  $('statSpend').textContent=money(records.reduce((n,x)=>n+priceValue(x.price),0));
  $('statSales').textContent=money(records.reduce((n,x)=>n+priceValue(x.soldPrice),0));
  $('statWish').textContent=records.filter(x=>x.type==='SET').length;
  $('sidebarBalance').textContent=money(records.reduce((n,x)=>n+priceValue(x.price)-priceValue(x.soldPrice),0));
  $('itemsGrid').classList.add('attribute-layout');
- $('itemsGrid').innerHTML=[...byAttribute].sort((a,b)=>compareAttributeNames(a[0],b[0])).map(([key,group])=>`<details class="attribute-section" data-attribute-group="${esc(key)}" ${expandedAttributeGroups.has(key)?'open':''}><summary><div class="attribute-heading"><div><strong>${esc(key)}</strong><span>${group.length} 件藏品</span></div><div class="attribute-totals">购入 ${money(group.reduce((n,x)=>n+priceValue(x.price),0))} · 售出 ${money(group.reduce((n,x)=>n+priceValue(x.soldPrice),0))}</div></div></summary><div class="attribute-records">${group.map(x=>`<button class="attribute-record" type="button" data-record-id="${esc(x.id)}"><span class="attribute-record-main"><strong>${esc(x.name||'未命名藏品')}</strong><small>${esc([x.type,x.version,x.serial].filter(Boolean).join(' · ')||'藏品')}${x.parentId?' · 所属套装：'+esc(items.find(p=>p.id===x.parentId)?.name||'关联套装不存在'):''}</small></span><span class="attribute-record-prices">购入 ${money(priceValue(x.price))}<span>售出 ${money(priceValue(x.soldPrice))}</span></span><span class="child-chevron">›</span></button>`).join('')}</div></details>`).join('')||'<div class="empty"><strong>没有找到符合条件的藏品</strong><p>可以切换属性或清除搜索条件。</p></div>';
+ $('itemsGrid').innerHTML=[...byAttribute].sort((a,b)=>compareAttributeNames(a[0],b[0])).map(([key,group])=>`<details class="attribute-section" data-attribute-group="${esc(key)}" ${expandedAttributeGroups.has(key)?'open':''}><summary><div class="attribute-heading"><div><strong>${esc(key)}</strong><span>${group.filter(isOwnedCollectible).length} 件藏品</span></div><div class="attribute-totals">购入 ${money(group.reduce((n,x)=>n+priceValue(x.price),0))} · 售出 ${money(group.reduce((n,x)=>n+priceValue(x.soldPrice),0))}</div></div></summary><div class="attribute-records">${group.map(x=>`<button class="attribute-record" type="button" data-record-id="${esc(x.id)}"><span class="attribute-record-main"><strong>${esc(x.name||'未命名藏品')}</strong><small>${esc([x.type,x.version,x.serial].filter(Boolean).join(' · ')||'藏品')}${x.parentId?' · 所属套装：'+esc(items.find(p=>p.id===x.parentId)?.name||'关联套装不存在'):''}</small></span><span class="attribute-record-prices">购入 ${money(priceValue(x.price))}<span>售出 ${money(priceValue(x.soldPrice))}</span></span><span class="child-chevron">›</span></button>`).join('')}</div></details>`).join('')||'<div class="empty"><strong>没有找到符合条件的藏品</strong><p>可以切换属性或清除搜索条件。</p></div>';
  $('itemsGrid').querySelectorAll('[data-attribute-group]').forEach(el=>el.addEventListener('toggle',()=>{const key=el.dataset.attributeGroup;if(el.open)expandedAttributeGroups.add(key);else expandedAttributeGroups.delete(key)}));
  $('itemsGrid').querySelectorAll('[data-record-id]').forEach(b=>b.addEventListener('click',()=>openDetail(b.dataset.recordId)));
  $('collectionSection').hidden=currentView==='stats';$('statsSection').hidden=currentView!=='stats';
@@ -654,7 +657,7 @@ function openDetail(id){
  $('detailList').innerHTML=rows.filter(r=>r[1]).map(r=>`<div class="detail-row"><div class="detail-label">${esc(r[0])}</div><div class="detail-value">${esc(r[1])}</div></div>`).join('');
  const related=$('relatedRecords');
  if(x.recordRole==='parent'){
-  related.innerHTML=`<div class="suite-children-heading"><strong>套装内的藏品（${children.length}）</strong><button class="btn primary detail-icon-btn" id="addChildBtn" type="button" aria-label="添加子记录" data-tooltip="添加子记录"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>`+(children.length?`<div class="suite-children">${children.map(c=>`<button type="button" class="related-child" data-child-id="${esc(c.id)}"><span class="child-thumb">${singlePhoto(c)?`<img src="${singlePhoto(c)}" alt="">`:'<span>✧</span>'}</span><span class="child-info"><strong>${esc(c.name||'未命名藏品')}</strong><span>${esc([c.type,effectiveAttribute(c),c.version,c.serial].filter(Boolean).join(' · ')||'暂无其他信息')}</span>${c.releaseDate?`<span>发布时间：${esc(displayDate(c.releaseDate))}</span>`:''}${c.price!==''&&c.price!=null?`<span class="child-price">${money(c.price)}</span>`:''}</span><span class="child-chevron">›</span></button>`).join('')}</div>`:'<p style="font-size:13px;color:#9A8387">还没有子记录，可以从这里添加拆出的单件。</p>');
+  related.innerHTML=`<div class="suite-children-heading"><strong>套装内的藏品（${children.filter(isOwnedCollectible).length}）</strong><button class="btn primary detail-icon-btn" id="addChildBtn" type="button" aria-label="添加子记录" data-tooltip="添加子记录"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>`+(children.length?`<div class="suite-children">${children.map(c=>`<button type="button" class="related-child" data-child-id="${esc(c.id)}"><span class="child-thumb">${singlePhoto(c)?`<img src="${singlePhoto(c)}" alt="">`:'<span>✧</span>'}</span><span class="child-info"><strong>${esc(c.name||'未命名藏品')}</strong><span>${esc([c.type,effectiveAttribute(c),c.version,c.serial].filter(Boolean).join(' · ')||'暂无其他信息')}</span>${c.releaseDate?`<span>发布时间：${esc(displayDate(c.releaseDate))}</span>`:''}${c.price!==''&&c.price!=null?`<span class="child-price">${money(c.price)}</span>`:''}</span><span class="child-chevron">›</span></button>`).join('')}</div>`:'<p style="font-size:13px;color:#9A8387">还没有子记录，可以从这里添加拆出的单件。</p>');
   $('addChildBtn').addEventListener('click',()=>openForm(null,x.id));
   related.querySelectorAll('[data-child-id]').forEach(b=>b.addEventListener('click',()=>openDetail(b.dataset.childId)));
  }else if(x.recordRole==='child'){
@@ -871,7 +874,7 @@ const CLOUD_KEY='sb_publishable_68q_82ULEuEPjJUf-SUiiw_-Mp_XP2M';
 let cloudClient=null,cloudUser=null,cloudBusy=false,cloudReady=false,cloudTimer=null,cloudBaseline=new Map(),cloudSnapshot=new Map(),cloudSyncRunning=false,cloudDirty=false,cloudConflicts=[],cloudSyncGeneration=0,cloudConflictPrompted='';
 const cloudStorageKey=id=>'cangjian_cloud_cache_'+id;
 function cloudStatus(message){$('cloudStatus').textContent=message;window.lastCloudMessage=message;refreshSyncPill()}
-function refreshSyncPill(){const msg=window.lastCloudMessage||'正在连接…';const ok=/^已同步/.test(msg);const text=ok?(mainPage==='concert'?('已同步 · '+concertRecords.length+' 站 · '+concertRecords.reduce((n,x)=>n+concertAttended(concertData(x)),0)+' 场'):('已同步 · '+items.filter(x=>x.type!=='SET').length+' 件藏品')):msg;$('syncPill').textContent=(ok?'✓ ':'☁ ')+text}
+function refreshSyncPill(){const msg=window.lastCloudMessage||'正在连接…';const ok=/^已同步/.test(msg);const text=ok?(mainPage==='concert'?('已同步 · '+concertRecords.length+' 站 · '+concertRecords.reduce((n,x)=>n+concertAttended(concertData(x)),0)+' 场'):('已同步 · '+items.filter(isOwnedCollectible).length+' 件藏品')):msg;$('syncPill').textContent=(ok?'✓ ':'☁ ')+text}
 function cloudUI(){
  const logged=!!cloudUser;
  $('cloudAuthFields').hidden=logged;$('cloudLogin').hidden=logged;
